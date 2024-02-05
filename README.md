@@ -1,31 +1,27 @@
-# React + TypeScript + Vite
+# BALANCE TON SPOT
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description :
 
-Currently, two official plugins are available:
+Ce site a pour objectif de présenter les différents lieux de rassemblements dans toute la France pour les passionnés de sports de glisse.
+Il permettra à toute personne le souhaitant de trouver un lieu pour exprimer sa passion.
+Il y aura également la possibilité de prendre contact afin de pouvoir commenter, noter voir même de pratiquer avec des passionnés près de chez vous.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Définition des besoins & Objectifs :
 
-## Expanding the ESLint configuration
+La création d’un site de référencement de lieux propices à la pratique des sports de glisse répond en effet à divers besoins et objectifs.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Besoins:
 
-- Configure the top-level `parserOptions` property like this:
+Personnaliser l’expérience utilisateur en lui permettant par exemple de filtrer sa recherche en fonction de son emplacement géographique ainsi que du choix du sport.
+Créer des comptes utilisateurs et se connecter au backoffice.
+En tant qu’administrateur, on doit pouvoir ajouter, modifier ou supprimer de nouveaux lieux lorsqu’on est connecté.
+Un utilisateur doit pouvoir laisser des commentaires et évaluer les lieux référencés, une fois son compte créé. 
+Partager ses lieux préférés grâce à un bouton de partage via les réseaux sociaux.
+Intégrer des éléments visuels tels que des photos pour donner une vision concrète des lieux à l’utilisateur (BONUS: ainsi qu’éventuellement une carte interactive).
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+### Objectifs:
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
-# projet-04-balance-ton-spot-front
+Créer une interface intuitive, dynamique et attractive afin de faciliter la navigation et d’optimiser la recherche de lieux.
+La contribution aux commentaires et aux évaluations de ces lieux permettrait d’encourager la participation des utilisateurs. Cela renforce la dimension sociale du site.
+
+En résumé, ce site aura pour but de répondre aux besoins des passionnés de sports de glisse en centralisant les informations des lieux en question et en alimentant l’aspect communautaire et interactif de ces disciplines.
