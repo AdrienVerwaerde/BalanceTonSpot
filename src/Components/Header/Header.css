@@ -1,0 +1,30 @@
+/* HEADER */
+
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#header-banner {
+    background-color: #214c5c;
+    border-radius: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 0px;
+}
+
+#logo {
+    aspect-ratio: 1.25/1;
+    width: 30%;
+}
+
+#sidebar-button {
+    background-color: #214c5c;
+    color: white;
+    font-size: xx-large;
+}

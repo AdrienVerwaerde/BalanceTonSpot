@@ -1,5 +1,13 @@
-import React, { useState } from 'react';
-import { Image, Segment, Header, Icon, Menu, MenuItem, Sidebar, Grid } from 'semantic-ui-react';
+import React, { useState } from "react";
+import {
+  Segment,
+  Icon,
+  Menu,
+  MenuItem,
+  Sidebar,
+  Grid,
+} from "semantic-ui-react";
+import "./Header.css";
 
 const HeaderWithSidebar = () => {
   const [sidebarVisible, setSidebarVisible] = useState(false);
@@ -9,67 +17,50 @@ const HeaderWithSidebar = () => {
   };
 
   return (
-    <div>
-      <Segment>
-        <Grid columns={3} stackable>
-          <Grid.Column width={4}>
-            <Image src="../../assets/images/logo.png" />
+    <header>
+      <Segment id="header-banner">
+          
+            <img
+              id="logo"
+              src="https://i.goopics.net/6p1uuc.png"
+              alt="Balance Ton Spot"
+            ></img>
+            
+          <Grid.Column>
+            <button id="sidebar-button" onClick={toggleSidebar}>V</button>
           </Grid.Column>
-
-          <Grid.Column width={8} textAlign="center">
-            <Header as="h2">Your Header Title</Header>
-          </Grid.Column>
-
-          <Grid.Column width={4} textAlign="right">
-            <Image src="../../assets/images/Adrien.png" avatar />
-            <span>Bonjour, Adrien Verwaerde</span>
-            <button onClick={toggleSidebar}>Toggle Sidebar</button>
-          </Grid.Column>
-        </Grid>
       </Segment>
 
       <Sidebar.Pushable>
         <Sidebar
           as={Menu}
-          animation='overlay'
-          icon='labeled'
+          animation="overlay"
+          icon="labeled"
           inverted
           onHide={() => setSidebarVisible(false)}
           vertical
           visible={sidebarVisible}
-          width='thin'
+          width="thin"
           style={{
-            height: '100%',
+            height: "200%",
             top: 0,
             left: 0,
-            position: 'fixed',
-            transform: `translateY(${sidebarVisible ? '0%' : '-100%'})`,
-            transition: 'transform 0.3s ease-in-out',
+            position: "fixed",
+            transform: `translateY(${sidebarVisible ? "0%" : "-100%"})`,
+            transition: "transform 0.3s ease-in-out",
           }}
         >
-          <MenuItem as='a'>
-            <Icon name='home' />
+          <MenuItem as="a">
+            <Icon name="home" />
             Home
-          </MenuItem>
-          <MenuItem as='a'>
-            <Icon name='gamepad' />
-            Games
-          </MenuItem>
-          <MenuItem as='a'>
-            <Icon name='camera' />
-            Channels
           </MenuItem>
         </Sidebar>
 
         <Sidebar.Pusher dimmed={sidebarVisible}>
-          <Segment basic>
-            {/* Your main content goes here */}
-            <Header as='h3'>Application Content</Header>
-            <Image src='/images/wireframe/paragraph.png' />
-          </Segment>
+          <Segment basic></Segment>
         </Sidebar.Pusher>
       </Sidebar.Pushable>
-    </div>
+    </header>
   );
 };
 

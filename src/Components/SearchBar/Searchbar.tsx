@@ -1,5 +1,6 @@
 import React from "react";
 import { Dropdown, Input } from "semantic-ui-react";
+import "./Searchbar.css";
 
 const options = [
   { key: "Tous les sports", text: "Qu'importe !", value: "page" },
@@ -9,6 +10,7 @@ const options = [
 
 export default function Searchbar() {
   return (
+    <div id="searchbar-container">
     <Input
       action={
         <Dropdown button basic floating options={options} defaultValue="page" />
@@ -17,5 +19,6 @@ export default function Searchbar() {
       iconPosition="left"
       placeholder="Search..."
     />
+    </div>
   );
 }
