@@ -9,12 +9,14 @@
 .slideshowSlider {
   white-space: nowrap;
   transition: ease 1000ms;
+  position: relative;
 }
 
 .slide {
   display: inline-block;
   height: 100%;
   width: 100%;
+  position: relative;
 
 }
 
@@ -53,14 +55,40 @@ img {
 #spotlight {
   position: absolute;
   z-index: 4000;
-  background-color: #214c5ca0;
+  background-color: #214c5cbb;
   color: white;
-  padding: 10em;
-  margin-top: 1em;
-  margin-left: 1em;
-
+  padding: 2em;
+  margin-top: 2em;
+  margin-left: 2em;
+  white-space: normal;
+  max-width: 40%;
+  font-size: medium;
 }
 
-#spotlight-text {
-  background: none;
+#spotlight:hover {
+  box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.5);
+  transform: scale(1.05);
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+#spotlight h2{
+  color: #FFFFFF; /* Couleur du texte */
+  background-color: #214c5c76; /* Couleur de fond */
+  padding: 10px 10px; /* Espacement intérieur */
+  border: 2px solid white; /* Bordure */
+  border-radius: 5px; /* Arrondir les coins de la bordure */
+  text-shadow: 1px 1px 2px #000000; /* Ombre du texte */
+  box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.5); /* Ombre externe */
+  font-family: Arial, sans-serif; /* Police de caractères */
+  font-size: 20px; /* Taille de la police */
+  transition: all 0.3s ease; /* Effet de transition */
+  max-width: 100%;
+}
+
+#spotlight p{
+  padding-top: 0.5em;
+  text-align: right;
+  font-size: small;
+  font-weight: bold;
 }
