@@ -84,7 +84,7 @@ export default function Slideshow() {
             <p>Découvrir >></p>
             </div>
             </a>
-            <img src={p} alt="" />
+            <img id="slideshow-img" src={p} alt="" />
           </div>
         ))}
       </div>

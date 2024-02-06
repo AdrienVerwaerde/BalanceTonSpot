@@ -1,26 +1,21 @@
 /* HEADER */
 
-
-header {
+.header {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    background-color: #214c5c;
+
 }
 
-#header-banner {
-    background-color: #214c5c;
-    border-radius: 0px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 0px;
+#button-logo {
+    text-align: center;
 }
 
 #logo {
-    aspect-ratio: 1.25/1;
-    width: 30%;
+    padding-bottom: 5em;
+    width: 60%;
 }
 
 #sidebar-button {

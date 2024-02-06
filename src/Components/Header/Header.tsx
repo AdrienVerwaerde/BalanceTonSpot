@@ -8,59 +8,26 @@ import {
   Grid,
 } from "semantic-ui-react";
 import "./Header.css";
+import ProfileButton from "../ProfileButton/ProfileButton";
 
-const HeaderWithSidebar = () => {
-  const [sidebarVisible, setSidebarVisible] = useState(false);
-
-  const toggleSidebar = () => {
-    setSidebarVisible(!sidebarVisible);
-  };
-
+export default function Header() {
+  
   return (
-    <header>
-      <Segment id="header-banner">
-            <img
+    <header className="header">
+{/*Call of the component Profile Button*/}
+<ProfileButton />
+
+{/*LOGO HEADER*/}
+      <a id="button-logo" href="#"><img
               id="logo"
-              src="https://i.goopics.net/6p1uuc.png"
+              src="https://i.goopics.net/r1wqq7.png"
               alt="Balance Ton Spot"
-            ></img>
-            
-          <Grid.Column>
-            <button id="sidebar-button" onClick={toggleSidebar}>V</button>
-          </Grid.Column>
-      </Segment>
+            ></img></a>
 
-      <Sidebar.Pushable>
-        <Sidebar
-          as={Menu}
-          animation="overlay"
-          icon="labeled"
-          inverted
-          onHide={() => setSidebarVisible(false)}
-          vertical
-          visible={sidebarVisible}
-          width="thin"
-          style={{
-            height: "200%",
-            top: 0,
-            left: 0,
-            position: "fixed",
-            transform: `translateY(${sidebarVisible ? "0%" : "-100%"})`,
-            transition: "transform 0.3s ease-in-out",
-          }}
-        >
-          <MenuItem as="a">
-            <Icon name="home" />
-            Home
-          </MenuItem>
-        </Sidebar>
-
-        <Sidebar.Pusher dimmed={sidebarVisible}>
-          <Segment basic></Segment>
-        </Sidebar.Pusher>
-      </Sidebar.Pushable>
+{/*BUTTON WRAPPER*/}
+            <button id="sidebar-button">V</button>   
     </header>
   );
 };
 
-export default HeaderWithSidebar;
+
