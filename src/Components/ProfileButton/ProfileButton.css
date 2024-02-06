@@ -1,7 +1,42 @@
-/* PROFILE BUTTON */
+/* BUTTON PROFILE */
 
-#image-profile {
+.btn-profile {
+    border: none;
+    width: 4.5em;
+    background-color: transparent;
+    border: none;
+}
+
+.mb-5 {
+    margin-bottom: 0px!important;
+}
+
+.btn-profile:hover {
+    background-color: transparent;
+}
+
+.btn-profile:focus,.btn-profile:active {
+    background-color: transparent;
+    border: none;
+}
+
+#button-img {
+    width: 100%;
+    height: 100%;
+}
+
+/* LIST OF LINKS */
+
+.list-group-item {
     width: 10em;
-    height: 10em;
-    text-align: left;
+    text-decoration: none;
+    transition: 0.2s ease-in-out;
+    color: #214C5C;
+    border-color: #214C5C;
+
+}
+
+.list-group-item:hover {
+    background-color: #214C5C;
+    color: white;
 }

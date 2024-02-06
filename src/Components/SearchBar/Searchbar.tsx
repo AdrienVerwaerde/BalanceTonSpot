@@ -4,8 +4,8 @@ import "./Searchbar.css";
 
 const options = [
   { key: "Tous les sports", text: "Qu'importe !", value: "page" },
-  { key: "Skateboard", text: "SkateBoard", value: "SkateBoard" },
-  { key: "SnowBoard", text: "Snowboard", value: "SnowBoard" },
+  { key: "Skateboard", text: "Skateboard", value: "Skateboard" },
+  { key: "Snowboard", text: "Snowboard", value: "Snowboard" },
 ];
 
 export default function Searchbar() {
