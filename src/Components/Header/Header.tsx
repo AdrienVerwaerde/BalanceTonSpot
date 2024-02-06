@@ -19,7 +19,6 @@ const HeaderWithSidebar = () => {
   return (
     <header>
       <Segment id="header-banner">
-          
             <img
               id="logo"
               src="https://i.goopics.net/6p1uuc.png"

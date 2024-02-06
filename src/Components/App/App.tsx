@@ -7,14 +7,12 @@ import Searchbar from '../SearchBar/Searchbar'
 function App() {
 
   return (
-    <div>
+    <>
       <Header />
-      <div>
       <Searchbar />
       <Homepage />
       <Footer />
-      </div>
-    </div>
+    </>
   )
 }
 
