@@ -13,7 +13,7 @@ export default function Header() {
 {/*LOGO HEADER*/}
       <a id="button-logo" href="#"><img
               id="logo"
-              src="https://i.goopics.net/r1wqq7.png"
+              src="https://i.goopics.net/qwh4qx.png"
               alt="Website logo for Balance Ton Spot"
             ></img></a>
 

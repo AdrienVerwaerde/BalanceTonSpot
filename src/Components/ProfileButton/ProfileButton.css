@@ -4,12 +4,12 @@
 .profile-btn-container {
     position: absolute;
     display: flex;
-    justify-content: center;
     flex-direction: column;
     align-self: flex-start;
     width: 5em;
     margin-left: 5em;
     top: 1.8em;
+    
 }
 
 
@@ -38,13 +38,15 @@
 
 #button-img {
     width: 100%;
-    height: 100%;
+    
 }
+
 
 /* LIST OF LINKS */
 
 .list-group {
     position: relative;
+    
 }
 
 .list-group-item {
@@ -52,8 +54,9 @@
     text-decoration: none;
     transition: 0.2s ease-in-out;
     color: #214C5C;
-    border: none;
+    border-color: white;
     padding: 1em;
+    
 
 }
 

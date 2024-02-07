@@ -6,7 +6,6 @@
     justify-content: space-around;
     align-items: center;
     background-color: #214c5c;
-
 }
 
 #button-logo {
@@ -14,16 +13,9 @@
     width: 20%;
     margin-bottom: 3em;
     margin-top: 2em;
-    
 }
 
 #logo {
     display: block;
     width: 100%;
-}
-
-#sidebar-button {
-    background-color: #214c5c;
-    color: white;
-    font-size: xx-large;
 }

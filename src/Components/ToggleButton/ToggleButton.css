@@ -1,2 +1,51 @@
 /* BUTTON */
 
+.btn-toggle {
+    display: flex;
+    border : none;
+    background-color: transparent;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 2.5em;
+}
+
+.btn-toggle:hover{
+    color: white;
+}
+
+.chevron {
+    display: block;
+    width: 100%;
+}
+
+/* In the Collapse */
+
+.toggle-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 2em;
+    margin-bottom: 2em;
+
+}
+
+.button-ride {
+    width: 5em;
+    background-color: transparent;
+    border:none;
+
+}
+
+
+.button-ride:active{
+    border-bottom: solid 3px white;
+}
+
+.button-ride img {
+    display: block;
+    width: 100%;
+}
