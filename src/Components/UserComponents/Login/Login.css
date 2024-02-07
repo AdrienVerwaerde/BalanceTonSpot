@@ -60,7 +60,7 @@
 .button-login span {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
-    background: linear-gradient(45deg, #214C5C, #2a2a2b);
+    background: linear-gradient(90deg, #214C5C, #2a2a2b);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     cursor: pointer;
@@ -80,4 +80,12 @@
 .button-login:hover span:after {
     opacity: 1;
     right: 0;
+}
+
+/* CLOSE BUTTON */
+
+.close-button {
+  position: absolute;
+  top: 25em;
+  left: 78.5em
 }
