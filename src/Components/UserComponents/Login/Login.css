@@ -1,0 +1,83 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 62,5%;
+}
+
+.wrapper-login {
+    height: 100vh;
+    width: 100%;
+    background: #2CA2DA;
+    background: linear-gradient(90deg, #214C5C, #2a2a2b);  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-login {
+    color: #333;
+    font-size: 1.2rem;
+    margin: 0 auto;
+    padding: 1.5rem 2rem;
+    border-radius: 0.2rem;
+    background-color: rgb(255, 255, 255);
+    border: none;
+    width: 90%;
+    display: block;
+    border-bottom: 0.3rem solid transparent;
+    transition: all 0.3s;
+    outline: none;
+    margin-bottom: 25px;
+}
+
+.form-login {
+    width: 400px;
+}
+
+.title-login {
+    margin-bottom: 2em;
+    width: 100%;
+    font-size: 2.3em;
+}
+
+.button-login {
+    border-radius: 4px;
+    border: none;
+    background-color: white;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 22px;
+    padding: 20px;
+    width: 200px;
+    transition: all 0.4s;
+    cursor: pointer;
+    margin: 5px;
+    width: 90%;
+}
+.button-login span {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    background: linear-gradient(45deg, #214C5C, #2a2a2b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.4s;
+}
+.button-login span:after {
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    transition: 0.5s;
+}
+.button-login:hover span {
+    scale: 1.1;
+}
+.button-login:hover span:after {
+    opacity: 1;
+    right: 0;
+}

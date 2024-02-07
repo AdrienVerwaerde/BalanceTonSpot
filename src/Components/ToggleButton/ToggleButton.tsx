@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { SetStateAction, useState } from 'react';
 import Collapse from 'react-bootstrap/Collapse';
 import './ToggleButton.css'
 import { FaChevronDown } from "react-icons/fa";
@@ -9,7 +9,7 @@ export default function ToggleButton() {
   const [open, setOpen] = useState(false);
   const [activeButton, setActiveButton] = useState('');
 
-  const handleClick = (buttonId) => {
+  const handleClick = (buttonId: SetStateAction<string>) => {
     setActiveButton(buttonId);
 };
 
