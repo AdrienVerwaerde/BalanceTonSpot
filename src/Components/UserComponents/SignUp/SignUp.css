@@ -5,14 +5,15 @@
     padding: 0;
     box-sizing: border-box;
     font-size: 62,5%;
+    
 }
 
 .wrapper-signup {
     height: 100vh;
     width: 100%;
-    background: #2CA2DA;
-    background: linear-gradient(90deg, #214C5C, #2a2a2b);  
+    background: linear-gradient(90deg, #214C5C, #2a2a2b);
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -80,4 +81,15 @@
 .button-signup:hover span:after {
     opacity: 1;
     right: 0;
+}
+
+/* CLOSE BUTTON */
+
+.close-button-signup {
+  background-color: transparent;
+  border: none;
+  color: white;
+  width: 100%;
+  align-self: left;
+  
 }

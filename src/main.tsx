@@ -1,10 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+
+// Import Application components
 import App from './Components/App/App.tsx'
-import 'semantic-ui-css/semantic.min.css'
-import Homepage from './Components/Homepage/Homepage.tsx';
+import Homepage from './Components/HomepageComponents/Homepage/Homepage.tsx';
 import LoginForm from './Components/UserComponents/Login/Login.tsx';
 import SignUp from './Components/UserComponents/SignUp/SignUp.tsx';
+
+// Import of the semantic-ui-css library to use the semantic-ui components
+import 'semantic-ui-css/semantic.min.css'
 
 // Import of react-router-dom components to create our Router
 import {

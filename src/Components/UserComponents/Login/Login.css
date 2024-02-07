@@ -82,10 +82,3 @@
     right: 0;
 }
 
-/* CLOSE BUTTON */
-
-.close-button {
-  position: absolute;
-  top: 25em;
-  left: 78.5em
-}
