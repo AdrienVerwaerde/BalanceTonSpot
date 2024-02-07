@@ -1,0 +1,66 @@
+/* BUTTON PROFILE */
+
+
+.profile-btn-container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    width: 5em;
+    margin-left: 5em;
+    top: 1.8em;
+    
+}
+
+
+.btn-profile {
+    position: relative;
+    display: block;
+    border: none;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+
+}
+
+.mb-5 {
+    margin-bottom: 0px!important;
+}
+
+.btn-profile:hover {
+    background-color: transparent;
+}
+
+.btn-profile:focus,.btn-profile:active {
+    background-color: transparent;
+    border: none;
+}
+
+#button-img {
+    width: 100%;
+    
+}
+
+
+/* LIST OF LINKS */
+
+.list-group {
+    position: relative;
+    
+}
+
+.list-group-item {
+    width: 10em;
+    text-decoration: none;
+    transition: 0.2s ease-in-out;
+    color: #214C5C;
+    border-color: white;
+    padding: 1em;
+    
+
+}
+
+.list-group-item:hover {
+    background-color: #214C5C;
+    color: white;
+}

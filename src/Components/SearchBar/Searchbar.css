@@ -1,0 +1,12 @@
+/* SEARCHBAR */
+
+#searchbar-container {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 2.7em;
+    margin-top: 3em;
+}
+
+.ui.input {
+  width: 30%;
+}

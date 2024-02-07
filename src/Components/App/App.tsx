@@ -1,20 +1,20 @@
 import './App.css'
-import Header from '../Header/Header'
-import Homepage from '../Homepage/Homepage'
+import Header from '../HeaderComponents/Header/Header'
 import Footer from '../Footer/Footer'
 import Searchbar from '../SearchBar/Searchbar'
+import { Outlet } from 'react-router-dom'
 
 function App() {
 
   return (
-    <div>
+    <>
       <Header />
-      <div>
+      <main>
       <Searchbar />
-      <Homepage />
+      <Outlet />
+      </main>
       <Footer />
-      </div>
-    </div>
+    </>
   )
 }
 
