@@ -1,29 +1,55 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
+import Collapse from 'react-bootstrap/Collapse';
 import './ProfileButton.css'
 
 const ProfileButton = () => {
   
 
   //This function uses useState to toggle the list of options from the button
-  const [toggle, setToggle] = useState(false)
+  const [open, setOpen] = useState(false);
+  //This function will make the menu close when we click outside of it
+  const menuRef = useRef<HTMLDivElement>(null);
+  //This function will check if the menu is already active
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    // Adds an event listener on the whole document to detect when we click anywhere but on the button and also allows to close the menu by clicking the button again
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        buttonRef.current &&
+        menuRef.current &&
+        !buttonRef.current.contains(event.target as Node) &&
+        !menuRef.current.contains(event.target as Node)
+      ) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
-    <>
+    <div className='profile-btn-container'>
       <button 
-            onClick={() => setToggle(!toggle)} 
+            ref={buttonRef}
+            onClick={() => setOpen(!open)}
             className="shadow-none btn btn-primary btn-profile mb-5">
-              <img id="button-img" src="https://i.goopics.net/n3a13g.png"></img>
+              <img id="button-img" src="https://i.goopics.net/n3a13g.png" alt="Profile button"></img>
       </button>
-      {toggle && (
-        <ul className="list-group">
-          <a href="#"><li className="list-group-item">An item</li></a>
-          <a href="#"><li className="list-group-item">A second item</li></a>
-          <a href="#"><li className="list-group-item">A third item</li></a>
-          <a href="#"><li className="list-group-item">A fourth item</li></a>
-          <a href="#"><li className="list-group-item">And a fifth one</li></a>
-        </ul>
-      )}
-    </>
+      <div ref={menuRef}>
+        <Collapse in={open}>
+      <ul className="list-group">
+      <a href="#"><li className="list-group-item">PROFIL</li></a>
+      <a href="#"><li className="list-group-item">FAVORIS</li></a>
+      <a href="#"><li className="list-group-item">DECONNEXION</li></a>
+    </ul>
+        </Collapse>
+    </div>
+    </div>
   )
 }
 export default ProfileButton

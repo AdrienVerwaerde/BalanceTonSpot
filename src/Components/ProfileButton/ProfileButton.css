@@ -1,10 +1,26 @@
 /* BUTTON PROFILE */
 
+
+.profile-btn-container {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-self: flex-start;
+    width: 5em;
+    margin-left: 5em;
+    top: 1.8em;
+}
+
+
 .btn-profile {
+    position: relative;
+    display: block;
     border: none;
-    width: 4.5em;
+    width: 100%;
     background-color: transparent;
     border: none;
+
 }
 
 .mb-5 {
@@ -27,12 +43,17 @@
 
 /* LIST OF LINKS */
 
+.list-group {
+    position: relative;
+}
+
 .list-group-item {
     width: 10em;
     text-decoration: none;
     transition: 0.2s ease-in-out;
     color: #214C5C;
-    border-color: #214C5C;
+    border: none;
+    padding: 1em;
 
 }
 
