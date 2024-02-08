@@ -4,8 +4,7 @@ import './SignUp.css'
 import { Link } from 'react-router-dom';
 import { ImCross } from 'react-icons/im';
 
-export default function LoginForm() {
-
+export default function SignUpForm() {
     // 1. Create a state for email and password
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
