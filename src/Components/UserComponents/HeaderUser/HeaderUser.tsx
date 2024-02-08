@@ -13,7 +13,9 @@ export default function HeaderUser() {
             <header className="navbar-container">
                 <Navbar expand="lg" className="bg-body-tertiary profile-navbar">
                     <Container>
-                        <Navbar.Brand id="my-profile">MON PROFIL</Navbar.Brand>
+                        <Navbar.Brand id="my-profile">
+                            {location.pathname === '/favoris' ? 'MES FAVORIS' : 'MON PROFIL'}
+                        </Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="me-auto">

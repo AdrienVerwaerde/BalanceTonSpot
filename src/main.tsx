@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ReactDOM from 'react-dom/client'
 
 // Import Application components
@@ -10,6 +10,7 @@ import Profile from './Components/UserComponents/Profile/Profile.tsx';
 import Admin from './Components/AdminComponents/Admin.tsx'
 import Favoris from './Components/UserComponents/Favoris/Favoris.tsx'
 import HeaderUser from './Components/UserComponents/HeaderUser/HeaderUser.tsx'
+import SpotsList from './Components/SpotsList/SpotsList.tsx'
 
 // Import of the semantic-ui-css library to use the semantic-ui components
 import 'semantic-ui-css/semantic.min.css'
@@ -58,8 +59,8 @@ const router = createBrowserRouter([
         element: <Homepage />,
       },
       {
-        path: '/spotslist',
-        //element: <SpotsList />,
+        path: 'spotslist',
+        element: <SpotsList />,
       },
     ],
   },
