@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import HeaderUser from '../HeaderUser/HeaderUser';
 import './Profile.css';
 
+/**
+ * Composant de tableau de bord du profil utilisateur.
+ */
 export default function UserProfileDashboard() {
     const [user, setUser] = useState({
         name: '',
@@ -9,14 +11,18 @@ export default function UserProfileDashboard() {
         profilePicture: '',
     });
 
-        useEffect(() => {
-            setUser({
-                name: 'John Doe',
-                email: 'john.doe@example.com',
-                profilePicture: 'https://via.placeholder.com/150',
-            });
-        }, []);
+    useEffect(() => {
+        setUser({
+            name: 'John Doe',
+            email: 'john.doe@example.com',
+            profilePicture: 'https://via.placeholder.com/150',
+        });
+    }, []);
 
+    /**
+     * Gère le changement de valeur des champs de saisie.
+     * @param {React.ChangeEvent<HTMLInputElement>} e - L'événement de changement.
+     */
     const handleChange = (e) => {
         const { name, value } = e.target;
         setUser((prevState) => ({
@@ -25,6 +31,10 @@ export default function UserProfileDashboard() {
         }));
     };
 
+    /**
+     * Gère le changement de l'image de profil.
+     * @param {React.ChangeEvent<HTMLInputElement>} e - L'événement de changement.
+     */
     const handleProfilePictureChange = (e) => {
         const file = e.target.files[0];
         const reader = new FileReader();
@@ -37,6 +47,10 @@ export default function UserProfileDashboard() {
         reader.readAsDataURL(file);
     };
 
+    /**
+     * Gère la soumission du formulaire.
+     * @param {React.FormEvent<HTMLFormElement>} e - L'événement de soumission.
+     */
     const handleSubmit = (e) => {
         e.preventDefault();
         // Ici, vous pouvez envoyer les données à une API pour mettre à jour le profil de l'utilisateur
@@ -45,7 +59,6 @@ export default function UserProfileDashboard() {
 
     return (
         <main>
-            <HeaderUser />
             <div className='user-profile-wrapper'>
                 <form className='user-form' onSubmit={handleSubmit}>
                     <h2>Bonjour, {user.name}</h2>

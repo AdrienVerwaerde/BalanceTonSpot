@@ -35,21 +35,21 @@ export default function ProfileButton() {
 
   return (
     <div className='profile-btn-container'>
-      <button 
-            ref={buttonRef}
-            onClick={() => setOpen(!open)}
-            className="shadow-none btn btn-primary btn-profile mb-5">
-              <img id="button-img" src="https://i.goopics.net/n3a13g.png" alt="Profile button"></img>
-              </button>
+      <button
+        ref={buttonRef}
+        onClick={() => setOpen(!open)}
+        className="shadow-none btn btn-primary btn-profile mb-5">
+        <img id="button-img" src="https://i.goopics.net/n3a13g.png" alt="Profile button"></img>
+      </button>
       <div ref={menuRef} style={{ minHeight: '150px' }}>
         <Fade in={open}>
-      <ul className="list-group">
-      <a href="#"><li className="list-group-item">PROFIL</li></a>
-      <Link to="/Favoris"><li className="list-group-item">FAVORIS</li></Link>
-      <a href="#"><li className="list-group-item">DECONNEXION</li></a>
-    </ul>
+          <ul className="list-group">
+          <Link to="/profile"><li className="list-group-item">PROFIL</li></Link>
+            <Link to="/favoris"><li className="list-group-item">FAVORIS</li></Link>
+            <a href="#"><li className="list-group-item">DECONNEXION</li></a>
+          </ul>
         </Fade>
-    </div>
+      </div>
     </div>
   )
 }

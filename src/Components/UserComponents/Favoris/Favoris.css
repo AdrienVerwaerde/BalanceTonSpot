@@ -1,28 +1,41 @@
 .favorite-spots {
-    font-family: Arial, sans-serif;
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    padding: 3em;
+    margin: 10em;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    background-color: #f9f9f9;
+    background-color: #ffffff;
 }
 
 .favorite-spots h2 {
-    color: #333;
+    color: #214c5c;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 1em;
 }
 
 .favorite-spots ul {
+    display: flex;
+    flex-direction: column;
     list-style: none;
-    padding: 0;
+    align-items: center;
 }
 
-.favorite-spots .spot-item {
+.spot-item {
     display: flex;
-    align-items: center;
-    margin-bottom: 15px;
+    padding: 1em;
+    margin: 1em;
+    border: transparent solid 1px;
+    border-radius: 20px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.106);
+    width: 100%;
+}
+
+.spot-item:hover {
+    transform: scale(1.02);
+    transition: transform 0.2s ease-in-out;
+    cursor: pointer;
 }
 
 .favorite-spots .spot-item:last-child {
@@ -39,10 +52,33 @@
 
 .spot-info h3 {
     margin: 0;
-    color: #007bff;
+    color: #214c5c;
 }
 
 .spot-info p {
     margin: 5px 0 0;
     font-size: 14px;
 }
+
+/* BEGIN: Media Queries */
+@media screen and (max-width: 768px) {
+    .favorite-spots {
+        margin: 5em;
+    }
+    
+    .spot-item {
+        margin: 0.5em;
+    }
+    
+    .spot-image {
+        width: 60px;
+        height: 60px;
+        border-radius: 30px;
+        margin-right: 10px;
+    }
+    
+    .spot-info p {
+        font-size: 12px;
+    }
+}
+/* END: Media Queries */

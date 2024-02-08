@@ -33,11 +33,10 @@ export default function LoginForm() {
 
     return (
         <div className="wrapper-signup">
-            
-                <Link to="/"><button className="close-button-signup"><ImCross />Retour à l'Accueil</button></Link>
-            
+            <Link to="/"><button className="close-button-signup"><ImCross />Retour à l'Accueil</button></Link>
             <div className="form-signup">
                 <img src="https://i.goopics.net/qwh4qx.png" className="title-signup" />
+                <h1>S'inscrire pour la Ride !</h1>
                 <form onSubmit={handleSubmit}>
                     <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="input-signup" placeholder="E-mail" required />
                     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="input-signup" placeholder="Mot de Passe" required />
