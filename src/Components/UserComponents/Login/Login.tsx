@@ -36,6 +36,7 @@ export default function LoginForm() {
             <Link to="/"><button className="close-button"><ImCross /></button></Link>
             <div className="form-login">
                 <img src="https://i.goopics.net/qwh4qx.png" className="title-login" />
+                <h1>Se Connecter</h1>
                 <form onSubmit={handleSubmit}>
                     <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="input-login" placeholder="E-mail" required />
                     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="input-login" placeholder="Mot de Passe" required />

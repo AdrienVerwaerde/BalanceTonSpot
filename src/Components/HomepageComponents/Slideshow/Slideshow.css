@@ -91,3 +91,19 @@
   font-size: small;
   font-weight: bold;
 }
+
+@media screen and (max-width: 768px) {
+  .slideshow {
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .slideshow {
+    max-width: 100%;
+  }
+
+  #spotlight {
+    max-width: 100%;
+  }
+}
