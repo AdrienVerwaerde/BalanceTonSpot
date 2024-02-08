@@ -19,7 +19,7 @@ export default function HeaderUser() {
                             <Nav className="me-auto">
                                 <Link className="header-user-link" to="/">Retour à l'accueil</Link>
                                 <Link className="header-user-link" to={location.pathname === '/favoris' ? '/profile' : '/favoris'}>
-                                    {location.pathname === '/favoris' ? 'Mon Profil' : 'Mes Favoris'}
+                                    {location.pathname === '/favoris' ? 'Mon profil' : 'Mes favoris'}
                                 </Link>
                             </Nav>
                         </Navbar.Collapse>
