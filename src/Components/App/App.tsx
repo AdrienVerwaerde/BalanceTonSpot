@@ -4,7 +4,7 @@ import Footer from '../Footer/Footer'
 import Searchbar from '../SearchBar/Searchbar'
 import { Outlet } from 'react-router-dom'
 
-function App() {
+export default function App() {
 
   return (
     <>
@@ -18,4 +18,3 @@ function App() {
   )
 }
 
-export default App

@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import Collapse from 'react-bootstrap/Collapse';
 import Card from 'react-bootstrap/Card';
 import Fade from 'react-bootstrap/Fade';
+import { Link } from 'react-router-dom';
 import './ProfileButton.css'
 
 export default function ProfileButton() {
@@ -44,7 +45,7 @@ export default function ProfileButton() {
         <Fade in={open}>
       <ul className="list-group">
       <a href="#"><li className="list-group-item">PROFIL</li></a>
-      <a href="#"><li className="list-group-item">FAVORIS</li></a>
+      <Link to="/Favoris"><li className="list-group-item">FAVORIS</li></Link>
       <a href="#"><li className="list-group-item">DECONNEXION</li></a>
     </ul>
         </Fade>

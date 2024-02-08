@@ -6,6 +6,9 @@ import App from './Components/App/App.tsx'
 import Homepage from './Components/HomepageComponents/Homepage/Homepage.tsx';
 import LoginForm from './Components/UserComponents/Login/Login.tsx';
 import SignUp from './Components/UserComponents/SignUp/SignUp.tsx';
+import Profile from './Components/UserComponents/Profile/Profile.tsx';
+import Admin from './Components/AdminComponents/Admin.tsx'
+import Favoris from './Components/UserComponents/Favoris/Favoris.tsx'
 
 // Import of the semantic-ui-css library to use the semantic-ui components
 import 'semantic-ui-css/semantic.min.css'
@@ -37,27 +40,37 @@ const router = createBrowserRouter([
         element: <Homepage />,
       },
       {
-        path: 'SpotsList',
+        path: 'spotslist',
         //element: <SpotsList />,
       },
     ],
   },
-// 2. Adding routes on login, signup and profile pages
+// 2. Adding routes on login, signup, and profile pages
   {
     path: '/login',
     element: <LoginForm />,
   },
   {
-    path: '/SignUp',
+    path: '/signup',
     element: <SignUp />,
   },
   {
     path: '/profile',
-    //element: <Profile />,
+    element: <Profile />,
   },
+  {
+    path: '/favoris',
+    element: <Favoris spots={undefined} />,
+  },
+
+// 4. Adding routes on admin page
+  {
+    path: '/admin',
+    element: <Admin />,
+  }
 ]);
 
-// 3. Rending of the Router
+// X. Rending of the Router
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     {/* ici on ne veut plus rendre simplement le composant App, mais notre router qui contient la logique de routage => c'est lui qui va décider en fonction de l'URL, quel composant rendre */}

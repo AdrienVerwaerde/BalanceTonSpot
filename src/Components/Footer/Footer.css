@@ -1,6 +1,5 @@
 /* FOOTER */
 
-
 footer {
 
     background-color: #214c5c;
@@ -34,3 +33,31 @@ li {
     text-underline-offset: 1rem;
     text-decoration-color: #c4c4c4;
 }
+/* FOOTER */
+
+@media screen and (max-width: 768px) {
+    footer {
+        margin-top: 2em;
+        padding: 0.5em;
+    }
+
+    ul {
+        flex-direction: column;
+    }
+
+    li {
+        margin-bottom: 0.5em;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    footer {
+        margin-top: 1em;
+        padding: 0.3em;
+    }
+
+    #footer-link {
+        gap: 1em;
+    }
+}
+

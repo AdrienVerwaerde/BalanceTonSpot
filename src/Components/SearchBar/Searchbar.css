@@ -10,3 +10,27 @@
 .ui.input {
   width: 30%;
 }
+
+/* Media Queries */
+
+@media screen and (max-width: 768px) {
+  #searchbar-container {
+    padding-bottom: 2em;
+    margin-top: 2em;
+  }
+
+  .ui.input {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #searchbar-container {
+    padding-bottom: 1.5em;
+    margin-top: 1.5em;
+  }
+
+  .ui.input {
+    width: 70%;
+  }
+}

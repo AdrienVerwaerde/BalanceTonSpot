@@ -81,7 +81,7 @@ export default function Slideshow() {
             <a href="#"><div id="spotlight">
             <h2>SPOTLIGHT N°{index + 1}</h2>
             <text id="spotlight-text">{textSpotlight[index]}</text>
-            <p>Découvrir</p>
+            <p>Découvrir >></p>
             </div>
             </a>
             <img id="slideshow-img" src={p} alt="" />
