@@ -1,6 +1,5 @@
 /* BUTTON PROFILE */
 
-
 .profile-btn-container {
     position: absolute;
     display: flex;
@@ -11,7 +10,6 @@
     top: 1.8em;
     z-index: 1500;
 }
-
 
 .btn-profile {
     position: relative;

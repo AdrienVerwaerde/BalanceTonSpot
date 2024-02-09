@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 // Import Application components
@@ -19,14 +19,6 @@ import 'semantic-ui-css/semantic.min.css'
 import {
   createBrowserRouter,
   RouterProvider,
-  Link,
-  createRoutesFromElements,
-  Route,
-  NavLink,
-  Outlet,
-  useLocation,
-  useParams,
-  Navigate,
 } from "react-router-dom";
 
 const spots = [

@@ -1,0 +1,13 @@
+/* HIDE SCROLLBAR FOR ALL NAVIGATORS */
+
+body {
+  overflow-y: scroll; 
+}
+
+body::-webkit-scrollbar {
+  display: none; 
+}
+
+body {
+  scrollbar-width: none; 
+}
