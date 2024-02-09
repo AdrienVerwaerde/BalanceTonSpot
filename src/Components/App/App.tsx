@@ -10,21 +10,6 @@ import axios from 'axios'
 export default function App() {
   const [spots, setSpots] = useState([]);
 
-  // Function to fetch the spots from the API
-  async function fetchSpots() {
-    try {
-        const response = await axios.get('http://ombelinepinoche-server.eddi.cloud:8443/api/spots');
-        setSpots(response.data); // Update the spotslist state variable with the fetched data
-    } catch (error) {
-        console.error(error);
-    }
-}
-
-// Fetch the spots from the database
-useEffect(() => {
-    fetchSpots();
-}, []);
-
   return (
     <SearchContext.Provider value={{ spots, setSpots }}>
       <Header />

@@ -23,29 +23,40 @@ export default function SpotsList() {
     };
 
     return (
-        <div id="spotslist-container">
-            {spots.map((spot: any) => (
-                <div key={spot.id} id={`spotslist-${spot.id}`}>
-                    <h2 id={`spotslist-title-${spot.id}`}>{spot.name}</h2>
-                    <p id={`spotslist-description-${spot.id}`}>{spot.description}</p>
-                    <img src={spot.picture} alt={spot.name} id={`spotslist-image-${spot.id}`} />
-                    <p id={`spotslist-address-${spot.id}`}>{spot.address}</p>
-                    <div id={`spotslist-rating-container-${spot.id}`}>
-                        <label htmlFor={`rating-${spot.id}`} id={`spotslist-label-${spot.id}`}>
-                            Rating:
-                        </label>
-                        <input
-                            type="number"
-                            id={`rating-${spot.id}`}
-                            value={rating[spot.id] || ''}
-                            onChange={(e) => handleRatingChange(spot.id, Number(e.target.value))}
+        console.log(spots),
+        spots.length === 0 ? (
+            <p>Pas de résultats</p>
+        ) : (
+            <div id="spotslist-container">
+                {spots.map((spot: Spot) => (
+                    <div key={spot.id} id={`spotslist-${spot.id}`}>
+                        <h2 id={`spotslist-title-${spot.id}`}>{spot.name}</h2>
+                        <p id={`spotslist-description-${spot.id}`}>{spot.description}</p>
+                        <img
+                            src={spot.picture}
+                            alt={spot.name}
+                            id={`spotslist-image-${spot.id}`}
                         />
+                        <p id={`spotslist-address-${spot.id}`}>{spot.address}</p>
+                        <div id={`spotslist-rating-container-${spot.id}`}>
+                            <label htmlFor={`rating-${spot.id}`} id={`spotslist-label-${spot.id}`}>
+                                Rating:
+                            </label>
+                            <input
+                                type="number"
+                                id={`rating-${spot.id}`}
+                                value={rating[spot.id] || ''}
+                                onChange={(e) => handleRatingChange(spot.id, Number(e.target.value))}
+                            />
+                        </div>
+                        <button
+                            onClick={() => handleFavoriteToggle(spot.id)}
+                            id={`spotslist-button-${spot.id}`}>
+                            {isFavorite[spot.id] ? 'Remove from Favorites' : 'Add to Favorites'}
+                        </button>
                     </div>
-                    <button onClick={() => handleFavoriteToggle(spot.id)} id={`spotslist-button-${spot.id}`}>
-                        {isFavorite[spot.id] ? 'Remove from Favorites' : 'Add to Favorites'}
-                    </button>
-                </div>
-            ))}
-        </div>
-    );
-}
+                ))}
+            </div>
+        )
+    )
+};
