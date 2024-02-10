@@ -1,6 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react'
-import Collapse from 'react-bootstrap/Collapse';
-import Card from 'react-bootstrap/Card';
 import Fade from 'react-bootstrap/Fade';
 import { Link } from 'react-router-dom';
 import './ProfileButton.css'

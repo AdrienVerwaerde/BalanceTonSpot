@@ -43,7 +43,7 @@ export default function Searchbar() {
           }
       } catch (error) {
           console.error('Error fetching data:', error);
-          setError('Aucun spot trouvé.');
+          setError('');
       } finally {
           setIsLoading(false);
       }
