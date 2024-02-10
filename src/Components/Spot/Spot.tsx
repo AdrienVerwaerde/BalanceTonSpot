@@ -2,12 +2,28 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Spot.css';
 
+interface Spot {
+  name: string;
+  description: string;
+  picture: string;
+  address: string;
+  rating: number;
+}
+
+/**
+ * Component that displays the details of a spot.
+ * @param spotId - The ID of the spot.
+ * @returns JSX element representing the spot details.
+ */
 export default function SpotDetails({ spotId }: { spotId: string }) {
-  const [spot, setSpot] = useState<unknown>(null);
+  const [spot, setSpot] = useState<Spot | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
+    /**
+     * Fetches the details of the spot from the server.
+     */
     const fetchSpotDetails = async () => {
       try {
         const response = await axios.get(`http://ombelinepinoche-server.eddi.cloud:8443/api/spot/${spotId}`);
@@ -48,4 +64,3 @@ export default function SpotDetails({ spotId }: { spotId: string }) {
     </div>
   );
 }
-

@@ -15,6 +15,9 @@ const options = [
   { key: "snowboard", text: "Snowboard", value: "snowboard" },
 ];
 
+/**
+ * Component for displaying a search bar.
+ */
 export default function Searchbar() {
   const { setSpots } = useContext(SearchContext);
   const [searchTerm, setSearchTerm] = useState('');
@@ -23,52 +26,60 @@ export default function Searchbar() {
   const navigate = useNavigate()
 
   useEffect(() => {
-      searchSpots(searchTerm); // Appel initial avec le searchTerm vide
-  }, []); // Dépendances vides pour exécuter une seule fois au montage
+    searchSpots(searchTerm); // Initial call with empty searchTerm
+  }, []); // Empty dependencies to run only once on mount
 
+  /**
+   * Function to search for spots.
+   * @param {string} name - The name to search for.
+   */
   const searchSpots = async (name) => {
-      setIsLoading(true);
-      setError('');
+    setIsLoading(true);
+    setError('');
 
-      try {
-          const response = await axios.get(`${API_BASE_URL}/location/${name}/spots`, {
-              params: { name } // Utiliser searchTerm comme paramètre de requête
-          });
-          const data = response.data;
+    try {
+      const response = await axios.get(`${API_BASE_URL}/location/${name}/spots`, {
+        params: { name } // Use searchTerm as query parameter
+      });
+      const data = response.data;
 
-          if (data && Array.isArray(data)) {
-              setSpots(data);
-          } else {
-              setSpots([]);
-          }
-      } catch (error) {
-          console.error('Error fetching data:', error);
-          setError('');
-      } finally {
-          setIsLoading(false);
+      if (data && Array.isArray(data)) {
+        setSpots(data);
+      } else {
+        setSpots([]);
       }
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      setError('');
+    } finally {
+      setIsLoading(false);
+    }
   };
   
+  /**
+   * Handle key down event.
+   * @param {KeyboardEvent} e - The keyboard event.
+   */
   const handleKeyDown = (e) => {
-      if (e.key === 'Enter') {
-          searchSpots(searchTerm);
-          navigate("/spotslist");
-      }
+    if (e.key === 'Enter') {
+      searchSpots(searchTerm);
+      navigate("/spotslist");
+    }
   };
 
   return (
-    <div id="searchbar-container">
-      <Input
-        action={<Dropdown button basic floating options={options} defaultValue="all" />}
-        icon="search"
-        iconPosition="left"
-        placeholder="Search..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        onKeyDown={handleKeyDown}
-        loading={isLoading}
-      />
-      {error && <p className="error-message">{error}</p>} {/* Affichage des messages d'erreur */}
-    </div>
+  <div id="searchbar-container">
+    <Input
+    action={<Dropdown button basic floating options={options} defaultValue="all" />}
+    icon="search"
+    iconPosition="left"
+    placeholder="Search..."
+    value={searchTerm}
+    onChange={(e) => setSearchTerm(e.target.value)}
+    onKeyDown={handleKeyDown}
+    loading={isLoading}
+    />
+    {error && <p className="error-message">{error}</p>} {/* Display error messages */}
+  </div>
   );
 }

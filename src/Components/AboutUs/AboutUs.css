@@ -1,0 +1,46 @@
+.equipe-presentation {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.membres {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.membre {
+    max-width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.membre img {
+    width: 100%;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.membre h3 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.membre p {
+    margin-bottom: 15px;
+}
+
+/* Style spécifique pour les rôles */
+.membre p:nth-child(3) {
+    font-style: italic;
+    color: #666;
+}
+
+/* Style spécifique pour les descriptions */
+.membre p:last-child {
+    font-size: 0.9rem;
+    color: #555;
+}
