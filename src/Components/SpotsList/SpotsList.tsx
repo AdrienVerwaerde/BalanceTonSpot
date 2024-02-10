@@ -24,7 +24,7 @@ export default function SpotsList() {
 
     return (
         spots.length === 0 ? (
-            <p id="no-result">C'est trop calme, j'aime pas trop beaucoup ça. J'préfère quand c'est un peu trop plus moins calme...</p>
+            <p className="no-result">C'est trop calme, j'aime pas trop beaucoup ça. J'préfère quand c'est un peu trop plus moins calme...</p>
         ) : (
             <div id="spotslist-container">
                 {spots.map((spot: Spot) => (

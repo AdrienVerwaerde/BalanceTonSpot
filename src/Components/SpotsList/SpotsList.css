@@ -65,7 +65,7 @@
 
 /* Error Message */
   
-#no-result {
+.no-result {
   color: #D8000C; 
   background-color: #FFBABA; 
   padding: 20px;

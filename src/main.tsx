@@ -20,6 +20,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import Spot from './Components/Spot/Spot.tsx';
 
 const spots = [
   {
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
         path: 'spotslist',
         element: <SpotsList />,
       },
+      {
+        path: 'spot/:id',
+        element: <Spot spotId={''} />,
+      }
     ],
   },
 // 2. Adding routes on login, signup
