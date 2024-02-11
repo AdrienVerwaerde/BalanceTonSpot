@@ -1,3 +1,5 @@
+/* SPOT PAGE */
+
 #spot-details-container {
   border: 1px solid #ccc;
   padding: 20px;
@@ -16,41 +18,42 @@
 }
 
 @keyframes stretch {
-    0%, 40%, 100% {
-      transform: scaleY(0.4);
-    }
-    20% {
-      transform: scaleY(1);
-    }
+  0%, 40%, 100% {
+    transform: scaleY(0.4);
   }
-  
-  .loader-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  20% {
+    transform: scaleY(1);
   }
+}
   
-  .ride-loader {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/* LOADER */
+
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+#loader-message {
+  margin-top: 1em;
+  color: #214c5c;
+  font-weight: bold;
+}
+
+/* ANIMATION */
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
   }
-  
-  .ride-loader div {
-    background: linear-gradient(45deg, #a47eec, #fd0058);
-    width: 10px;
-    height: 50px;
-    margin: 0 3px;
-    border-radius: 5px;
-    animation: stretch 1.2s infinite ease-in-out;
+  to {
+    transform: rotate(360deg);
   }
+}
   
-  .ride-loader div:nth-child(2) {
-    animation-delay: -1.1s;
-  }
-  
-  .ride-loader div:nth-child(3) {
-    animation-delay: -0.9s;
-  }
-  
+.loader-img {
+  animation: rotate 1s linear infinite;
+  width: 3em;
+}

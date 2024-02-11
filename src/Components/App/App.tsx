@@ -10,6 +10,7 @@ export default function App() {
   const [spots, setSpots] = useState([]);
 
   return (
+    <div className="app-container">
     <SearchContext.Provider value={{ spots, setSpots }}>
       <Header />
       <main>
@@ -18,5 +19,6 @@ export default function App() {
       </main>
       <Footer />
     </SearchContext.Provider>
+    </div>
   )
 }

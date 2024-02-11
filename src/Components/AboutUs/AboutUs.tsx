@@ -4,13 +4,13 @@ import './AboutUs.css';
 
 export default function AboutUs() {
 
-    const equipe = [
+    const team = [
         {
             nom: 'Ombeline PINOCHE',
             nickname: 'La Pinocherie',
             role: 'Développeuse Back-end',
-            description: "Elle a une passion pour le développement backend, mais son véritable amour reste la bière, un intérêt bien plus marquant pour elle. En effet, dès 15 heures, elle est déjà en route pour l'heure du happy hour. C'est une amatrice de bière dans l'âme, qui allie cette passion à ses compétences en codage. Elle s'autoproclame fièrement reine de la décontraction et de la convivialité, une identité qu'elle assume pleinement !"            ,
-            photo: 'https://images.lesindesradios.fr/fit-in/1100x2000/filters:format(webp)/medias/Vsj0LZpM34/image/beer_g247be1fcf_12801691063541746.jpg' 
+            description: "Elle a une passion pour le développement backend, mais ce n'est pas pour autant qu'elle reste en arrière-plan. Aussi solide que les remparts de sa ville de coeur, Ombeline rempli sans une tuile son rôle de mur porteur pour coder des projets pétillants, à l'image de la bière qui la rafraîchit après une bonne journée de développement !",            
+            photo: 'https://i.postimg.cc/vZc7pKD2/Screenshot-2024-02-11-at-12-02-46-O-m-b-e-l-i-n-e-lapinocherie-Photos-et-vid-os-Instagram.png'
         },
         {
             nom: 'Gatien DOUY',
@@ -36,23 +36,23 @@ export default function AboutUs() {
     ];
 
     return (
-        <>
+        <div className='team-container'>
         <Header />
-        <div className="equipe-presentation">
+        <div className="team-presentation">
             <h2>Notre Équipe</h2>
-            <div className="membres">
-                {equipe.map((membre, index) => (
-                    <div key={index} className="membre">
-                        <img src={membre.photo} alt={`Photo de ${membre.nom}`} />
-                        <h3>{membre.nom}</h3>
-                        <p> A.k.a : {membre.nickname}</p>
-                        <p>{membre.role}</p>
-                        <p>{membre.description}</p>
+            <div className="members">
+                {team.map((member, index) => (
+                    <div key={index} className="member">
+                        <img src={member.photo} alt={`Photo de ${member.nom}`} />
+                        <h3>{member.nom}</h3>
+                        <p> A.k.a : {member.nickname}</p>
+                        <p>{member.role}</p>
+                        <p>{member.description}</p>
                     </div>
                 ))}
             </div>
         </div>
         <Footer />
-        </>
+        </div>
     );
 }

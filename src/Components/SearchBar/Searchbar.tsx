@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { Dropdown, Input } from "semantic-ui-react";
+import { Dropdown, Input, Icon } from "semantic-ui-react";
 import { useNavigate } from "react-router-dom";
 import "./Searchbar.css";
 
@@ -9,11 +9,11 @@ import SearchContext from '../../contextAPI/searchContext';
 // Utiliser les variables d'environnement pour l'URL de base de l'API
 const API_BASE_URL = 'http://ombelinepinoche-server.eddi.cloud:8443/api';
 
-const options = [
-  { key: "all", text: "Qu'importe !", value: "all" },
-  { key: "skateboard", text: "Skateboard", value: "skateboard" },
-  { key: "snowboard", text: "Snowboard", value: "snowboard" },
-];
+// const options = [
+//   { key: "all", text: "Qu'importe !", value: "all" },
+//   { key: "skateboard", text: "Skateboard", value: "skateboard" },
+//   { key: "snowboard", text: "Snowboard", value: "snowboard" },
+// ];
 
 /**
  * Component for displaying a search bar.
@@ -28,6 +28,13 @@ export default function Searchbar() {
   useEffect(() => {
     searchSpots(searchTerm); // Initial call with empty searchTerm
   }, []); // Empty dependencies to run only once on mount
+
+  //Checks if isLoading=true and if not, clears the search input
+  useEffect(() => {
+    if (!isLoading) {
+      setSearchTerm('');
+    }
+  }, [isLoading]);
 
   /**
    * Function to search for spots.
@@ -53,11 +60,12 @@ export default function Searchbar() {
       setError('');
     } finally {
       setIsLoading(false);
+      setSearchTerm('');
     }
   };
   
   /**
-   * Handle key down event.
+   * HANDLE KEY DOWN EVENT.
    * @param {KeyboardEvent} e - The keyboard event.
    */
   const handleKeyDown = (e) => {
@@ -67,19 +75,26 @@ export default function Searchbar() {
     }
   };
 
+  // HANDLE CLICK ON SEARCH ICON
+  const handleSearchClick = () => {
+    searchSpots(searchTerm);
+    navigate("/spotslist");
+  };
+
+
+
   return (
   <div id="searchbar-container">
     <Input
-    action={<Dropdown button basic floating options={options} defaultValue="all" />}
-    icon="search"
-    iconPosition="left"
-    placeholder="Search..."
-    value={searchTerm}
-    onChange={(e) => setSearchTerm(e.target.value)}
-    onKeyDown={handleKeyDown}
-    loading={isLoading}
-    />
+        icon={<Icon name="search" link onClick={handleSearchClick} />}
+        placeholder="Rechercher un spot ou une ville..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        onKeyDown={handleKeyDown}
+      />
     {error && <p className="error-message">{error}</p>} {/* Display error messages */}
   </div>
   );
 }
+
+

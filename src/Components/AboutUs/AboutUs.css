@@ -1,46 +1,67 @@
-.equipe-presentation {
-    text-align: center;
-    margin-bottom: 50px;
+/* ABOUT US */
+
+.team-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
 }
 
-.membres {
+.team-presentation {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+}
+
+.team-presentation h2 {
+    color: #214c5c;
+    padding-top: 3em;
+    margin: 3em;
+}
+
+.members {
     display: flex;
     justify-content: center;
     gap: 30px;
     flex-wrap: wrap;
 }
 
-.membre {
+.member {
     max-width: 300px;
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 20px;
     background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.membre img {
+.member img {
     width: 100%;
     border-radius: 50%;
     margin-bottom: 20px;
+    object-fit: cover;
 }
 
-.membre h3 {
+.member h3 {
     margin-bottom: 10px;
     font-size: 1.2rem;
 }
 
-.membre p {
+.member p {
     margin-bottom: 15px;
 }
 
 /* Style spécifique pour les rôles */
-.membre p:nth-child(3) {
+.member p:nth-child(3) {
     font-style: italic;
     color: #666;
 }
 
 /* Style spécifique pour les descriptions */
-.membre p:last-child {
+.member p:last-child {
     font-size: 0.9rem;
     color: #555;
 }

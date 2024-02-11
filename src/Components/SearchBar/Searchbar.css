@@ -11,6 +11,13 @@
   width: 30%;
 }
 
+.ui.input:focus-within {
+  color: #214c5c !important;
+}
+
+.ui.input:focus-within label {
+  color: #ff0000 !important;
+}
 
 
 /* Media Queries */

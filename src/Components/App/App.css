@@ -1,7 +1,14 @@
 /* HIDE SCROLLBAR FOR ALL NAVIGATORS */
 
+.app-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+}
+
 body {
-  overflow-y: scroll; 
+  overflow-y: scroll;
 }
 
 body::-webkit-scrollbar {
@@ -11,3 +18,5 @@ body::-webkit-scrollbar {
 body {
   scrollbar-width: none; 
 }
+
+

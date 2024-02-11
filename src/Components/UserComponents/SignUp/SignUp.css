@@ -1,73 +1,78 @@
-*,
-*::after,
-*::before {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-size: 62,5%;
-    
-}
+/* SIGNUP FORM */
 
 .wrapper-signup {
     height: 100vh;
     width: 100%;
-    background: linear-gradient(90deg, #214C5C, #2a2a2b);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: #214c5c;
 }
 
 .input-signup {
     color: #333;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     font-size: 1.2rem;
     margin: 0 auto;
     padding: 1.5rem 2rem;
     border-radius: 0.2rem;
     background-color: rgb(255, 255, 255);
-    border: none;
+    border:#214c5c 1px solid;
     width: 90%;
     display: block;
-    border-bottom: 0.3rem solid transparent;
     transition: all 0.3s;
-    outline: none;
     margin-bottom: 25px;
 }
 
-.form-signup {
-    width: 400px;
+.input-signup:focus{
+    outline-color: #214c5c;
 }
 
+.form-container {
+    width: 400px;
+    text-align: center;
+    color: #214c5c;
+}
+
+.form-container h1 {
+    color: white;
+    margin-top: 2em;
+    margin-bottom: 1em;
+}
+
+
 .title-signup {
-    margin-bottom: 2em;
     width: 100%;
     font-size: 2.3em;
 }
 
+/* BUTTONS */
+
 .button-signup {
+    background-color: #333 !important;
     border-radius: 4px;
-    border: none;
-    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     text-align: center;
     text-transform: uppercase;
     font-size: 22px;
-    padding: 20px;
-    width: 200px;
     transition: all 0.4s;
     cursor: pointer;
-    margin: 5px;
-    width: 90%;
+    width: 91% !important;
+
 }
+
 .button-signup span {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
-    background: linear-gradient(90deg, #214C5C, #2a2a2b);
+    background: white;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     cursor: pointer;
     display: inline-block;
     position: relative;
     transition: 0.4s;
+    padding: 0.5em;
 }
 .button-signup span:after {
     position: absolute;
@@ -78,18 +83,32 @@
 .button-signup:hover span {
     scale: 1.1;
 }
+
 .button-signup:hover span:after {
     opacity: 1;
     right: 0;
 }
 
+.button-signup:hover {
+    background-color: #ccc !important;
+}
+
 /* CLOSE BUTTON */
 
 .close-button-signup {
+    display: flex;
+    justify-content: center;
     background-color: transparent;
     border: none;
-    color: white;
+    color: #ffffff;
     width: 100%;
     align-self: left;
+    margin-top: 1em;
+    font-weight: bold;
+    font-size: medium;
 
+}
+
+.close-button-signup svg {
+    margin-right: 0.5em;
 }

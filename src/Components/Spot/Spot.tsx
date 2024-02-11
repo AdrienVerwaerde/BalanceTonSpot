@@ -41,11 +41,10 @@ export default function SpotDetails({ spotId }: { spotId: string }) {
   if (loading) {
     return (
       <div className="loader-container">
-        <div className="ride-loader">
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
+        <img src="https://i.postimg.cc/wjKvWdkq/bouton-skate-color.png" 
+        alt="loader" 
+        className="loader-img" />
+        <p id="loader-message">Recherche des spots...</p>
       </div>
     );
   }
