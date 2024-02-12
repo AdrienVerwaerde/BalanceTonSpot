@@ -1,6 +1,5 @@
 /* SPOT PAGE */
 
-
 .details-global-container {
   display: flex;
   justify-content: center;
@@ -21,15 +20,37 @@
   border-radius: 5px;
   overflow: hidden;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  
+}
+
+#spot-details-description {
+  width: 100%;
 }
 
 #spot-details-container h2 {
   background: #e3e3e3;
   margin: 0;
-  padding: 10px;
-  font-size: 1.2em;
+  padding: 1em 2em 1em 2em;
+  border-radius: 0.3em;
+  font-size: 1.5em;
   color: #000000;
 }
+
+#spot-details-container img {
+  width: 100%;
+}
+
+#spot-details-address img {
+  width: 1.2em;
+}
+
+#ratings {
+  display: flex;
+  justify-content: space-between;
+  width: 10.5%;
+}
+
+
 
 /* LOADER */
 .loader-container {
@@ -76,4 +97,8 @@
   background-color: #333;
   width: 3em;
   height: 3em;
+}
+
+.carousel-indicators {
+  display: none;
 }

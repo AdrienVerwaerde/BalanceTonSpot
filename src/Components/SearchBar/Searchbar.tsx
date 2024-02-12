@@ -1,46 +1,49 @@
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Input, Icon } from "semantic-ui-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom"; // Ajout de useLocation
 import "./Searchbar.css";
 
 import SearchContext from '../../contextAPI/searchContext';
 
-// Utiliser les variables d'environnement pour l'URL de base de l'API
 const API_BASE_URL = 'http://ombelinepinoche-server.eddi.cloud:8443/api';
 
-/**
- * Component for displaying a search bar.
- */
 export default function Searchbar() {
   const { setSpots } = useContext(SearchContext);
   const [searchTerm, setSearchTerm] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const location = useLocation(); // Pour accéder à la query de l'URL
 
   useEffect(() => {
-    searchSpots(searchTerm); // Initial call with empty searchTerm
-  }, []); // Empty dependencies to run only once on mount
+    // Lecture du terme de recherche depuis l'URL
+    const searchParams = new URLSearchParams(location.search);
+    const name = searchParams.get('search') || '';
+    setSearchTerm(name);
+    if (name) {
+      searchSpots(name);
+    }
+  }, [location.search]); // Dépendance à location.search pour réagir aux changements
 
-  //Checks if isLoading=true and if not, clears the search input
   useEffect(() => {
     if (!isLoading) {
       setSearchTerm('');
     }
   }, [isLoading]);
 
-  /**
-   * Function to search for spots.
-   * @param {string} name - The name to search for.
-   */
-  const searchSpots = async (name) => {
+  const searchSpots = async (name: string) => {
+    if (!name.trim()) {
+      setIsLoading(false);
+      return;
+    }
+
     setIsLoading(true);
     setError('');
 
     try {
       const response = await axios.get(`${API_BASE_URL}/location/${name}/spots`, {
-        params: { name } // Use searchTerm as query parameter
+        params: { name }
       });
       const data = response.data;
 
@@ -51,42 +54,33 @@ export default function Searchbar() {
       }
     } catch (error) {
       console.error('Error fetching data:', error);
-      setError('');
+      setError('Une erreur est survenue lors de la recherche.');
     } finally {
       setIsLoading(false);
-      setSearchTerm('');
-    }
-  };
-  
-  /**
-   * HANDLE KEY DOWN EVENT.
-   * @param {KeyboardEvent} e - The keyboard event.
-   */
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
-      searchSpots(searchTerm);
-      navigate("/spotslist");
     }
   };
 
-  // HANDLE CLICK ON SEARCH ICON
+  const handleKeyDown = (e: { key: string; }) => {
+    if (e.key === 'Enter') {
+      navigate(`/spotslist?search=${encodeURIComponent(searchTerm)}`);
+    }
+  };
+
   const handleSearchClick = () => {
-    searchSpots(searchTerm);
-    navigate("/spotslist");
+    navigate(`/spotslist?search=${encodeURIComponent(searchTerm)}`);
   };
 
   return (
-  <div id="searchbar-container">
-    <Input
+    <div id="searchbar-container">
+      <Input
         icon={<Icon name="search" link onClick={handleSearchClick} />}
         placeholder="Rechercher un spot ou une ville..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         onKeyDown={handleKeyDown}
       />
-    {error && <p className="error-message">{error}</p>} {/* Display error messages */}
-  </div>
+      {error && <p className="error-message">{error}</p>}
+    </div>
   );
 }
-
 

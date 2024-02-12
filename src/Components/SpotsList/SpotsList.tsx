@@ -73,8 +73,8 @@ export default function SpotsList() {
                         </div>
 
                         <p id="spotslist-description">{spot.description.length > 150 ? `${spot.description.slice(0, 150)}...` : spot.description}</p>
-                        <p id="spotslist-address">{spot.address}</p>
-                        <div id="spotslist-rating-container">
+                        <p id="spotslist-address"><img src="https://i.postimg.cc/P5YNtVhs/pin-solid-24.png"></img>{spot.address}</p>
+                        
                             {/* BUTTON DETAILS */}
                             <button
                                 onClick={() => {
@@ -84,11 +84,10 @@ export default function SpotsList() {
                                 }}
                                 id="spotslist-button-detail"
                             >
-                                Voir le détail
+                            Voir le détail
                             </button>
                         </div>
                     </div>
-                </div>
             ))}
         </div>
     );

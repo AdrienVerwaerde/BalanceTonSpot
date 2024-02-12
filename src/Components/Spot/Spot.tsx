@@ -83,8 +83,7 @@ export default function Spot() {
   return (
     <div className='details-global-container'>
       <div id="spot-details-container">
-        <h2 id="spot-details-title">{spot?.name}</h2>
-        <p id="spot-details-description">{spot?.description}</p>
+      <h2 id="spot-details-title">{spot?.name}</h2>
 
         {/*CARROUSEL*/}
           <Carousel fade>
@@ -107,9 +106,12 @@ export default function Spot() {
               </Carousel.Caption>
             </Carousel.Item>
           </Carousel>
-        
-        <p id="spot-details-address">{spot?.address}</p>
-        <div>
+          <div id="ratings">
+        <StarRating
+          id={spot?.id}
+          rating={spot?.rating || 0}
+        /> <p>({spot.rating})</p>
+          </div>
           <button
             onClick={() => handleFavoriteToggle(spot?.id)}
             id="spotslist-button-fav"
@@ -121,13 +123,12 @@ export default function Spot() {
               <img src="https://i.postimg.cc/bY1ZzYdG/heart-regular-24-2.png"></img>
             )}
           </button>
-        </div>
-
-        <StarRating
-          id={spot?.id}
-          rating={spot?.rating || 0}
-        />
-      </div>
+        
+      
+        <p id="spot-details-description">{spot?.description}</p>
+        <p id="spot-details-address"><img src="https://i.postimg.cc/P5YNtVhs/pin-solid-24.png"></img>{spot?.address}</p>
+      
+    </div>
     </div>
   );
 }

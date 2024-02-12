@@ -39,6 +39,10 @@
   padding-right: 1em;
 }
 
+#spotslist-address img {
+  width: 1.2em;
+}
+
 /* Styles for the no result message */
 .no-result {
   text-align: center;
@@ -46,7 +50,7 @@
   color: #333;
 }
 
-/* Image styles */
+/* Images styles */
 
 #spotslist-image {
   width: 100%;
@@ -54,10 +58,20 @@
   aspect-ratio: 1.5/1;
 }
 
+#spotslist-pin {
+  width: 5%;
+}
+
 /* Button styles */
 #spotslist-button-fav {
   background-color: transparent;
   border:none;
+}
+
+/* Styles for favorite button */
+#spotslist-container button img {
+  display: block;
+  width: 100%;
 }
 
 #spotslist-button-detail {
@@ -68,8 +82,7 @@
   padding: 1em;
 }
 
-/* Styles for favorite toggle button */
-#spotslist-container button img {
-  display: block;
-  width: 100%;
+#spotslist-button-detail:hover {
+  background-color: #333;
+
 }
