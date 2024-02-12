@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import './Spot.css';
 
-// Interface TS for Spot
+// Interface TS for spot
 interface Spot {
   name: string;
   description: string;
