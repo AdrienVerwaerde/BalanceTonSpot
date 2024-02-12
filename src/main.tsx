@@ -7,7 +7,6 @@ import Homepage from "./Components/HomepageComponents/Homepage/Homepage.tsx";
 import LoginForm from "./Components/UserComponents/Login/Login.tsx";
 import SignUp from "./Components/UserComponents/SignUp/SignUp.tsx";
 import Profile from "./Components/UserComponents/Profile/Profile.tsx";
-import Admin from "./Components/AdminComponents/Admin.tsx";
 import Favoris from "./Components/UserComponents/Favoris/Favoris.tsx";
 import HeaderUser from "./Components/UserComponents/HeaderUser/HeaderUser.tsx";
 import SpotsList from "./Components/SpotsList/SpotsList.tsx";
@@ -98,12 +97,6 @@ const router = createBrowserRouter([
         element: <Favoris spots={spots} />,
       },
     ],
-  },
-
-  // 4. Adding routes on admin page
-  {
-    path: "/admin",
-    element: <Admin />,
   },
 
   {

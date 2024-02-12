@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { Dropdown, Input, Icon } from "semantic-ui-react";
+import { Input, Icon } from "semantic-ui-react";
 import { useNavigate } from "react-router-dom";
 import "./Searchbar.css";
 
@@ -8,12 +8,6 @@ import SearchContext from '../../contextAPI/searchContext';
 
 // Utiliser les variables d'environnement pour l'URL de base de l'API
 const API_BASE_URL = 'http://ombelinepinoche-server.eddi.cloud:8443/api';
-
-// const options = [
-//   { key: "all", text: "Qu'importe !", value: "all" },
-//   { key: "skateboard", text: "Skateboard", value: "skateboard" },
-//   { key: "snowboard", text: "Snowboard", value: "snowboard" },
-// ];
 
 /**
  * Component for displaying a search bar.

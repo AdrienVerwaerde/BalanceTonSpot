@@ -34,7 +34,7 @@ export default function LoginForm() {
     return (
         <div className="wrapper-login">
             <div className="form-login">
-                <img src="https://i.goopics.net/qwh4qx.png" className="title-login" />
+                <img src="https://i.postimg.cc/0QHzDXTz/logo-bts-simplified-transparent-copie.png" className="title-login" />
                 <h1>Se Connecter</h1>
                 <form onSubmit={handleSubmit}>
                     <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="input-login" placeholder="E-mail" required />

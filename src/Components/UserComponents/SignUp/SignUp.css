@@ -47,6 +47,11 @@
     font-size: 2.3em;
 }
 
+.error-message {
+    color: white;
+}
+
+
 /* BUTTONS */
 
 .button-signup {
@@ -111,4 +116,12 @@
 
 .close-button-signup svg {
     margin-right: 0.5em;
+}
+
+/* RESPONSIVE DESIGN */
+
+@media screen and (max-width: 768px) {
+    .wrapper-signup {
+        height: 100vh;
+    }
 }

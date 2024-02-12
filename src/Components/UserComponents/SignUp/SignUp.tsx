@@ -3,7 +3,6 @@ import axios from 'axios';
 import './SignUp.css'
 import { Link } from 'react-router-dom';
 import { ImCross } from 'react-icons/im';
-import HeaderUser from '../HeaderUser/HeaderUser';
 
 
 export default function SignUpForm() {
@@ -47,12 +46,29 @@ export default function SignUpForm() {
         <div className="wrapper-signup">
             
             <div className="form-container">
-                <img src="https://i.goopics.net/qwh4qx.png" className="title-signup" />
+                <img src="https://i.postimg.cc/0QHzDXTz/logo-bts-simplified-transparent-copie.png" className="title-signup" />
                 <h1>S'inscrire pour la Ride !</h1>
                 <form className="signup-form" onSubmit={handleSubmit}>
                     <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="input-signup" placeholder="E-mail" required />
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="input-signup" placeholder="Mot de Passe" required />
-                    <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="input-signup" placeholder="Confirmer mot de passe" required />
+                    <input
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        className="input-signup"
+                        placeholder="Mot de Passe"
+                        required
+                    />
+                    <input
+                        type="password"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        className="input-signup"
+                        placeholder="Confirmer mot de passe"
+                        required
+                    />
+                    {password !== confirmPassword && (
+                        <p className="error-message">Les mots de passe ne correspondent pas.</p>
+                    )}
                     <div align="center">
                         <button type="submit" className="button-signup">
                             <span>INSCRIPTION</span>
@@ -60,8 +76,7 @@ export default function SignUpForm() {
                         <Link to="/"><button className="close-button-signup"><ImCross />Retour à l'Accueil</button></Link>
                     </div>
                 </form>
-                <h1>{error}</h1>
             </div>
         </div>
     );
-};
+}

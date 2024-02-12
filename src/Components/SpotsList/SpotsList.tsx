@@ -1,6 +1,7 @@
-import { useState, useContext } from 'react';
-import './SpotsList.css';
-import SearchContext from '../../contextAPI/searchContext.ts';
+import { useState, useContext } from "react";
+import "./SpotsList.css";
+import SearchContext from "../../contextAPI/searchContext.ts";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 interface Spot {
     id: number;
@@ -29,7 +30,7 @@ export default function SpotsList() {
      */
     const { spots } = useContext(SearchContext) || {}; // Add default value of empty object
 
-    /**
+    /**https://i.postimg.cc/vZc7pKD2/Screenshot-2024-02-11-at-12-02-46-O-m-b-e-l-i-n-e-lapinocherie-Photos-et-vid-os-Instagram.png
      * Handler function to update the rating of a spot.
      * @param spotId - The ID of the spot.
      * @param value - The new rating value.
@@ -52,40 +53,69 @@ export default function SpotsList() {
         }));
     };
 
-    return (
-        spots.length === 0 ? (
-            <p className="no-result">C'est trop calme, j'aime pas trop beaucoup ça. J'préfère quand c'est un peu trop plus moins calme...</p>
-        ) : (
-            <div id="spotslist-container">
-                {spots.map((spot: Spot) => (
-                    <div key={spot.id} id={`spotslist-${spot.id}`}>
-                        <h2 id={`spotslist-title-${spot.id}`}>{spot.name}</h2>
-                        <p id={`spotslist-description-${spot.id}`}>{spot.description}</p>
-                        <img
-                            src={spot.picture}
-                            alt={spot.name}
-                            id={`spotslist-image-${spot.id}`}
-                        />
-                        <p id={`spotslist-address-${spot.id}`}>{spot.address}</p>
-                        <div id={`spotslist-rating-container-${spot.id}`}>
-                            <label htmlFor={`rating-${spot.id}`} id={`spotslist-label-${spot.id}`}>
-                                Rating:
-                            </label>
-                            <input
-                                type="number"
-                                id={`rating-${spot.id}`}
-                                value={rating[spot.id] || ''}
-                                onChange={(e) => handleRatingChange(spot.id, Number(e.target.value))}
-                            />
+    return spots.length === 0 ? (
+        <p className="no-result">
+            C'est trop calme, j'aime pas trop beaucoup ça. J'préfère quand c'est un
+            peu trop plus moins calme...
+        </p>
+    ) : (
+        <div id="spotslist-container">
+
+            {/* CARD SPOT */}
+            {spots.map((spot: Spot) => (
+                <div key={spot.id} id={`spotslist-${spot.id}`}>
+                    <h2 id={`spotslist-title-${spot.id}`}>{spot.name}</h2>
+                    <img
+                        src={spot.picture}
+                        alt={spot.name}
+                        id={`spotslist-image-${spot.id}`}
+                    />
+                    <p id={`spotslist-description-${spot.id}`}>{spot.description}</p>
+                    <p id={`spotslist-address-${spot.id}`}>{spot.address}</p>
+                    <div id={`spotslist-rating-container-${spot.id}`}>
+
+                        {/* Input Rating */}
+                        <div className="rating">
+                            {[1, 2, 3, 4, 5].map((value) => (
+                                <label key={value}>
+                                    <input
+                                        type="radio"
+                                        name={`rating-${spot.id}`}
+                                        value={value}
+                                        checked={rating[spot.id] === value}
+                                        onChange={(e) =>
+                                            handleRatingChange(spot.id, Number(e.target.value))
+                                        }
+                                    />
+                                    <span className="star"></span>
+                                </label>
+                            ))}
                         </div>
+
+                        {/* BUTTON FAVS */}
+                        <div>
+                            <button
+                                onClick={() => handleFavoriteToggle(spot.id)}
+                                id={`spotslist-button-${spot.id}`}
+                                aria-label="toggle favorite"
+                            >
+                                {isFavorite[spot.id] ? <img src="https://i.postimg.cc/BQgtKhT4/heart-solid-24-1.png"></img> : <img src="https://i.postimg.cc/bY1ZzYdG/heart-regular-24-2.png"></img>}
+                            </button>
+                        </div>
+
+
+                        {/* BUTTON DETAILS */}
                         <button
-                            onClick={() => handleFavoriteToggle(spot.id)}
-                            id={`spotslist-button-${spot.id}`}>
-                            {isFavorite[spot.id] ? 'Remove from Favorites' : 'Add to Favorites'}
+                            onClick={() => {
+                                window.location.href = `/spot/${spot.id}`;
+                            }}
+                            id={`spotslist-detail-button-${spot.id}`}
+                        >
+                            Voir le détail
                         </button>
                     </div>
-                ))}
-            </div>
-        )
-    )
+                </div>
+            ))}
+        </div>
+    );
 }

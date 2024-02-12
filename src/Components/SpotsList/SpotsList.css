@@ -1,78 +1,93 @@
-/* Conteneur principal */
 #spotslist-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin: 20px;
-  }
-  
-  /* Chaque spot */
-  [id^="spotslist-"] {
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  }
-  
-  /* Titres */
-  [id^="spotslist-title-"] {
-    color: #214c5c;
-    margin-bottom: 10px;
-  }
-  
-  /* Descriptions */
-  [id^="spotslist-description-"], [id^="spotslist-address-"] {
-    color: #000000;
-    font-size: 14px;
-    margin-bottom: 5px;
-  }
-  
-  /* Images */
-  [id^="spotslist-image-"] {
-    width: 100%;
-    max-width: 300px;
-    height: auto;
-    margin-bottom: 10px;
-  }
-  
-  /* Boutons */
-  [id^="spotslist-button-"] {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  [id^="spotslist-button-"]:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Zone de notation */
-  [id^="spotslist-rating-container-"] {
-    margin-bottom: 10px;
-  }
-  
-  [id^="spotslist-label-"] {
-    margin-right: 10px;
-  }
-  
-  input[type="number"] {
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-
-/* Error Message */
-  
-.no-result {
-  color: #D8000C; 
-  background-color: #FFBABA; 
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
   padding: 20px;
-  margin: 15px 0;
-  border: 1px solid #D8000C;
-  border-radius: 5px;
-  text-align: center;
-  box-shadow: 0 0 5px rgba(0,0,0,0.2);
 }
 
+/* Styles for each spot card */
+#spotslist-container > div {
+  width: 300px;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#spotslist-container h2 {
+  background: #eee;
+  margin: 0;
+  padding: 10px;
+  font-size: 1.2em;
+  color: #333;
+}
+
+#spotslist-container p {
+  padding: 0 10px;
+  font-size: 0.9em;
+}
+
+/* Styles for the no result message */
+.no-result {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+}
+
+/* Image styles */
+#spotslist-container img {
+  width: 100%;
+  display: block;
+}
+
+/* Rating input container */
+#spotslist-rating-container- {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+#spotslist-rating-container- label {
+  margin-right: 10px;
+  font-size: 0.9em;
+}
+
+#spotslist-rating-container- input[type="number"] {
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  padding: 5px;
+  width: 50px;
+}
+
+/* Button styles */
+#spotslist-container button {
+  background: #009688;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  margin: 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#spotslist-container button:hover {
+  background: #00796b;
+}
+
+/* Styles for favorite toggle button */
+#spotslist-container button img {
+  width: 20px;
+  height: 20px;
+}
+
+/* Styles for 'Voir le détail' button */
+#spotslist-detail-button- {
+  background: #ff9800;
+}
+
+#spotslist-detail-button-:hover {
+  background: #f57c00;
+}

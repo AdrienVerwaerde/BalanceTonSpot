@@ -31,6 +31,7 @@
 
 .form-login {
     width: 400px;
+    max-width: 90%;
     text-align: center;
     color: #214c5c;
 }
@@ -42,8 +43,11 @@
 }
 
 .signup-link {
-    color: white;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    text-decoration: underline;
 }
+    
 
 .signup-link:hover {
     color: #ccc;
@@ -121,3 +125,10 @@
     margin-right: 0.5em;
 }
 
+/* RESPONSIVE DESIGN */
+
+@media screen and (max-width: 768px) {
+    .form-login {
+        width: 90%;
+    }
+}
