@@ -1,33 +1,37 @@
 /* SPOT PAGE */
 
+
+.details-global-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
 #spot-details-container {
-  border: 1px solid #ccc;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
   padding: 20px;
-  margin-bottom: 20px;
+  width: 90em;
+  background: white;
+  border: 1px solid #e3e3e3;
   border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 #spot-details-container h2 {
-  color: #333;
+  background: #e3e3e3;
+  margin: 0;
+  padding: 10px;
+  font-size: 1.2em;
+  color: #000000;
 }
 
-#spot-details-container img {
-  width: 100%;
-  height: auto;
-  border-radius: 5px;
-}
-
-@keyframes stretch {
-  0%, 40%, 100% {
-    transform: scaleY(0.4);
-  }
-  20% {
-    transform: scaleY(1);
-  }
-}
-  
 /* LOADER */
-
 .loader-container {
   display: flex;
   flex-direction: column;
@@ -42,7 +46,7 @@
   font-weight: bold;
 }
 
-/* ANIMATION */
+/* LOADER ANIMATION */
 
 @keyframes rotate {
   from {
@@ -56,4 +60,20 @@
 .loader-img {
   animation: rotate 1s linear infinite;
   width: 3em;
+}
+
+
+/* CAROUSEL OPTIONS */
+
+.carousel-control-next-icon {
+  background-color: #333;
+  width: 3em;
+  height: 3em;
+  
+}
+
+.carousel-control-prev-icon {
+  background-color: #333;
+  width: 3em;
+  height: 3em;
 }

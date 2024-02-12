@@ -2,9 +2,13 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import './Spot.css';
+import StarRating from '../StarRating/StarRating';
+import Carousel from 'react-bootstrap/Carousel';
+
 
 // Interface TS for spot
-interface Spot {
+interface spot {
+  id: number;
   name: string;
   description: string;
   picture: string;
@@ -16,9 +20,26 @@ interface Spot {
  * Component that displays details of a spot.
  */
 export default function Spot() {
-  const [spot, setSpot] = useState<Spot | null>(null);
+  const [spot, setSpot] = useState<spot | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [isFavorite, setIsFavorite] = useState<{ [key: number]: boolean }>({});
+  const [index, setIndex] = useState(0);
+
+  const handleSelect = (selectedIndex) => {
+    setIndex(selectedIndex);
+  };
+
+  /**
+    * Handler function to toggle the favorite status of a spot.
+    * @param spotId - The ID of the spot.
+    */
+  const handleFavoriteToggle = (spotId: number) => {
+    setIsFavorite((prevIsFavorite) => ({
+      ...prevIsFavorite,
+      [spotId]: !prevIsFavorite[spotId],
+    }));
+  };
 
   // Extract the 'name' parameter from the URL
   const { name } = useParams<{ name: string }>();
@@ -47,9 +68,9 @@ export default function Spot() {
   if (loading) {
     return (
       <div className="loader-container">
-        <img src="https://i.postimg.cc/wjKvWdkq/bouton-skate-color.png" 
-        alt="loader" 
-        className="loader-img" />
+        <img src="https://i.postimg.cc/wjKvWdkq/bouton-skate-color.png"
+          alt="loader"
+          className="loader-img" />
         <p id="loader-message">Recherche des spots...</p>
       </div>
     );
@@ -60,12 +81,53 @@ export default function Spot() {
   }
 
   return (
-    <div id="spot-details-container">
-      <h2 id="spot-details-title">{spot?.name}</h2>
-      <p id="spot-details-description">{spot?.description}</p>
-      <img src={spot?.picture} alt={spot?.name} id="spot-details-image" />
-      <p id="spot-details-address">{spot?.address}</p>
-      <p id="spot-details-rating">Rating: {spot?.rating}</p>
+    <div className='details-global-container'>
+      <div id="spot-details-container">
+        <h2 id="spot-details-title">{spot?.name}</h2>
+        <p id="spot-details-description">{spot?.description}</p>
+
+        {/*CARROUSEL*/}
+          <Carousel fade>
+            <Carousel.Item>
+              <img src={spot?.picture} alt="First slide" />
+              <Carousel.Caption>
+                <h3>CECI</h3>
+              </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item>
+              <img src={spot?.picture} alt="First slide" />
+              <Carousel.Caption>
+                <h3>EST UN TRÈS BEAU</h3>
+              </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item>
+              <img src={spot?.picture} alt="First slide" />
+              <Carousel.Caption>
+                <h3>SLIDER</h3>
+              </Carousel.Caption>
+            </Carousel.Item>
+          </Carousel>
+        
+        <p id="spot-details-address">{spot?.address}</p>
+        <div>
+          <button
+            onClick={() => handleFavoriteToggle(spot?.id)}
+            id="spotslist-button-fav"
+            aria-label="toggle favorite"
+          >
+            {isFavorite[spot?.id] ? (
+              <img src="https://i.postimg.cc/BQgtKhT4/heart-solid-24-1.png"></img>
+            ) : (
+              <img src="https://i.postimg.cc/bY1ZzYdG/heart-regular-24-2.png"></img>
+            )}
+          </button>
+        </div>
+
+        <StarRating
+          id={spot?.id}
+          rating={spot?.rating || 0}
+        />
+      </div>
     </div>
   );
 }

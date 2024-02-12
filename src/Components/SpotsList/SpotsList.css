@@ -1,3 +1,5 @@
+/* LIST OF SPOTS */
+
 #spotslist-container {
   display: flex;
   flex-wrap: wrap;
@@ -6,88 +8,68 @@
   padding: 20px;
 }
 
+.spotslist-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em;
+}
+
 /* Styles for each spot card */
-#spotslist-container > div {
-  width: 300px;
+#spotslist {
+  width: 30em;
   background: white;
-  border: 1px solid #e0e0e0;
+  border: 1px solid #e3e3e3;
   border-radius: 5px;
   overflow: hidden;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 #spotslist-container h2 {
-  background: #eee;
+  background: #e3e3e3;
   margin: 0;
   padding: 10px;
   font-size: 1.2em;
-  color: #333;
+  color: #000000;
 }
 
-#spotslist-container p {
-  padding: 0 10px;
-  font-size: 0.9em;
+#spotslist-description,
+#spotslist-address {
+  padding-right: 1em;
 }
 
 /* Styles for the no result message */
 .no-result {
   text-align: center;
   padding: 20px;
-  color: #666;
+  color: #333;
 }
 
 /* Image styles */
-#spotslist-container img {
+
+#spotslist-image {
   width: 100%;
   display: block;
-}
-
-/* Rating input container */
-#spotslist-rating-container- {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-}
-
-#spotslist-rating-container- label {
-  margin-right: 10px;
-  font-size: 0.9em;
-}
-
-#spotslist-rating-container- input[type="number"] {
-  border: 1px solid #ddd;
-  border-radius: 3px;
-  padding: 5px;
-  width: 50px;
+  aspect-ratio: 1.5/1;
 }
 
 /* Button styles */
-#spotslist-container button {
-  background: #009688;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  margin: 10px;
-  border-radius: 3px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+#spotslist-button-fav {
+  background-color: transparent;
+  border:none;
 }
 
-#spotslist-container button:hover {
-  background: #00796b;
+#spotslist-button-detail {
+  color: white;
+  background-color: #214c5c;
+  border-radius: 0.5em;
+  border-color: transparent;
+  padding: 1em;
 }
 
 /* Styles for favorite toggle button */
 #spotslist-container button img {
-  width: 20px;
-  height: 20px;
-}
-
-/* Styles for 'Voir le détail' button */
-#spotslist-detail-button- {
-  background: #ff9800;
-}
-
-#spotslist-detail-button-:hover {
-  background: #f57c00;
+  display: block;
+  width: 100%;
 }
