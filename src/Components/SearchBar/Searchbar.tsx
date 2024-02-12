@@ -75,8 +75,6 @@ export default function Searchbar() {
     navigate("/spotslist");
   };
 
-
-
   return (
   <div id="searchbar-container">
     <Input

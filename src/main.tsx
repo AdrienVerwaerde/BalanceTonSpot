@@ -59,8 +59,8 @@ const router = createBrowserRouter([
         element: <SpotsList />,
       },
       {
-        path: "spot/:id",
-        element: <Spot spotId={""} />,
+        path: "spot/:name",
+        element: <Spot />,
       },
       {
         path: "legal-notice",

@@ -1,7 +1,6 @@
 import { useState, useContext } from "react";
 import "./SpotsList.css";
 import SearchContext from "../../contextAPI/searchContext.ts";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 interface Spot {
     id: number;
@@ -28,9 +27,9 @@ export default function SpotsList() {
     /**
      * Context variable to access the spots data.
      */
-    const { spots } = useContext(SearchContext) || {}; // Add default value of empty object
-
-    /**https://i.postimg.cc/vZc7pKD2/Screenshot-2024-02-11-at-12-02-46-O-m-b-e-l-i-n-e-lapinocherie-Photos-et-vid-os-Instagram.png
+    const { spots } = useContext(SearchContext)
+    
+    /**
      * Handler function to update the rating of a spot.
      * @param spotId - The ID of the spot.
      * @param value - The new rating value.
@@ -107,9 +106,9 @@ export default function SpotsList() {
                         {/* BUTTON DETAILS */}
                         <button
                             onClick={() => {
-                                window.location.href = `/spot/${spot.id}`;
+                                window.location.href = `/spot/${spot.name.toLowerCase().replace(/\s+/g, '-')}`;
                             }}
-                            id={`spotslist-detail-button-${spot.id}`}
+                            id={`spotslist-detail-button-${spot.name}`}
                         >
                             Voir le détail
                         </button>

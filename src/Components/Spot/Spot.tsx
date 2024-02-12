@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 import './Spot.css';
 
+// Interface TS for Spot
 interface Spot {
   name: string;
   description: string;
@@ -11,32 +13,36 @@ interface Spot {
 }
 
 /**
- * Component that displays the details of a spot.
- * @param spotId - The ID of the spot.
- * @returns JSX element representing the spot details.
+ * Component that displays details of a spot.
  */
-export default function SpotDetails({ spotId }: { spotId: string }) {
+export default function Spot() {
   const [spot, setSpot] = useState<Spot | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+
+  // Extract the 'name' parameter from the URL
+  const { name } = useParams<{ name: string }>();
 
   useEffect(() => {
     /**
      * Fetches the details of the spot from the server.
      */
     const fetchSpotDetails = async () => {
-      try {
-        const response = await axios.get(`http://ombelinepinoche-server.eddi.cloud:8443/api/spot/${spotId}`);
-        setSpot(response.data);
-        setLoading(false);
-      } catch (err) {
-        setError('Petit problème de Fetch pour les détails du spot...');
-        setLoading(false);
+      if (name) {
+        try {
+          const formattedSpotName = name.toLowerCase().replace(/\s/g, "-");
+          const response = await axios.get(`http://ombelinepinoche-server.eddi.cloud:8443/api/spot/${formattedSpotName}`);
+          setSpot(response.data);
+          setLoading(false);
+        } catch (err) {
+          setError('404');
+          setLoading(false);
+        }
       }
     };
 
     fetchSpotDetails();
-  }, [spotId]);
+  }, [name]); // Add 'name' as a dependency for useEffect
 
   if (loading) {
     return (
