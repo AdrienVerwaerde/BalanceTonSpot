@@ -1,0 +1,168 @@
+/* SLIDESHOW */
+
+
+.slideshow {
+  overflow: hidden;
+  max-width: 60%;
+  margin: auto;
+}
+
+.slideshowSlider {
+  white-space: nowrap;
+  transition: ease 1000ms;
+  position: relative;
+}
+
+.slide {
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  position: relative;
+
+}
+
+#slideshow-img {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease-in-out;
+  object-fit: cover;
+  aspect-ratio: 1.5/1;
+}
+
+/* BUTTONS */
+
+.slideshowDots {
+  text-align: center;
+}
+
+.slideshowDot {
+  display: inline-block;
+  height: 1em;
+  width: 1em;
+  border-radius: 50%;
+  cursor: pointer;
+  margin: 15px 7px 0px;
+
+  background-color: #c4c4c4;
+}
+
+.slideshowDot.active {
+  background-color: #214c5c;
+}
+
+/* ARTICLES */
+
+#spotlight {
+  position: absolute;
+  z-index: 4000;
+  background-color: #214c5cbb;
+  color: white;
+  padding: 2em;
+  margin-top: 2em;
+  margin-left: 2em;
+  white-space: normal;
+  max-width: 40%;
+  max-height: 40%;
+  font-size: medium;
+}
+
+#spotlight:hover {
+  box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.5);
+  transform: scale(1.05);
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+#spotlight h2{
+  color: #FFFFFF; 
+  background-color: #214c5c76; 
+  padding: 0.5em 0.5em; 
+  border: 2px solid white; 
+  border-radius: 5px; 
+  text-shadow: 1px 1px 2px #000000; 
+  box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.5); 
+  font-family: Arial, sans-serif; 
+  font-size: 20px; 
+  transition: all 0.3s ease; 
+  max-width: 100%;
+}
+
+#spotlight p{
+  padding-top: 1em;
+  text-align: right;
+  font-size: small;
+  font-weight: bold;
+}
+
+
+/* MEDIA QUERRIES */
+
+@media screen and (max-width: 1400px) {
+  .slideshow {
+    max-width: 60%;
+  }
+
+  #spotlight {
+    max-width: 60%;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .slideshow {
+    max-width: 100%;
+  }
+
+  #spotlight {
+    max-width: 60%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .slideshow {
+    max-width: 100%;
+  }
+
+  #spotlight {
+    padding: 1em;
+    margin-top: 1em;
+    margin-left: 1em;
+    width: 100%;
+  }
+
+  #spotlight-text {
+    display: none;
+  }
+
+  #spotlight p {
+    text-align: left;
+    padding-top: 0px;
+  }
+
+}
+
+@media screen and (max-width: 480px) {
+  .slideshow {
+    width: 100%;
+  }
+
+  #spotlight-text {
+    display: none;
+  }
+
+  #spotlight {
+    padding: 0.5em;
+    margin-top: 0.5em;
+    margin-left: 0.5em;
+    width: 100%;
+  }
+
+  #spotlight h2 {
+    padding: 0.5em;
+  }
+
+  #spotlight p {
+    text-align: left;
+    padding-top: 0px;
+  }
+}
+
