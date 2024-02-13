@@ -17,19 +17,21 @@
 
 .favorite-spots ul {
     display: flex;
-    flex-direction: column;
+    flex-direction: grid;
     list-style: none;
     align-items: center;
+    justify-content: space-around;
+    gap: 1em;
 }
 
 .spot-item {
     display: flex;
     padding: 1em;
-    margin: 1em;
+    margin: 0em;
     border: transparent solid 1px;
     border-radius: 20px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.106);
-    width: 100%;
+    max-width: 30%;
 }
 
 .spot-item:hover {

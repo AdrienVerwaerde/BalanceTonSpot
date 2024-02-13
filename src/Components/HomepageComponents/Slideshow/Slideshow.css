@@ -1,5 +1,6 @@
 /* SLIDESHOW */
 
+
 .slideshow {
   overflow: hidden;
   max-width: 60%;
@@ -61,6 +62,7 @@
   margin-left: 2em;
   white-space: normal;
   max-width: 40%;
+  max-height: 40%;
   font-size: medium;
 }
 
@@ -72,38 +74,95 @@
 }
 
 #spotlight h2{
-  color: #FFFFFF; /* Couleur du texte */
-  background-color: #214c5c76; /* Couleur de fond */
-  padding: 10px 10px; /* Espacement intérieur */
-  border: 2px solid white; /* Bordure */
-  border-radius: 5px; /* Arrondir les coins de la bordure */
-  text-shadow: 1px 1px 2px #000000; /* Ombre du texte */
-  box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.5); /* Ombre externe */
-  font-family: Arial, sans-serif; /* Police de caractères */
-  font-size: 20px; /* Taille de la police */
-  transition: all 0.3s ease; /* Effet de transition */
+  color: #FFFFFF; 
+  background-color: #214c5c76; 
+  padding: 0.5em 0.5em; 
+  border: 2px solid white; 
+  border-radius: 5px; 
+  text-shadow: 1px 1px 2px #000000; 
+  box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.5); 
+  font-family: Arial, sans-serif; 
+  font-size: 20px; 
+  transition: all 0.3s ease; 
   max-width: 100%;
 }
 
 #spotlight p{
-  padding-top: 0.5em;
+  padding-top: 1em;
   text-align: right;
   font-size: small;
   font-weight: bold;
+}
+
+
+/* MEDIA QUERRIES */
+
+@media screen and (max-width: 1400px) {
+  .slideshow {
+    max-width: 60%;
+  }
+
+  #spotlight {
+    max-width: 60%;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .slideshow {
+    max-width: 100%;
+  }
+
+  #spotlight {
+    max-width: 60%;
+  }
 }
 
 @media screen and (max-width: 768px) {
   .slideshow {
     max-width: 100%;
   }
+
+  #spotlight {
+    padding: 1em;
+    margin-top: 1em;
+    margin-left: 1em;
+    width: 100%;
+  }
+
+  #spotlight-text {
+    display: none;
+  }
+
+  #spotlight p {
+    text-align: left;
+    padding-top: 0px;
+  }
+
 }
 
 @media screen and (max-width: 480px) {
   .slideshow {
-    max-width: 100%;
+    width: 100%;
+  }
+
+  #spotlight-text {
+    display: none;
   }
 
   #spotlight {
-    max-width: 100%;
+    padding: 0.5em;
+    margin-top: 0.5em;
+    margin-left: 0.5em;
+    width: 100%;
+  }
+
+  #spotlight h2 {
+    padding: 0.5em;
+  }
+
+  #spotlight p {
+    text-align: left;
+    padding-top: 0px;
   }
 }
+

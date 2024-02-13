@@ -1,0 +1,88 @@
+/* LIST OF SPOTS */
+
+#spotslist-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.spotslist-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em;
+}
+
+/* Styles for each spot card */
+#spotslist {
+  width: 30em;
+  background: white;
+  border: 1px solid #e3e3e3;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#spotslist-container h2 {
+  background: #e3e3e3;
+  margin: 0;
+  padding: 10px;
+  font-size: 1.2em;
+  color: #000000;
+}
+
+#spotslist-description,
+#spotslist-address {
+  padding-right: 1em;
+}
+
+#spotslist-address img {
+  width: 1.2em;
+}
+
+/* Styles for the no result message */
+.no-result {
+  text-align: center;
+  padding: 20px;
+  color: #333;
+}
+
+/* Images styles */
+
+#spotslist-image {
+  width: 100%;
+  display: block;
+  aspect-ratio: 1.5/1;
+}
+
+#spotslist-pin {
+  width: 5%;
+}
+
+/* Button styles */
+#spotslist-button-fav {
+  background-color: transparent;
+  border:none;
+}
+
+/* Styles for favorite button */
+#spotslist-container button img {
+  display: block;
+  width: 100%;
+}
+
+#spotslist-button-detail {
+  color: white;
+  background-color: #214c5c;
+  border-radius: 0.5em;
+  border-color: transparent;
+  padding: 1em;
+}
+
+#spotslist-button-detail:hover {
+  background-color: #333;
+
+}

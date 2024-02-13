@@ -18,9 +18,9 @@ export default function ToggleButton() {
       <Collapse in={open}>
         <div className="toggle-content">
           <button className={`button-ride ${activeButton === 'button1' ? 'active' : ''}`}
-                onClick={() => handleClick('button1')}> <img src="https://i.goopics.net/52swkl.png"></img></button>
+                onClick={() => handleClick('button1')}> <img src="https://i.postimg.cc/QtMBBZyL/bouton-snow.png"></img></button>
           <button className={`button-ride ${activeButton === 'button2' ? 'active' : ''}`}
-                onClick={() => handleClick('button2')}><img src="https://i.goopics.net/wvrygn.png"></img></button>
+                onClick={() => handleClick('button2')}><img src="https://i.postimg.cc/zf7bXGpS/bouton-skate.png"></img></button>
         </div>
       </Collapse>
       <button 

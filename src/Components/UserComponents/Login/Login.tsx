@@ -33,9 +33,8 @@ export default function LoginForm() {
 
     return (
         <div className="wrapper-login">
-            <Link to="/"><button className="close-button"><ImCross /></button></Link>
             <div className="form-login">
-                <img src="https://i.goopics.net/qwh4qx.png" className="title-login" />
+                <img src="https://i.postimg.cc/0QHzDXTz/logo-bts-simplified-transparent-copie.png" className="title-login" />
                 <h1>Se Connecter</h1>
                 <form onSubmit={handleSubmit}>
                     <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="input-login" placeholder="E-mail" required />
@@ -45,8 +44,9 @@ export default function LoginForm() {
                             <span>CONNEXION</span>
                         </button>
                     </div>
+                <Link to="/SignUp" className="signup-link">Pas de compte ? Rejoindre la communauté !</Link>
+                <Link to="/"><button className="close-button-signup"><ImCross />Retour à l'Accueil</button></Link>
                 </form>
-                <Link to="/SignUp">Pas de compte ? Rejoindre la communauté !</Link>
                 <h1>{error}</h1>
             </div>
         </div>
