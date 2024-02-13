@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Fade from 'react-bootstrap/Fade';
 import { Link } from 'react-router-dom';
 import './ProfileButton.css'
@@ -10,6 +10,8 @@ export default function ProfileButton() {
   const menuRef = useRef<HTMLDivElement>(null);
   //This function will check if the menu is already active
   const buttonRef = useRef<HTMLButtonElement>(null);
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     // Adds an event listener on the whole document to detect when we click anywhere but on the button and also allows to close the menu by clicking the button again
@@ -25,6 +27,9 @@ export default function ProfileButton() {
     };
 
     document.addEventListener('mousedown', handleClickOutside);
+
+    const token = localStorage.getItem('token');
+    setIsLoggedIn(!!token);
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
@@ -42,13 +47,24 @@ export default function ProfileButton() {
       <div ref={menuRef} style={{ minHeight: '150px' }}>
         <Fade in={open}>
           <ul className="list-group">
-          <Link to="/profile"><li className="list-group-item">PROFIL</li></Link>
-            <Link to="/favoris"><li className="list-group-item">FAVORIS</li></Link>
-            <a href="#"><li className="list-group-item">DECONNEXION</li></a>
+            {isLoggedIn ? (
+              // Options affichées si l'utilisateur est connecté
+              <>
+                <Link to="/profile"><li className="list-group-item">PROFIL</li></Link>
+                <Link to="/favoris"><li className="list-group-item">FAVORIS</li></Link>
+                <Link to="/" onClick={() => {localStorage.removeItem('token'); setIsLoggedIn(false);}}><li className="list-group-item">DECONNEXION</li></Link>
+              </>
+            ) : (
+              // Options affichées si l'utilisateur n'est pas connecté
+              <>
+                <Link to="/login"><li className="list-group-item">CONNEXION</li></Link>
+                <Link to="/signup"><li className="list-group-item">INSCRIPTION</li></Link>
+              </>
+            )}
           </ul>
         </Fade>
       </div>
     </div>
-  )
+  );
 }
 

@@ -24,11 +24,6 @@ export default function Spot() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [isFavorite, setIsFavorite] = useState<{ [key: number]: boolean }>({});
-  const [index, setIndex] = useState(0);
-
-  const handleSelect = (selectedIndex) => {
-    setIndex(selectedIndex);
-  };
 
   /**
     * Handler function to toggle the favorite status of a spot.
@@ -107,17 +102,15 @@ export default function Spot() {
             </Carousel.Item>
           </Carousel>
           <div id="ratings">
-        <StarRating
-          id={spot?.id}
-          rating={spot?.rating || 0}
-        /> <p>({spot.rating})</p>
+            <StarRating rating={spot?.rating || 0} id={0} />
+            <p>({spot?.rating})</p>
           </div>
           <button
-            onClick={() => handleFavoriteToggle(spot?.id)}
+            onClick={() => handleFavoriteToggle(spot?.id ?? 0)}
             id="spotslist-button-fav"
             aria-label="toggle favorite"
           >
-            {isFavorite[spot?.id] ? (
+            {isFavorite[spot?.id ?? 0] ? (
               <img src="https://i.postimg.cc/BQgtKhT4/heart-solid-24-1.png"></img>
             ) : (
               <img src="https://i.postimg.cc/bY1ZzYdG/heart-regular-24-2.png"></img>

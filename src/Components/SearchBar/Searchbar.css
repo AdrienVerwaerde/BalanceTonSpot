@@ -19,6 +19,12 @@
   color: #ff0000 !important;
 }
 
+.search-error {
+  text-align: center;
+  padding: 20px;
+  color: #333;
+}
+
 
 /* Media Queries */
 

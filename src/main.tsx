@@ -108,7 +108,7 @@ const router = createBrowserRouter([
 // X. Rending of the Router
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    {/* ici on ne veut plus rendre simplement le composant App, mais notre router qui contient la logique de routage => c'est lui qui va décider en fonction de l'URL, quel composant rendre */}
-    <RouterProvider router={router} />
+      {/* ici on ne veut plus rendre simplement le composant App, mais notre router qui contient la logique de routage => c'est lui qui va décider en fonction de l'URL, quel composant rendre */}
+      <RouterProvider router={router} />
   </React.StrictMode>
 );

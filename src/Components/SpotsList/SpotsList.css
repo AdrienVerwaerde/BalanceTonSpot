@@ -43,13 +43,6 @@
   width: 1.2em;
 }
 
-/* Styles for the no result message */
-.no-result {
-  text-align: center;
-  padding: 20px;
-  color: #333;
-}
-
 /* Images styles */
 
 #spotslist-image {

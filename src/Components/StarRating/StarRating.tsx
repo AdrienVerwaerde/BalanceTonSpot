@@ -6,7 +6,7 @@ interface StarRatingProps {
     rating: number;
 }
 
-const StarRating: React.FC<StarRatingProps> = ({ rating}) => {
+const StarRating: React.FC<StarRatingProps> = ({rating}) => {
     const [hover, setHover] = useState<number>(0);
 
     useEffect(() => {

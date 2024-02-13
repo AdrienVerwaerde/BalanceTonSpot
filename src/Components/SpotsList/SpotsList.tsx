@@ -38,12 +38,7 @@ export default function SpotsList() {
         }));
     };
 
-    return spots.length === 0 ? (
-        <p className="no-result">
-            C'est trop calme, j'aime pas trop beaucoup ça. J'préfère quand c'est un
-            peu trop plus moins calme...
-        </p>
-    ) : (
+    return (
         <div id="spotslist-container">
             {/* CARD SPOT */}
             {spots.map((spot: Spot) => (
@@ -90,5 +85,4 @@ export default function SpotsList() {
                     </div>
             ))}
         </div>
-    );
-}
+)}

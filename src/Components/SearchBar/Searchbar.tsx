@@ -1,117 +1,168 @@
-import { useContext, useEffect, useState } from "react";
-import axios from "axios";
-import { Input, Icon } from "semantic-ui-react";
-import { useNavigate, useLocation } from "react-router-dom";
-import "./Searchbar.css";
+  // This component is responsible for rendering the search bar and handling search functionality.
+  // It uses React hooks and context API for state management.
+  // It also makes API calls to fetch spots based on the search term.
 
-import SearchContext from '../../contextAPI/searchContext';
+  import { useContext, useEffect, useState } from "react";
+  import axios from "axios";
+  import { Input, Icon } from "semantic-ui-react";
+  import { useNavigate, useLocation } from "react-router-dom";
+  import "./Searchbar.css";
 
-const API_BASE_URL = 'http://ombelinepinoche-server.eddi.cloud:8443/api';
+  import SearchContext from '../../contextAPI/searchContext';
 
-/**
- * Component for the search bar.
- * This component allows users to search for spots or cities.
- * It retrieves the search term from the URL query parameter and performs a search using the term.
- * The search results are displayed in a list of spots.
- */
-export default function Searchbar() {
-  const { setSpots } = useContext(SearchContext);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
-  const navigate = useNavigate();
-  const location = useLocation(); 
+  const API_BASE_URL = 'http://ombelinepinoche-server.eddi.cloud:8443/api';
 
-  useEffect(() => {
-    // Reading research terms from URL
-    const searchParams = new URLSearchParams(location.search);
-    const name = searchParams.get('search') || '';
-    setSearchTerm(name);
-    if (name) {
-      searchSpots(name);
-    }
-  }, [location.search]);
+  export default function Searchbar() {
+    const { setSpots } = useContext(SearchContext);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
+    const location = useLocation();
 
-  useEffect(() => {
-    if (!isLoading) {
-      setSearchTerm('');
-    }
-  }, [isLoading]);
+    useEffect(() => {
+      // Fetch the search term from the URL query parameter
+      const searchParams = new URLSearchParams(location.search);
+      const name = searchParams.get('search') || '';
+      setSearchTerm(name);
 
-  const searchSpots = async (name) => {
-    if (!name.trim()) {
-      setIsLoading(false);
-      return;
-    }
+      if (name) {
+        // If a search term is present, perform the search
+        searchSpots(name);
+      }
+      else {
+        // Reset error when searchTerm is empty
+        setError('');
+      }
+// eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [location.search]);
 
-    setIsLoading(true);
-    setError('');
-    setSpots([]); // Clears the spots before making a new search
+    // Reset error when navigating away from the current page
+    useEffect(() => {
+      return () => setError('');
+    }, [location.pathname]);
 
-    try {
-      // Exécution des requêtes en parallèle
-      const [locationSpotsResponse, singleSpotResponse] = await Promise.all([
-        axios.get(`${API_BASE_URL}/location/1/spots`, {
+      // Reset the search term when the loading state changes
+    useEffect(() => {
+      if (!isLoading) {
+        setSearchTerm('');
+      }
+    }, [isLoading]);
+
+    // Make an API call to fetch spots by location
+    const fetchLocationSpots = async (name: string) => {
+      try {
+        const response = await axios.get(`${API_BASE_URL}/location/${name}/spots`, {
           params: { name }
-        }),
-        axios.get(`${API_BASE_URL}/spot/${name}`)
+        });
+        return { success: true, data: response.data };
+      } 
+      catch (error) {
+        return { success: false, error: error };
+      }
+    };
+
+    // Make an API call to fetch a single spot by its name
+    const fetchSingleSpot = async (name: string) => {
+      try {
+        const response = await axios.get(`${API_BASE_URL}/spot/${name}`);
+        return { success: true, data: response.data };
+      } 
+      catch (error) {
+        return { success: false, error: error };
+      }
+    };
+
+    //Data treatment after axios request:
+
+    const searchSpots = async (name: string) => {
+      if (!name.trim()) {
+        // If the search term is empty, set loading state to false and return
+        setIsLoading(false);
+        return;
+      }
+
+      //Default value of the useState when new research is set
+      setIsLoading(true);
+      setError('');
+      setSpots([]);
+
+      // Fetch spots by location and a single spot in parallel
+      const [locationSpotsResult, singleSpotResult] = await Promise.all([
+        fetchLocationSpots(name),
+        fetchSingleSpot(name)
       ]);
-
-      // Traitement de la première requête (spots par location)
-      const locationSpotsData = locationSpotsResponse.data;
+      //Spots are a list so we put them in an array
       let spots = [];
-      console.log(name)
-      if (locationSpotsData && Array.isArray(locationSpotsData) && locationSpotsData.length > 0) {
-        spots = locationSpotsData;
+
+      //If we find spots with this location in the API, shows its/their data
+      if (locationSpotsResult.success) {
+        spots = locationSpotsResult.data;
+      } 
+      else {
+        console.error('Error fetching location spots:', locationSpotsResult.error);
       }
 
-      // Traitement de la seconde requête (spot unique)
-      const singleSpotData = singleSpotResponse.data;
-      if (singleSpotData) {
-        // Ici, vous pouvez décider comment intégrer singleSpotData avec spots
-        // Par exemple, ajouter au début ou à la fin de la liste, si unique
-        spots = [singleSpotData, ...spots]; // Ajoute le spot unique au début de la liste
+      //If we find spot(s) with this name in the API, shows its/their data
+      if (singleSpotResult.success && singleSpotResult.data) {
+        spots = [singleSpotResult.data, ...spots];
+      } 
+      else {
+        console.error('Error fetching single spot:', singleSpotResult.error);
       }
 
+      //If 1 or more spot(s) is found in the DB, show it/them
       if (spots.length > 0) {
         setSpots(spots);
-      } else {
-        setError('Aucun résultat trouvé. Essayez une autre recherche.');
-        setSpots([]);
       }
-    } catch (error) {
-      console.error('Error fetching data:', error);
-      setError('Une erreur est survenue lors de la recherche.');
-    } finally {
+      //If not, show an error message
+      else {
+        setError('Aucun spot trouvé.');
+      }
       setIsLoading(false);
+    };
+
+    // Render a loader while spots are being fetched
+    if (isLoading) {
+      return (
+        <div className="loader-container">
+          <img src="https://i.postimg.cc/wjKvWdkq/bouton-skate-color.png"
+            alt="loader"
+            className="loader-img" />
+          <p id="loader-message">Recherche des spots...</p>
+        </div>
+      );
     }
-  };
 
-  const cleanSearchTerm = (term) => {
-    return term.replace(/\s+/g, '-').toLowerCase();
-  };
+    //When using SPACE in the searchbar, turns it into "-" to match DB
+    const cleanSearchTerm = (term: string) => term.replace(/\s+/g, '-').toLowerCase();
 
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
+    // Handle search when Enter key is pressed
+    const handleKeyDown = (e: { key: string; }) => {
+      if (e.key === 'Enter') {
+        const cleanedSearchTerm = cleanSearchTerm(searchTerm);
+        navigate(`/spotslist?search=${encodeURIComponent(cleanedSearchTerm)}`);
+      }
+    };
+
+    // Handle search when search icon is clicked
+    const handleSearchClick = () => {
       const cleanedSearchTerm = cleanSearchTerm(searchTerm);
       navigate(`/spotslist?search=${encodeURIComponent(cleanedSearchTerm)}`);
-    }
-  };
-  
-  const handleSearchClick = () => {
-    const cleanedSearchTerm = cleanSearchTerm(searchTerm);
-    navigate(`/spotslist?search=${encodeURIComponent(cleanedSearchTerm)}`);
-  };
+    };
 
-  return (
-    <div id="searchbar-container">
-      <Input
-        icon={<Icon name="search" link onClick={handleSearchClick} />}
-        placeholder="Rechercher un spot ou une ville..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        onKeyDown={handleKeyDown}
-      />
-    </div>
-  );
-}
+    return (
+      <>
+        <div id="searchbar-container">
+          <Input
+            icon={<Icon name="search" link onClick={handleSearchClick} />}
+            placeholder="Rechercher un spot ou une ville..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyDown={handleKeyDown}
+          />
+        </div>
+        {error && <div className="search-error">{error}</div>}
+      </>
+    );
+  }
