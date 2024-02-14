@@ -65,29 +65,59 @@
 
 .comments-form {
   width: 100%;
-  padding: 1em 0em 1em 0em;
-  margin-bottom: 1em;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.comments-button {
-  margin-top: 1em;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .comments-text-input {
-  height: 10em;
-  width: 30em;
+  height: 25em;
+  width: 100%;
+  border: #c3c3c3 1px solid;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/*ACCORDION*/
+.comments-text-input:active {
+  border: #214c5c 1px solid;
+}
 
-.accordion-item {
-  margin: 1em 0em;
-  width: 20%;
+/*BUTTONS*/
+
+
+.comments-button-submit {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1em;
+  width: 40% !important;
 }
-.accordion-button {
-  color: white;
-  background-color: #214c5c;
+
+#button-submit-img {
+  width: 1.3em;
+  margin-left: 0.5em;
 }
+
+#button-cancel-img {
+  width: 1.3em;
+  margin-left: 0.5em;
+}
+
+.comments-button-cancel {
+  margin-top: 1em;
+  width: 20% !important;
+  background-color: #333 !important;
+}
+
+.comments-button-cancel:hover {
+  background-color: red !important;
+}
+
+
+#comments-submit-title {
+  color: #214c5c;
+}
+
+/*MODAL*/
+
