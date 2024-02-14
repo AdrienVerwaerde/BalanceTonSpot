@@ -22,7 +22,7 @@ export default function SearchButtons() {
 
     return (
         <div className='buttons-search-container'>
-            <button className='button-search' onClick={() => fetchData('spots')}>Tous les sports</button>
+            <button className='button-search' onClick={() => fetchData('spots')}>Tous les spots</button>
             <button className='button-search' onClick={() => fetchData('sport/snowboard/spots')}>Snowboard</button>
             <button className='button-search' onClick={() => fetchData('sport/skateboard/spots')}>Skateboard</button>
         </div>

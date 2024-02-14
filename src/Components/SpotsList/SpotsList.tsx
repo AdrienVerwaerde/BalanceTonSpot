@@ -10,6 +10,7 @@ interface Spot {
     description: string;
     picture: string;
     address: string;
+    sport: string;
 }
 
 /**
@@ -21,7 +22,7 @@ export default function SpotsList() {
      * State variable to store whether each spot is marked as favorite or not.
      */
     const [isFavorite, setIsFavorite] = useState<{ [key: number]: boolean }>({});
-    const [tri, setTri] = useState({ triPar: 'rating', order: 'desc' });
+    const [tri, setTri] = useState({ triPar: 'alphabet', order: 'asc' });
 
     /**
      * Context variable to access the spots data.
@@ -44,9 +45,9 @@ export default function SpotsList() {
      */
     const triSpots = () => {
         return [...spots].sort((a, b) => {
-            // Tri par note
-            if (tri.triPar === 'rating') {
-                return tri.order === 'asc' ? a.rating - b.rating : b.rating - a.rating;
+            // Tri par alphabet
+            if (tri.triPar === 'alphabet') {
+                return tri.order === 'asc' ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
             }
             // Tri par type de sport
             else if (tri.triPar === 'sport') {
@@ -58,6 +59,10 @@ export default function SpotsList() {
                 }
                 return tri.order === 'asc' ? a.sport.localeCompare(b.sport) : b.sport.localeCompare(a.sport);
             }
+            // Tri par note
+            else if (tri.triPar === 'rating') {
+                return tri.order === 'asc' ? a.rating - b.rating : b.rating - a.rating;
+            }
         });
     };
     
@@ -65,6 +70,7 @@ export default function SpotsList() {
         <div id="spotslist-container">
             <div>
                 <select value={tri.triPar} onChange={(e) => setTri({ ...tri, triPar: e.target.value })}>
+                    <option value="alphabet">A à Z</option>
                     <option value="rating">Par Note</option>
                     <option value="sport">Par Sport</option>
                 </select>

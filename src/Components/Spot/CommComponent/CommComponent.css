@@ -7,10 +7,15 @@
 
 }
 
-.comments-container h2 {
-  width: auto;
-
+#comments-section-title {
+  background: #e3e3e3;
+  margin: 0;
+  padding: 1em 2em 1em 2em;
+  border-radius: 0.3em;
+  font-size: 1.5em;
+  color: #000000;
 }
+
 
 /*COMMENTS LIST*/
 
@@ -69,4 +74,20 @@
 
 .comments-button {
   margin-top: 1em;
+}
+
+.comments-text-input {
+  height: 10em;
+  width: 30em;
+}
+
+/*ACCORDION*/
+
+.accordion-item {
+  margin: 1em 0em;
+  width: 20%;
+}
+.accordion-button {
+  color: white;
+  background-color: #214c5c;
 }
