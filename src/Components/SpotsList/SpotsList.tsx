@@ -21,6 +21,7 @@ export default function SpotsList() {
      * State variable to store whether each spot is marked as favorite or not.
      */
     const [isFavorite, setIsFavorite] = useState<{ [key: number]: boolean }>({});
+    const [tri, setTri] = useState({ triPar: 'rating', order: 'desc' });
 
     /**
      * Context variable to access the spots data.
@@ -38,10 +39,42 @@ export default function SpotsList() {
         }));
     };
 
+    /**
+     * Sorts spots based on the selected criteria.
+     */
+    const triSpots = () => {
+        return [...spots].sort((a, b) => {
+            // Tri par note
+            if (tri.triPar === 'rating') {
+                return tri.order === 'asc' ? a.rating - b.rating : b.rating - a.rating;
+            }
+            // Tri par type de sport
+            else if (tri.triPar === 'sport') {
+                // En cas d'égalité de type de sport, vous pouvez choisir de les trier par note ou tout autre attribut
+                if (a.sport === b.sport) {
+                    // Ici, par défaut, on trie encore par note si les types de sport sont égaux
+                    // Cela assure un sous-tri cohérent
+                    return tri.order === 'asc' ? a.rating - b.rating : b.rating - a.rating;
+                }
+                return tri.order === 'asc' ? a.sport.localeCompare(b.sport) : b.sport.localeCompare(a.sport);
+            }
+        });
+    };
+    
     return (
         <div id="spotslist-container">
+            <div>
+                <select value={tri.triPar} onChange={(e) => setTri({ ...tri, triPar: e.target.value })}>
+                    <option value="rating">Par Note</option>
+                    <option value="sport">Par Sport</option>
+                </select>
+                <select value={tri.order} onChange={(e) => setTri({ ...tri, order: e.target.value })}>
+                    <option value="asc">Ascending</option>
+                    <option value="desc">Descending</option>
+                </select>
+            </div>
             {/* CARD SPOT */}
-            {spots.map((spot: Spot) => (
+            {triSpots().map((spot: Spot) => (
                 <div key={spot.id} id="spotslist">
                     <h2 id="spotslist-title">{spot.name}</h2>
                     <img src={spot.picture} alt={spot.name} id="spotslist-image" />

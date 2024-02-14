@@ -4,8 +4,8 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 20px;
-  padding: 20px;
+  gap: 5em;
+  padding: 1.5em;
 }
 
 .spotslist-content {
@@ -39,6 +39,12 @@
   padding-right: 1em;
 }
 
+#spotslist-address {
+  max-width: 60%;
+  margin-bottom: 0em;
+  padding: 0em;
+}
+
 #spotslist-address img {
   width: 1.2em;
 }
@@ -68,6 +74,7 @@
 }
 
 #spotslist-button-detail {
+  transition: 0.2s ease-in-out;
   color: white;
   background-color: #214c5c;
   border-radius: 0.5em;
@@ -77,5 +84,4 @@
 
 #spotslist-button-detail:hover {
   background-color: #333;
-
 }

@@ -5,6 +5,8 @@ import './Spot.css';
 import StarRating from '../StarRating/StarRating';
 import Carousel from 'react-bootstrap/Carousel';
 
+import CommComponent from './CommComponent/CommComponent';
+
 
 // Interface TS for spot
 interface spot {
@@ -78,50 +80,52 @@ export default function Spot() {
   return (
     <div className='details-global-container'>
       <div id="spot-details-container">
-      <h2 id="spot-details-title">{spot?.name}</h2>
+        <h2 id="spot-details-title">{spot?.name}</h2>
 
         {/*CARROUSEL*/}
-          <Carousel fade>
-            <Carousel.Item>
-              <img src={spot?.picture} alt="First slide" />
-              <Carousel.Caption>
-                <h3>CECI</h3>
-              </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item>
-              <img src={spot?.picture} alt="First slide" />
-              <Carousel.Caption>
-                <h3>EST UN TRÈS BEAU</h3>
-              </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item>
-              <img src={spot?.picture} alt="First slide" />
-              <Carousel.Caption>
-                <h3>SLIDER</h3>
-              </Carousel.Caption>
-            </Carousel.Item>
-          </Carousel>
-          <div id="ratings">
-            <StarRating rating={spot?.rating || 0} id={0} />
-            <p>({spot?.rating})</p>
-          </div>
-          <button
-            onClick={() => handleFavoriteToggle(spot?.id ?? 0)}
-            id="spotslist-button-fav"
-            aria-label="toggle favorite"
-          >
-            {isFavorite[spot?.id ?? 0] ? (
-              <img src="https://i.postimg.cc/BQgtKhT4/heart-solid-24-1.png"></img>
-            ) : (
-              <img src="https://i.postimg.cc/bY1ZzYdG/heart-regular-24-2.png"></img>
-            )}
-          </button>
-        
-      
+        <Carousel fade>
+          <Carousel.Item>
+            <img src={spot?.picture} alt="First slide" />
+            <Carousel.Caption>
+              <h3>CECI</h3>
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item>
+            <img src={spot?.picture} alt="First slide" />
+            <Carousel.Caption>
+              <h3>EST UN TRÈS BEAU</h3>
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item>
+            <img src={spot?.picture} alt="First slide" />
+            <Carousel.Caption>
+              <h3>SLIDER</h3>
+            </Carousel.Caption>
+          </Carousel.Item>
+        </Carousel>
+        <div id="ratings">
+          <StarRating rating={spot?.rating || 0} id={0} />
+          <p>({spot?.rating})</p>
+        </div>
+        <button
+          onClick={() => handleFavoriteToggle(spot?.id ?? 0)}
+          id="spotslist-button-fav"
+          aria-label="toggle favorite"
+        >
+          {isFavorite[spot?.id ?? 0] ? (
+            <img src="https://i.postimg.cc/BQgtKhT4/heart-solid-24-1.png"></img>
+          ) : (
+            <img src="https://i.postimg.cc/bY1ZzYdG/heart-regular-24-2.png"></img>
+          )}
+        </button>
+
         <p id="spot-details-description">{spot?.description}</p>
         <p id="spot-details-address"><img src="https://i.postimg.cc/P5YNtVhs/pin-solid-24.png"></img>{spot?.address}</p>
-      
-    </div>
+
+        <CommComponent spot={spot} />
+
+      </div>
+
     </div>
   );
 }

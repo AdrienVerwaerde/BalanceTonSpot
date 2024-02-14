@@ -132,3 +132,12 @@
         width: 90%;
     }
 }
+
+@media screen and (max-width: 480px) {
+    .form-login {
+        width: 100%;
+    }
+    .button-login {
+        width: 100% !important;
+    }
+}
