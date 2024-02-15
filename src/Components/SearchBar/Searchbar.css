@@ -5,8 +5,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-bottom: 2.7em;
+    padding-bottom: 0.5em;
     margin-top: 3em;
+    padding-bottom: 1.5em;
 }
 
 .ui.input {

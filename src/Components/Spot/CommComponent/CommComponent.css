@@ -84,14 +84,13 @@
 
 /*BUTTONS*/
 
-
 .comments-button-submit {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   margin-top: 1em;
-  width: 40% !important;
+  width: 12em !important;
 }
 
 #button-submit-img {
@@ -99,15 +98,18 @@
   margin-left: 0.5em;
 }
 
-#button-cancel-img {
-  width: 1.3em;
-  margin-left: 0.5em;
+.comments-button-cancel {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: #333 !important;
+  margin-top: 1em;
+  width: 8em !important;
 }
 
-.comments-button-cancel {
-  margin-top: 1em;
-  width: 20% !important;
-  background-color: #333 !important;
+#button-cancel-img {
+  width: 1.3em;
 }
 
 .comments-button-cancel:hover {

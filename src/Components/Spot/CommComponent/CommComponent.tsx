@@ -49,29 +49,46 @@ export default function CommentSection({ spot }) {
   };
 
   const handleCommentSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
     if (newComment.trim() !== '') {
-      const comment: Comment = {
-        id: Date.now(), // Simulez un ID; dans une application réelle, l'API devrait générer l'ID
-        text: newComment.trim(),
+      // Assurez-vous que les données nécessaires sont disponibles
+      // Par exemple, si `username` et `date` sont stockés dans l'état local ou passés en tant que props
+      const username = "Username"; // Remplacer par la source appropriée
+      const date = new Date().toISOString(); // Exemple pour générer la date actuelle, ajustez selon vos besoins
+
+      const commentToSubmit = {
+        content: newComment.trim(),
+        username: username, // Utiliser la valeur dynamique
+        spot: spot.id, // Supposons que `spot` est un objet passé en props avec un identifiant `id`
+        date: date, // Utiliser la date dynamique ou une valeur fixe si nécessaire
       };
-      // Ici, vous pourriez vouloir envoyer le nouveau commentaire à l'API aussi
-      setComments([...comments, comment]);
-      setNewComment('');
+
+      axios.post('http://ombelinepinoche-server.eddi.cloud:8443/api/comments', commentToSubmit)
+        .then(response => {
+          // Supposons que l'API renvoie le commentaire complet, y compris son ID généré par la BDD
+          setComments([...comments, response.data]);
+          setNewComment('');
+          setOpen(false);
+        })
+        .catch(error => {
+          console.error("Erreur lors de l'envoi du commentaire", error);
+        });
     }
   };
   
+
   //These make the comment modal work
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
+  const handleClose = () => {
+    setOpen(false);
+    setNewComment('');
+  };
 
   return (
     <div className="comments-container">
       <h2 id="comments-section-title">Les Avis des Riders</h2>
       <div>
-        <Button onClick={handleOpen}>Open modal</Button>
+        <Button onClick={handleOpen}>COMMENTER ET NOTER</Button>
         <Modal
           aria-labelledby="transition-modal-title"
           aria-describedby="transition-modal-description"
@@ -87,17 +104,27 @@ export default function CommentSection({ spot }) {
         >
           <Fade in={open}>
             <Box sx={style}>
-            <form className="comments-form" onSubmit={handleCommentSubmit}>
-              <h2 id="comments-submit-title">Balance Ton Com' !</h2>
-        <textarea className="comments-text-input" value={newComment} onChange={handleCommentChange} />
-        <button className="comments-button-cancel" type="submit"><img id="button-cancel-img" src="https://i.postimg.cc/ZRpy77dM/x-regular-24.png"/>ANNULER</button>
-        <button className="comments-button-submit" type="submit">ENVOYER<img id="button-submit-img" src="https://i.postimg.cc/QMxygx8Y/send-regular-24-1.png"/></button>
-      </form>
+              <form 
+              className="comments-form" 
+              onSubmit={handleCommentSubmit}>
+                <h2 id="comments-submit-title">Balance Ton Com' !</h2>
+                <textarea 
+                className="comments-text-input" 
+                value={newComment} 
+                onChange={handleCommentChange} />
+                <button className="comments-button-cancel" 
+                type="submit" 
+                onClick={handleClose}><img id="button-cancel-img" src="https://i.postimg.cc/ZRpy77dM/x-regular-24.png"/>ANNULER</button>
+                <button 
+                className="comments-button-submit" 
+                type="submit"
+                >ENVOYER<img id="button-submit-img" src="https://i.postimg.cc/QMxygx8Y/send-regular-24-1.png"/></button>
+              </form>
             </Box>
           </Fade>
         </Modal>
       </div>
-      
+
 
       <ul className="comments-list">
         {comments.map((comment) => (

@@ -1,3 +1,4 @@
+
 /* BUTTONS CONTAINER*/
 .buttons-search-container {
     width: 100%;
@@ -16,7 +17,7 @@
     border-color: transparent;
     padding: 1em;
     width: 8%;
-    margin: 0 0.5em;
+    margin: 0 1em;
 }
 
 .button-search:hover {
@@ -25,6 +26,23 @@
 
 
 /* MEDIA QUERIES */
+
+@media screen and (max-width: 1512px) {
+    .button-search {
+        width: 30%;
+        margin: 0 0.5em;
+        padding : 0.5em
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .button-search {
+        width: 30%;
+        margin: 0 0.5em;
+        padding : 0.5em
+    }
+}
+
 @media screen and (max-width: 768px) {
     .button-search {
         width: 30%;

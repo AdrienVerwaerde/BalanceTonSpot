@@ -85,3 +85,21 @@
 #spotslist-button-detail:hover {
   background-color: #333;
 }
+
+/* Styles for filter boxes */
+
+.filter-boxes-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+#filter-box {
+  width: 8em;
+  height: 2em;
+  border: #e3e3e3 1px solid;
+  border-radius: 0.5em;
+  background-color: white;
+  margin: 1em 0.5em 0.5em 0;
+}
