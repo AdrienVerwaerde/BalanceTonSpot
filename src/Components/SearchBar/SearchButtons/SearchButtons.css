@@ -12,7 +12,7 @@
 .button-search {
     transition: 0.2s ease-in-out;
     color: rgb(255, 255, 255);
-    background-color: #214c5c;
+    background-color: #897b68;
     border-radius: 0.5em;
     border-color: transparent;
     padding: 1em;
@@ -21,7 +21,7 @@
 }
 
 .button-search:hover {
-    background-color: #333;
+    background-color: #e3e3e3;
 }
 
 

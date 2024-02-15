@@ -47,18 +47,31 @@
     
 }
 
-.list-group-item {
+.list-group-item,
+.list-group-item-skateboard {
+    width: 10em;
+    text-decoration: none;
+    transition: 0.2s ease-in-out;
+    color: #333;
+    border-color: white;
+    padding: 1em;
+}
+
+.list-group-item-snowboard {
     width: 10em;
     text-decoration: none;
     transition: 0.2s ease-in-out;
     color: #214C5C;
     border-color: white;
     padding: 1em;
-    
-
 }
 
 .list-group-item:hover {
+    background-color: #333;
+    color: white;
+}
+
+.list-group-item-snowboard:hover {
     background-color: #214C5C;
     color: white;
 }

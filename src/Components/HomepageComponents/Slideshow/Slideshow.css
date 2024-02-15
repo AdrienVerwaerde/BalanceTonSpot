@@ -47,15 +47,15 @@
 }
 
 .slideshowDot.active {
-  background-color: #214c5c;
+  background-color: #897b68;
 }
 
-/* ARTICLES */
+/* SPOTLIGHTS */
 
 #spotlight {
   position: absolute;
   z-index: 4000;
-  background-color: #214c5cbb;
+  background-color: #897b68d4;
   color: white;
   padding: 2em;
   margin-top: 2em;
@@ -71,11 +71,12 @@
   transform: scale(1.05);
   transition: transform 0.3s ease-in-out;
   cursor: pointer;
+  background-color: #897b68;
 }
 
 #spotlight h2{
   color: #FFFFFF; 
-  background-color: #214c5c76; 
+  background-color: #897b68; 
   padding: 0.5em 0.5em; 
   border: 2px solid white; 
   border-radius: 5px; 

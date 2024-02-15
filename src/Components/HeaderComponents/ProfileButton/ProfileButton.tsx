@@ -1,7 +1,8 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useContext } from 'react'
 import Fade from 'react-bootstrap/Fade';
 import { Link } from 'react-router-dom';
 import './ProfileButton.css'
+import ThemeContext from '../../../contextAPI/themeContext';  
 
 export default function ProfileButton() {
   //This function uses useState to toggle the list of options from the button
@@ -12,6 +13,9 @@ export default function ProfileButton() {
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const { theme } = useContext(ThemeContext);
+  const listGroupItem = `list-group-item list-group-item-${theme}`;
 
   useEffect(() => {
     // Adds an event listener on the whole document to detect when we click anywhere but on the button and also allows to close the menu by clicking the button again
@@ -50,15 +54,15 @@ export default function ProfileButton() {
             {isLoggedIn ? (
               // Options affichées si l'utilisateur est connecté
               <>
-                <Link to="/profile"><li className="list-group-item">PROFIL</li></Link>
-                <Link to="/favoris"><li className="list-group-item">FAVORIS</li></Link>
-                <Link to="/" onClick={() => {localStorage.removeItem('token'); setIsLoggedIn(false);}}><li className="list-group-item">DECONNEXION</li></Link>
+                <Link to="/profile"><li className={listGroupItem}>PROFIL</li></Link>
+                <Link to="/favoris"><li className={listGroupItem}>FAVORIS</li></Link>
+                <Link to="/" onClick={() => {localStorage.removeItem('token'); setIsLoggedIn(false);}}><li className={listGroupItem}>DECONNEXION</li></Link>
               </>
             ) : (
               // Options affichées si l'utilisateur n'est pas connecté
               <>
-                <Link to="/login"><li className="list-group-item">CONNEXION</li></Link>
-                <Link to="/signup"><li className="list-group-item">INSCRIPTION</li></Link>
+                <Link to="/login"><li className={listGroupItem}>CONNEXION</li></Link>
+                <Link to="/signup"><li className={listGroupItem}>INSCRIPTION</li></Link>
               </>
             )}
           </ul>

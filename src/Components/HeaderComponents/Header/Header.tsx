@@ -1,13 +1,17 @@
-
 import "./Header.css";
+import { useContext } from "react";
 import ProfileButton from "../ProfileButton/ProfileButton";
-import ToggleButton from "../ToggleButton/ToggleButton";
+import ToggleTheme from "../ToggleTheme/ToggleTheme";
 import { Link } from "react-router-dom";
+import ThemeContext from '../../../contextAPI/themeContext';  
 
 export default function Header() {
 
+  const { theme } = useContext(ThemeContext);
+  const headerClassName = `header header-${theme}`;
+
   return (
-    <header className="header">
+    <header className={headerClassName}>
 {/*Call of the Profile Button component*/}
 <ProfileButton />
 
@@ -19,7 +23,7 @@ export default function Header() {
             ></img></Link>
 
 {/*Call of the Toggle Button component*/}
-<ToggleButton />  
+<ToggleTheme />  
     </header>
   );
 }

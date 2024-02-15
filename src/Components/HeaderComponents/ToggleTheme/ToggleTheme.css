@@ -1,0 +1,77 @@
+/* BUTTON */
+
+.btn-toggle {
+    display: flex;
+    border : none;
+    background-color: transparent;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 2.5em;
+}
+
+.btn-toggle:hover{
+    color: white;
+}
+
+.chevron {
+    display: block;
+    width: 100%;
+}
+
+/* TOGGLE BUTTONS */
+
+.toggle-buttons-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+}
+
+.toggle-buttons-container h4 {
+    margin-bottom: 0.5em;
+}
+
+.toggle-button-snow {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: none !important;
+    border-radius: 0.5em !important;
+    color: white !important;
+    height: 5em !important;
+
+}
+
+.toggle-button-skate {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: none !important;
+    border-radius: 0.5em !important;
+    color: white !important;
+    height: 5em !important;
+    
+}
+
+/*Background color when a button is active*/
+.css-d9c359-MuiButtonBase-root-MuiToggleButton-root.Mui-selected {
+    background-color: rgba(0, 0, 0, 0.133) !important;
+}
+
+#image-button-skate { 
+    display: block;
+    width: 30%;
+
+}
+
+#image-button-snow {
+    display: block;
+    width: 30%;
+
+}

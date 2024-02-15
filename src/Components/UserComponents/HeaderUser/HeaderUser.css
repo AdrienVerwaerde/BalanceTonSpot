@@ -3,9 +3,8 @@
 .profile-navbar {
   display: flex;
   justify-content: space-between;
-  
   width: 100%;
-  background: #214C5C;
+  background: #897b68;
   box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.5);
   padding: 2em;
   font-size: large;

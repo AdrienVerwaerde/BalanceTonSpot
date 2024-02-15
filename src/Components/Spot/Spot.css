@@ -63,7 +63,7 @@
 
 #loader-message {
   margin-top: 1em;
-  color: #214c5c;
+  color: #897b68;
   font-weight: bold;
 }
 
@@ -87,14 +87,14 @@
 /* CAROUSEL OPTIONS */
 
 .carousel-control-next-icon {
-  background-color: #333;
+  background-color: #897b68;
   width: 3em;
   height: 3em;
   
 }
 
 .carousel-control-prev-icon {
-  background-color: #333;
+  background-color: #897b68;
   width: 3em;
   height: 3em;
 }

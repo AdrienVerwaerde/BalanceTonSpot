@@ -10,6 +10,11 @@ import Button from '@mui/material/Button';
 interface Comment {
   id: number;
   text: string;
+  username: string;
+  spot: number;
+  content: string;
+  picture: string;
+  date: string;
 }
 
 //STYLE OF THE COMMENT MODAL
@@ -48,7 +53,7 @@ export default function CommentSection({ spot }) {
     setNewComment(event.target.value);
   };
 
-  const handleCommentSubmit = (event: React.FormEvent) => {
+  const handleCommentSubmit = () => {
     if (newComment.trim() !== '') {
       // Assurez-vous que les données nécessaires sont disponibles
       // Par exemple, si `username` et `date` sont stockés dans l'état local ou passés en tant que props

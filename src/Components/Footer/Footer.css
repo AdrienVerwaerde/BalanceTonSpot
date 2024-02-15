@@ -1,12 +1,18 @@
 /* FOOTER */
 
-footer {
-    
+.footer,
+.footer-skateboard  {
     margin-top: 3em;
-    background-color: #214c5c;
     text-align: center;
     padding: 1em;
+    background-color: #333;
+}
 
+.footer-snowboard {
+    margin-top: 3em;
+    text-align: center;
+    padding: 1em;
+    background-color: #214c5c;
 }
 
 ul {

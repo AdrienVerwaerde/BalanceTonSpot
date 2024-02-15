@@ -65,7 +65,7 @@ export default function Spot() {
   if (loading) {
     return (
       <div className="loader-container">
-        <img src="https://i.postimg.cc/wjKvWdkq/bouton-skate-color.png"
+        <img src="https://i.postimg.cc/fLvdb7fR/bouton-skate-color-2.png"
           alt="loader"
           className="loader-img" />
         <p id="loader-message">Recherche des spots...</p>

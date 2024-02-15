@@ -7,7 +7,7 @@
     align-items: center;
     padding-bottom: 0.5em;
     margin-top: 3em;
-    padding-bottom: 1.5em;
+    padding-bottom: 2em;
 }
 
 .ui.input {
@@ -15,7 +15,7 @@
 }
 
 .ui.input:focus-within {
-  color: #214c5c !important;
+  color: #897b68 !important;
 }
 
 .ui.input:focus-within label {

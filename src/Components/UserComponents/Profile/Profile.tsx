@@ -13,8 +13,8 @@ export default function UserProfileDashboard() {
 
     useEffect(() => {
         setUser({
-            name: 'John Doe',
-            email: 'john.doe@example.com',
+            name: 'Play Doe',
+            email: 'play.doe@example.com',
             profilePicture: 'https://via.placeholder.com/150',
         });
     }, []);

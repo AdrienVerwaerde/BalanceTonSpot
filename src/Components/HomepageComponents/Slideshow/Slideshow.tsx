@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useContext } from 'react';
 import axios from 'axios';
 import './Slideshow.css';
+import ThemeContext from '../../../contextAPI/themeContext';  
 
 interface spot {
   name: string;
@@ -11,9 +12,10 @@ interface spot {
 const delay = 4000;
 
 export default function Slideshow() {
+  const { theme } = useContext(ThemeContext);
   const [spots, setSpots] = useState([]); // State variable to store the spots data
   const [index, setIndex] = useState(0); // State variable to store the current index of the slideshow
-  const timeoutRef = useRef(null); // Reference to the timeout used for automatic slideshow
+  const timeoutRef = useRef<number>(); // Reference to the timeout used for automatic slideshow
 
   function resetTimeout() {
     if (timeoutRef.current) {
@@ -24,15 +26,16 @@ export default function Slideshow() {
   useEffect(() => {
     const fetchSpots = async () => {
       try {
-        const response = await axios.get('http://ombelinepinoche-server.eddi.cloud:8443/api/sport/snowboard/spots'); // Fetch spots data from the API
-        setSpots(response.data.slice(0, 3)); // Update the spots state with the fetched data (only the first 3 spots)
+        const sportType = theme === 'snowboard' ? 'snowboard' : 'skateboard';
+        const response = await axios.get(`http://ombelinepinoche-server.eddi.cloud:8443/api/sport/${sportType}/spots`);
+        setSpots(response.data.slice(0, 3));
       } catch (error) {
-        console.error("Erreur lors de la récupération des spots:", error); // Log an error if the API request fails
+        console.error("Erreur lors de la récupération des spots:", error);
       }
     };
 
-    fetchSpots(); // Call the fetchSpots function when the component mounts
-  }, []);
+    fetchSpots();
+  }, [theme]);
 
   useEffect(() => {
     resetTimeout(); // Reset the timeout when the index or spots length changes

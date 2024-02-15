@@ -20,7 +20,6 @@
 /*COMMENTS LIST*/
 
 .comments-list {
-
   width: 100%;
   margin: 0px;
   display: flex;
@@ -36,14 +35,14 @@
   padding: 1em;
   margin-bottom: 0.5em;
   border-radius: 8px;
-  border: #214c5c 1px solid;
+  border: #897b68 1px solid;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   background-color: #ffffff;
 }
 
 .comments-list h3 {
   margin: 0px;
-  color: #214c5c;
+  color: #897b68;
 }
 
 .comments-list p {
@@ -74,13 +73,10 @@
 .comments-text-input {
   height: 25em;
   width: 100%;
-  border: #c3c3c3 1px solid;
+  border: #897b68 1px solid;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.comments-text-input:active {
-  border: #214c5c 1px solid;
-}
 
 /*BUTTONS*/
 
@@ -105,7 +101,8 @@
   justify-content: center;
   background-color: #333 !important;
   margin-top: 1em;
-  width: 8em !important;
+  padding-left: 0em !important;
+  width: 12em !important;
 }
 
 #button-cancel-img {
@@ -118,7 +115,7 @@
 
 
 #comments-submit-title {
-  color: #214c5c;
+  color: #897b68;
 }
 
 /*MODAL*/

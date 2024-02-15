@@ -1,6 +1,14 @@
 /* HEADER */
+.header,
+.header-skateboard {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #333;
+}
 
-.header {
+.header-snowboard {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
