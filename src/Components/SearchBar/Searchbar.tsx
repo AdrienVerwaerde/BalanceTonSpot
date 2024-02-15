@@ -127,7 +127,7 @@ export default function Searchbar() {
   }
 
   const cleanSearchTerm = (term: string) => term.replace(/\s+/g, '-').toLowerCase();
-
+  
   const handleKeyDown = (e: { key: string; }) => {
     if (e.key === 'Enter') {
       const cleanedSearchTerm = cleanSearchTerm(searchTerm);

@@ -17,22 +17,10 @@ interface Comment {
   date: string;
 }
 
-//STYLE OF THE COMMENT MODAL
-const style = {
-  position: 'absolute' as 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 800,
-  height: 500,
-  bgcolor: '#ffffff',
-  boxShadow: 24,
-  p: 1.75,
-};
-
 export default function CommentSection({ spot }) {
   const [comments, setComments] = useState<Comment[]>([]);
   const [newComment, setNewComment] = useState('');
+  
 
   useEffect(() => {
     if (spot?.name) {
@@ -59,7 +47,6 @@ export default function CommentSection({ spot }) {
       // Par exemple, si `username` et `date` sont stockés dans l'état local ou passés en tant que props
       const username = "Username"; // Remplacer par la source appropriée
       const date = new Date().toISOString(); // Exemple pour générer la date actuelle, ajustez selon vos besoins
-
       const commentToSubmit = {
         content: newComment.trim(),
         username: username, // Utiliser la valeur dynamique
@@ -77,9 +64,9 @@ export default function CommentSection({ spot }) {
         .catch(error => {
           console.error("Erreur lors de l'envoi du commentaire", error);
         });
+        
     }
   };
-  
 
   //These make the comment modal work
   const [open, setOpen] = React.useState(false);
@@ -89,11 +76,12 @@ export default function CommentSection({ spot }) {
     setNewComment('');
   };
 
+
   return (
     <div className="comments-container">
       <h2 id="comments-section-title">Les Avis des Riders</h2>
-      <div>
-        <Button onClick={handleOpen}>COMMENTER ET NOTER</Button>
+      <div className="modal-container">
+        <Button id="button-modal-open" onClick={handleOpen}>COMMENTER ET NOTER</Button>
         <Modal
           aria-labelledby="transition-modal-title"
           aria-describedby="transition-modal-description"
@@ -108,14 +96,14 @@ export default function CommentSection({ spot }) {
           }}
         >
           <Fade in={open}>
-            <Box sx={style}>
+            <Box className="modal-box">
               <form 
               className="comments-form" 
               onSubmit={handleCommentSubmit}>
                 <h2 id="comments-submit-title">Balance Ton Com' !</h2>
                 <textarea 
                 className="comments-text-input" 
-                value={newComment} 
+                value={newComment}
                 onChange={handleCommentChange} />
                 <button className="comments-button-cancel" 
                 type="submit" 
@@ -129,10 +117,8 @@ export default function CommentSection({ spot }) {
           </Fade>
         </Modal>
       </div>
-
-
       <ul className="comments-list">
-        {comments.map((comment) => (
+      {comments.map((comment) => (
           <li key={comment.id}>
             <img src={comment.picture} alt={comment.username} className="user-image" />
             <h3>{comment.username}</h3>

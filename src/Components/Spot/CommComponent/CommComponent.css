@@ -71,12 +71,24 @@
 }
 
 .comments-text-input {
-  height: 25em;
+  height: 26em;
   width: 100%;
+  resize: none;
   border: #897b68 1px solid;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-radius: 0.5em;
+  padding: 0.5em;
 }
 
+.comments-text-input:focus {
+  outline: none !important;
+  border: #897b68 1px solid;
+}
+
+#comments-submit-title {
+  color: #897b68;
+  margin-bottom: 0.5em;
+}
 
 /*BUTTONS*/
 
@@ -114,9 +126,36 @@
 }
 
 
-#comments-submit-title {
-  color: #897b68;
-}
-
 /*MODAL*/
 
+.modal-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+#button-modal-open {
+  background-color: #897b68;
+  color: white;
+  font-weight: bold;
+  font-size: small;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+#button-modal-open:hover {
+  background-color: #e3e3e3;
+}
+
+.modal-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50em;
+  height: 35em;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 0.8em;
+  border-radius: 0.5em;
+}
