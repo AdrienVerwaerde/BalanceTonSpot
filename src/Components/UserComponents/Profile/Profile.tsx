@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './Profile.css';
 
-/**
- * Composant de tableau de bord du profil utilisateur.
- */
 export default function UserProfileDashboard() {
     const [user, setUser] = useState({
         name: '',
@@ -19,11 +16,7 @@ export default function UserProfileDashboard() {
         });
     }, []);
 
-    /**
-     * Gère le changement de valeur des champs de saisie.
-     * @param {React.ChangeEvent<HTMLInputElement>} e - L'événement de changement.
-     */
-    const handleChange = (e) => {
+    const handleChange = (e: { target: { name: any; value: any; }; }) => {
         const { name, value } = e.target;
         setUser((prevState) => ({
             ...prevState,
@@ -31,30 +24,28 @@ export default function UserProfileDashboard() {
         }));
     };
 
-    /**
-     * Gère le changement de l'image de profil.
-     * @param {React.ChangeEvent<HTMLInputElement>} e - L'événement de changement.
-     */
-    const handleProfilePictureChange = (e) => {
-        const file = e.target.files[0];
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            setUser((prevState) => ({
-                ...prevState,
-                profilePicture: reader.result || '',
-            }));
-        };
-        reader.readAsDataURL(file);
+    const handleProfilePictureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const files = e.target.files;
+        if (files && files[0] && files[0].type.startsWith('image/')) {
+            const file = files[0];
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                // Utilisez as string pour s'assurer que le type est correct
+                setUser((prevState) => ({
+                    ...prevState,
+                    profilePicture: reader.result as string || '',
+                }));
+            };
+            reader.readAsDataURL(file);
+        } else {
+            alert('Please select an image file.');
+        }
     };
 
-    /**
-     * Gère la soumission du formulaire.
-     * @param {React.FormEvent<HTMLFormElement>} e - L'événement de soumission.
-     */
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
-        // Ici, vous pouvez envoyer les données à une API pour mettre à jour le profil de l'utilisateur
         console.log('User data to be submitted:', user);
+        // Envoie des données à une API pour mise à jour
     };
 
     return (
@@ -64,7 +55,7 @@ export default function UserProfileDashboard() {
                     <h2>Bonjour, {user.name}</h2>
                     <div className="form-group">
                         <label htmlFor="profilePicture">Image de Profil</label>
-                        <input type="file" id="profilePicture" onChange={handleProfilePictureChange} />
+                        <input type="file" id="profilePicture" onChange={handleProfilePictureChange} accept="image/*" />
                         {user.profilePicture && (
                             <img src={user.profilePicture} alt="Profile" style={{ width: '10em', height: '10em', borderRadius: '50%' }} />
                         )}
@@ -83,4 +74,3 @@ export default function UserProfileDashboard() {
         </main>
     );
 }
-

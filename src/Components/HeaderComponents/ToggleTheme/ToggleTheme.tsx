@@ -19,7 +19,7 @@ export default function ToggleTheme() {
 
   return (
     <div className="toggle-buttons-container">
-      <h4>Choisis un Thème</h4>
+      <h4>CHOISIS UN THÈME</h4>
       <ToggleButtonGroup
         color="primary"
         value={alignment}

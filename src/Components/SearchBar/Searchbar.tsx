@@ -118,17 +118,17 @@ export default function Searchbar() {
   if (isLoading) {
     return (
       <div className="loader-container">
-        <img src="https://i.postimg.cc/wjKvWdkq/bouton-skate-color.png"
+        <img src="https://i.postimg.cc/fLvdb7fR/bouton-skate-color-2.png"
           alt="loader"
           className="loader-img" />
-        <p id="loader-message">Recherche des spots...</p>
+        <p id="loader-message">Chargement en cours...</p>
       </div>
     );
   }
 
   const cleanSearchTerm = (term: string) => term.replace(/\s+/g, '-').toLowerCase();
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = (e: { key: string; }) => {
     if (e.key === 'Enter') {
       const cleanedSearchTerm = cleanSearchTerm(searchTerm);
       navigate(`/spotslist?search=${encodeURIComponent(cleanedSearchTerm)}`);

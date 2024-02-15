@@ -62,16 +62,16 @@ export default function Spot() {
     fetchSpotDetails();
   }, [name]); // Add 'name' as a dependency for useEffect
 
-  if (loading) {
-    return (
-      <div className="loader-container">
-        <img src="https://i.postimg.cc/fLvdb7fR/bouton-skate-color-2.png"
-          alt="loader"
-          className="loader-img" />
-        <p id="loader-message">Recherche des spots...</p>
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <div className="loader-container">
+  //       <img src="https://i.postimg.cc/fLvdb7fR/bouton-skate-color-2.png"
+  //         alt="loader"
+  //         className="loader-img" />
+  //       <p id="loader-message">Recherche des spots...</p>
+  //     </div>
+  //   );
+  // }
 
   if (error) {
     return <p className='no-result'>{error}</p>;
