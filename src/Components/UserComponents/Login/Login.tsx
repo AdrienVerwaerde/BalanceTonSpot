@@ -1,26 +1,12 @@
 import { useState, useEffect } from "react";
 // Optional axios import, useful for real API calls.
-// import axios from "axios";
+import axios from "axios";
 // Import CSS styles for the login form.
 import "./Login.css";
 // For navigation and links within the app.
 import { Link, useNavigate } from "react-router-dom";
 // Import an icon for UI enhancement.
 import { ImCross } from "react-icons/im";
-
-// Mock database to simulate user authentication.
-const fakeDB = {
-    users: [
-        {
-            id: 1,
-            email: "user@example.com",
-            // Warning: Never store passwords as plain text in a real application.
-            password: "password123",
-            token: "fakeToken123456789",
-        },
-        // Add more users here to simulate a larger database.
-    ],
-};
 
 // Function to simulate the authentication process.
 const authenticateUser = async (email: string, password: string) => {

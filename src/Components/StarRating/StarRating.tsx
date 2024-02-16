@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import './StarRating.css'; // Make sure to have the corresponding CSS file
+import './StarRating.css'; 
+import starFilledSvg from '../../assets/images/svg/starfilled.svg';
+import starEmptySvg from '../../assets/images/svg/starempty.svg';
+import starHalfSvg from '../../assets/images/svg/starhalf.svg';
 
 interface StarRatingProps {
     id: number;
@@ -18,15 +21,20 @@ const StarRating: React.FC<StarRatingProps> = ({rating}) => {
         for (let i = 5; i >= 1; i--) {
             const isFilled = i <= (hover || rating);
             const isPartialFilled = i <= Math.floor(rating) || (i === Math.ceil(rating) && rating % 1 > 0);
-            const starClassName = `star ${isFilled ? 'filled' : ''}`;
-            const starContent = isPartialFilled ? '★' : '☆';
+            let starContent: JSX.Element;
+
+        if (isFilled) {
+            starContent = <img src={starFilledSvg} alt="Star" />;
+        } else if (isPartialFilled) {
+            starContent = <img src={starHalfSvg} alt="Half Star" />;
+        } else {
+            starContent = <img src={starEmptySvg} alt="Empty Star" />;
+        }
 
             stars.unshift(
                 <span
                     key={i}
-                    className={starClassName}
-                    onMouseEnter={() => setHover(i)}
-                    onMouseLeave={() => setHover(rating)}
+                    className={`star ${isFilled ? 'filled' : ''}`}
                 >
                     {starContent}
                 </span>
@@ -35,26 +43,11 @@ const StarRating: React.FC<StarRatingProps> = ({rating}) => {
         return stars;
     };
 
-    const renderPartialStar = (): JSX.Element | null => {
-        if (rating % 1 > 0) {
-            const partialStarWidth = `${(rating % 1) * 20}%`;
-            return (
-                <span className="star partial-filled" style={{ width: partialStarWidth }}>
-                    ★
-                </span>
-            );
-        }
-        return null;
-    };
-
     return (
         <div className="star-rating">
             {renderStars()}
-            {renderPartialStar()}
         </div>
     );
 };
 
 export default StarRating;
-
-

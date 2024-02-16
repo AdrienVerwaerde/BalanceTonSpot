@@ -63,6 +63,8 @@
 
 /* Button styles */
 #spotslist-button-fav {
+  display: flex;
+  align-items: center;
   background-color: transparent;
   border:none;
 }

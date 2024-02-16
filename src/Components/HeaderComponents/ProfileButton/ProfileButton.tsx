@@ -55,7 +55,7 @@ const fetchUserData = async (token) => {
       },
     });
     console.log(response.data)
-    setUser({ pseudo: response.data.pseudo }); // Assurez-vous que la réponse contient un champ pseudo
+    setUser({ pseudo: response.data.pseudo });
   } catch (error) {
     console.error('Erreur lors de la récupération des données utilisateur', error);
   }
@@ -78,7 +78,7 @@ const fetchUserData = async (token) => {
               <>
                 <Link to="/profile"><li className={listGroupItem}>PROFIL</li></Link>
                 <Link to="/favoris"><li className={listGroupItem}>FAVORIS</li></Link>
-                <Link to="/" onClick={() => {localStorage.removeItem('token'); setIsLoggedIn(false);}}><li className={listGroupItem}>DECONNEXION</li></Link>
+                <Link to="/" onClick={() => {localStorage.removeItem('userToken'); setIsLoggedIn(false);}}><li className={listGroupItem}>DECONNEXION</li></Link>
               </>
             ) : (
               // Options affichées si l'utilisateur n'est pas connecté
