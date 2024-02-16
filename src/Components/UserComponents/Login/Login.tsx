@@ -1,61 +1,46 @@
 import { useState, useEffect } from "react";
-// Optional axios import, useful for real API calls.
 import axios from "axios";
-// Import CSS styles for the login form.
 import "./Login.css";
-// For navigation and links within the app.
 import { Link, useNavigate } from "react-router-dom";
-// Import an icon for UI enhancement.
 import { ImCross } from "react-icons/im";
 
-// Function to simulate the authentication process.
-const authenticateUser = async (email: string, password: string) => {
-    // Search for a matching user in the mock database.
-    const user = fakeDB.users.find(
-        (user) => user.email === email && user.password === password
-    );
-    
-    if (user) {
-        // If found, return a success object with a token.
-        return { success: true, token: user.token };
-    } else {
-        // Otherwise, throw an error indicating authentication failure.
-        throw new Error("Invalid password and/or email.");
-    }
-};
-
 export default function LoginForm() {
-    // Local state to manage form inputs, loading state, and error messages.
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
-    const navigate = useNavigate(); // Hook for programmatic navigation.
+    const navigate = useNavigate();
 
     useEffect(() => {
-        // Check for a stored token on component mount.
-        const token = localStorage.getItem("token");
-        if (token) {
-            navigate("/"); // Redirect to home page if already logged in.
+        const userToken = localStorage.getItem("userToken");
+        if (userToken) {
+            navigate("/");
         }
     }, [navigate]);
 
-    // Handle form submission.
-    const handleSubmit = async (e: { preventDefault: () => void; }) => {
-        e.preventDefault(); // Prevent page reload.
-        setLoading(true); // Start loading indicator.
-
+    const authenticateUser = async () => {
+        setLoading(true);
         try {
-            // Attempt authentication with provided credentials.
-            const response = await authenticateUser(email, password);
-            localStorage.setItem("token", response.token); // Store token locally for the session.
-            setLoading(false); // Stop loading indicator.
-            navigate("/"); // Redirect to home page after successful login.
+            const response = await axios.post("http://ombelinepinoche-server.eddi.cloud:8443/api/login_check", {
+                username: email,
+                password: password,
+            });
+            if (response.data && response.data.token) {
+                localStorage.setItem("userToken", response.data.token);
+                navigate("/");
+            } else {
+                throw new Error("Réponse de l'API invalide, token manquant.");
+            }
         } catch (error) {
-            // Handle authentication errors.
-            setError(error.message); // Display error message.
-            setLoading(false); // Stop loading indicator.
+            setError(error.response?.data.message || "Erreur lors de l'authentification.");
+        } finally {
+            setLoading(false); // Arrête l'indicateur de chargement quelle que soit l'issue de la tentative
         }
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        await authenticateUser();
     };
 
     // JSX structure for the login form.

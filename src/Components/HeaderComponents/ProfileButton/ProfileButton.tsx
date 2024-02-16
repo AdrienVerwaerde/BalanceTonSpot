@@ -54,7 +54,6 @@ const fetchUserData = async (token) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(response.data)
     setUser({ pseudo: response.data.pseudo });
   } catch (error) {
     console.error('Erreur lors de la récupération des données utilisateur', error);
@@ -68,20 +67,20 @@ const fetchUserData = async (token) => {
         onClick={() => setOpen(!open)}
         className="shadow-none btn btn-primary btn-profile mb-5">
         <img id="button-img" src="https://i.postimg.cc/QCdf9cNS/585e4bf3cb11b227491c339a.png" alt="Profile button"></img>
-        {isLoggedIn && <span>{user.pseudo}</span>}
+        {isLoggedIn && <span id="profile-button-pseudo">{user.pseudo}</span>}
       </button>
       <div ref={menuRef} style={{ minHeight: '150px' }}>
         <Fade in={open}>
           <ul className="list-group">
             {isLoggedIn ? (
-              // Options affichées si l'utilisateur est connecté
+              // Displayed if user is logged in
               <>
                 <Link to="/profile"><li className={listGroupItem}>PROFIL</li></Link>
                 <Link to="/favoris"><li className={listGroupItem}>FAVORIS</li></Link>
                 <Link to="/" onClick={() => {localStorage.removeItem('userToken'); setIsLoggedIn(false);}}><li className={listGroupItem}>DECONNEXION</li></Link>
               </>
             ) : (
-              // Options affichées si l'utilisateur n'est pas connecté
+              // Displayed if user isn't logged in
               <>
                 <Link to="/login"><li className={listGroupItem}>CONNEXION</li></Link>
                 <Link to="/signup"><li className={listGroupItem}>INSCRIPTION</li></Link>

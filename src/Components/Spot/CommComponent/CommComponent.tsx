@@ -7,6 +7,7 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
 
+// Définition de l'interface pour le commentaire
 interface Comment {
   id: number;
   text: string;
@@ -17,64 +18,89 @@ interface Comment {
   date: string;
 }
 
-export default function CommentSection({ spot }) {
+// Définition de l'interface pour les props
+interface SpotProps {
+  spot: {
+    id: number;
+    name: string;
+  };
+}
+
+// Définition de l'interface pour l'utilisateur
+interface User {
+  pseudo?: string;
+}
+
+export default function CommentSection({ spot }: SpotProps) {
   const [comments, setComments] = useState<Comment[]>([]);
   const [newComment, setNewComment] = useState('');
-  
+  const [user, setUser] = useState<User>({});
+  const [open, setOpen] = useState(false);
+
+  // Fonction pour récupérer les données utilisateur
+  const fetchUserData = async () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        const response = await axios.get(`http://ombelinepinoche-server.eddi.cloud:8443/api/user`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setUser({ pseudo: response.data.pseudo });
+      } catch (error) {
+        console.error('Error fetching user data', error);
+      }
+    }
+  };
+
   useEffect(() => {
-    if (spot?.name) {
-      // Formate le nom du spot pour l'URL
+    fetchUserData();
+  }, []);
+
+  useEffect(() => {
+    if (spot && spot.name) {
       const formattedSpotName = spot.name.toLowerCase().replace(/\s/g, "-");
       axios.get(`http://ombelinepinoche-server.eddi.cloud:8443/api/spot/${formattedSpotName}/comments`)
         .then(response => {
-          // Supposons que l'API renvoie un tableau de commentaires
           setComments(response.data);
         })
         .catch(error => {
           console.error("Erreur lors du chargement des commentaires", error);
         });
     }
-  }, [spot?.name]); // Déclenchez l'effet lorsque le nom du spot change
+  }, [spot]);
 
-  const handleCommentChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCommentChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setNewComment(event.target.value);
   };
 
-  const handleCommentSubmit = () => {
-    if (newComment.trim() !== '') {
-      // Assurez-vous que les données nécessaires sont disponibles
-      // Par exemple, si `username` et `date` sont stockés dans l'état local ou passés en tant que props
-      const username = "Username 2"; // Remplacer par la source appropriée
-      const date = new Date().toISOString(); // Exemple pour générer la date actuelle, ajustez selon vos besoins
+  const handleCommentSubmit = async (event) => {
+    if (newComment.trim() !== '' && user.pseudo) {
       const commentToSubmit = {
         content: newComment.trim(),
-        username: username, // Utiliser la valeur dynamique
-        spot: spot.id, // Supposons que `spot` est un objet passé en props avec un identifiant `id`
-        date: date, // Utiliser la date dynamique ou une valeur fixe si nécessaire
+        username: 'coucou',
+        spot: spot.name,
+        date: new Date().toISOString(),
+        rating: ''
       };
 
-      axios.post('http://ombelinepinoche-server.eddi.cloud:8443/api/comments', commentToSubmit)
-        .then(response => {
-          // Supposons que l'API renvoie le commentaire complet, y compris son ID généré par la BDD
-          setComments([...comments, response.data]);
-          setNewComment('');
-          setOpen(false);
-        })
-        .catch(error => {
-          console.error("Erreur lors de l'envoi du commentaire", error);
-        });
-        
+      try {
+        const response = await axios.post('http://ombelinepinoche-server.eddi.cloud:8443/api/comments', commentToSubmit);
+        setComments([...comments, response.data]);
+        setNewComment('');
+        setOpen(false);
+      } catch (error) {
+        console.error("Erreur lors de l'envoi du commentaire", error);
+      }
     }
   };
 
-  //These make the comment modal work
-  const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false);
     setNewComment('');
   };
-
 
   return (
     <div className="comments-container">

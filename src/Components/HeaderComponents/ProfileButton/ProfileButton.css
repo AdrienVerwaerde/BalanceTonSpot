@@ -13,7 +13,10 @@
 
 .btn-profile {
     position: relative;
-    display: block;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
     border: none;
     width: 100%;
     background-color: transparent;
@@ -36,9 +39,11 @@
 
 #button-img {
     width: 100%;
-    
 }
 
+#profile-button-pseudo {
+    text-transform: uppercase;
+}
 
 /* LIST OF LINKS */
 
@@ -55,6 +60,8 @@
     color: #333;
     border-color: white;
     padding: 1em;
+    margin-bottom: 0px !important;
+    
 }
 
 .list-group-item-snowboard {
@@ -64,11 +71,14 @@
     color: #214C5C;
     border-color: white;
     padding: 1em;
+    margin-bottom: 0px !important;
+    
 }
 
 .list-group-item:hover {
     background-color: #333;
     color: white;
+    
 }
 
 .list-group-item-snowboard:hover {
