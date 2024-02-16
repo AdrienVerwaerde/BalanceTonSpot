@@ -37,10 +37,13 @@ export default function CommentSection({ spot }: SpotProps) {
   const [user, setUser] = useState<User>({});
   const [open, setOpen] = useState(false);
 
+
+
   // Fonction pour récupérer les données utilisateur
   const fetchUserData = async () => {
-    const token = localStorage.getItem('token');
-    if (token) {
+    const token = localStorage.getItem('userToken');
+    // Vérification supplémentaire pour s'assurer que le token est non vide
+    if (token && token.trim() !== '') {
       try {
         const response = await axios.get(`http://ombelinepinoche-server.eddi.cloud:8443/api/user`, {
           headers: {
@@ -51,6 +54,8 @@ export default function CommentSection({ spot }: SpotProps) {
       } catch (error) {
         console.error('Error fetching user data', error);
       }
+    } else {
+      console.log('No token found or token is invalid');
     }
   };
 
@@ -76,17 +81,27 @@ export default function CommentSection({ spot }: SpotProps) {
   };
 
   const handleCommentSubmit = async (event) => {
+  event.preventDefault();
     if (newComment.trim() !== '' && user.pseudo) {
       const commentToSubmit = {
+        // Supposons que votre API attend un `id` pour le commentaire, cela devrait normalement être généré côté serveur
         content: newComment.trim(),
-        username: 'coucou',
-        spot: spot.name,
+        username: user.pseudo, // Utilisation de `user.pseudo` au lieu de 'coucou'
+        spot: [spot.id], // Supposons que l'API attend un tableau avec l'ID du spot
         date: new Date().toISOString(),
-        rating: ''
+        rating: null // Utilisation de `null` si aucun rating n'est fourni
       };
 
+      // Affichage des valeurs dans la console pour débogage
+    console.log('Content:', commentToSubmit.content);
+    console.log('Username:', commentToSubmit.username);
+    console.log('Spot ID:', commentToSubmit.spot);
+    console.log('Date:', commentToSubmit.date);
+    console.log('Rating:', commentToSubmit.rating);
+  
       try {
         const response = await axios.post('http://ombelinepinoche-server.eddi.cloud:8443/api/comments', commentToSubmit);
+        console.log(response.data);
         setComments([...comments, response.data]);
         setNewComment('');
         setOpen(false);

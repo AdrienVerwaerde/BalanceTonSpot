@@ -1,25 +1,48 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import './Favoris.css';
 
-/**
- * Component for displaying favorite spots.
- * @param {Array} spots - The array of favorite spots.
- * @returns {JSX.Element} - The rendered component.
- */
-export default function Favoris({ spots }) {
-  // Check if there are no spots or if the spots array is empty
+interface Spot {
+  name: string;
+  image: string;
+  description: string;
+}
+
+export default function Favoris() {
+  const [spots, setSpots] = useState([]);
+
+  useEffect(() => {
+    fetchFavoriteSpots();
+  }, []);
+
+  const fetchFavoriteSpots = async () => {
+    const token = localStorage.getItem('userToken');
+    if (token && token.trim() !== '') {
+      try {
+        const response = await axios.get('http://ombelinepinoche-server.eddi.cloud:8443/api/favorites', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setSpots(response.data);
+      } catch (error) {
+        console.error('Error fetching favorite spots', error);
+      }
+    } else {
+      console.log('No token found or token is invalid');
+    }
+  };
+
   if (!spots || spots.length === 0) {
-    // Render a message indicating that there are no favorite spots
-    return <div className="favorite-spots">Aucun spot en favoris.</div>;
+    return <div className="favorite-spots"><h2>Aucun spot en favoris.</h2></div>;
   }
 
-  // Render the list of favorite spots
   return (
     <main>
       <div className="favorite-spots">
         <h2>BALANCE MES FAVORIS</h2>
         <ul>
-          {spots.map((spot, index) => (
+          {(spots as Spot[]).map((spot, index) => (
             <li key={index} className="spot-item">
               <img src={spot.image} alt={spot.name} className="spot-image" />
               <div className="spot-info">
@@ -32,5 +55,6 @@ export default function Favoris({ spots }) {
       </div>
     </main>
   );
-};
+}
+
 

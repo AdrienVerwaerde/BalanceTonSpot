@@ -38,7 +38,9 @@
 
 .form-group input[type="text"],
 .form-group input[type="email"],
-.form-group input[type="file"] {
+.form-group input[type="file"],
+.form-group input[type="firstname"],
+.form-group input[type="lastname"] {
     width: 100%;
     padding: 8px;
     border: 1px solid #e3e3e3;
