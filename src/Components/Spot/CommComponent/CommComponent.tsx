@@ -21,7 +21,6 @@ export default function CommentSection({ spot }) {
   const [comments, setComments] = useState<Comment[]>([]);
   const [newComment, setNewComment] = useState('');
   
-
   useEffect(() => {
     if (spot?.name) {
       // Formate le nom du spot pour l'URL
@@ -45,7 +44,7 @@ export default function CommentSection({ spot }) {
     if (newComment.trim() !== '') {
       // Assurez-vous que les données nécessaires sont disponibles
       // Par exemple, si `username` et `date` sont stockés dans l'état local ou passés en tant que props
-      const username = "Username"; // Remplacer par la source appropriée
+      const username = "Username 2"; // Remplacer par la source appropriée
       const date = new Date().toISOString(); // Exemple pour générer la date actuelle, ajustez selon vos besoins
       const commentToSubmit = {
         content: newComment.trim(),

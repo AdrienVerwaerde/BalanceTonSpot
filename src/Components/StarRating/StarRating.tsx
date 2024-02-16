@@ -15,13 +15,13 @@ const StarRating: React.FC<StarRatingProps> = ({rating}) => {
 
     const renderStars = (): JSX.Element[] => {
         const stars: JSX.Element[] = [];
-        for (let i = 1; i <= 5; i++) {
+        for (let i = 5; i >= 1; i--) {
             const isFilled = i <= (hover || rating);
             const isPartialFilled = i <= Math.floor(rating) || (i === Math.ceil(rating) && rating % 1 > 0);
             const starClassName = `star ${isFilled ? 'filled' : ''}`;
             const starContent = isPartialFilled ? '★' : '☆';
 
-            stars.push(
+            stars.unshift(
                 <span
                     key={i}
                     className={starClassName}
@@ -56,3 +56,5 @@ const StarRating: React.FC<StarRatingProps> = ({rating}) => {
 };
 
 export default StarRating;
+
+

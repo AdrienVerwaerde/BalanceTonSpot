@@ -3,6 +3,7 @@ import Fade from 'react-bootstrap/Fade';
 import { Link } from 'react-router-dom';
 import './ProfileButton.css'
 import ThemeContext from '../../../contextAPI/themeContext';  
+import axios from 'axios';
 
 export default function ProfileButton() {
   //This function uses useState to toggle the list of options from the button
@@ -13,6 +14,7 @@ export default function ProfileButton() {
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState({ pseudo: '' });
 
   const { theme } = useContext(ThemeContext);
   const listGroupItem = `list-group-item list-group-item-${theme}`;
@@ -32,13 +34,32 @@ export default function ProfileButton() {
 
     document.addEventListener('mousedown', handleClickOutside);
 
+    // Vérifiez si l'utilisateur est connecté et récupérez ses données
     const token = localStorage.getItem('userToken');
-    setIsLoggedIn(!!token);
+    if (token) {
+      setIsLoggedIn(true);
+      fetchUserData(token);
+    }
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
+// Fonction pour récupérer les données utilisateur à partir du token
+const fetchUserData = async (token) => {
+  try {
+    const response = await axios.get(`http://ombelinepinoche-server.eddi.cloud:8443/api/user`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log(response.data)
+    setUser({ pseudo: response.data.pseudo }); // Assurez-vous que la réponse contient un champ pseudo
+  } catch (error) {
+    console.error('Erreur lors de la récupération des données utilisateur', error);
+  }
+};
 
   return (
     <div className='profile-btn-container'>
@@ -47,6 +68,7 @@ export default function ProfileButton() {
         onClick={() => setOpen(!open)}
         className="shadow-none btn btn-primary btn-profile mb-5">
         <img id="button-img" src="https://i.postimg.cc/QCdf9cNS/585e4bf3cb11b227491c339a.png" alt="Profile button"></img>
+        {isLoggedIn && <span>{user.pseudo}</span>}
       </button>
       <div ref={menuRef} style={{ minHeight: '150px' }}>
         <Fade in={open}>

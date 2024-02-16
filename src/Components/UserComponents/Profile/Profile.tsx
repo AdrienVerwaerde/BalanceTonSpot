@@ -1,29 +1,28 @@
 import { useState, useEffect } from 'react';
 import './Profile.css';
 
-//Add a default profile picture
 const defaultProfilePicture = 'https://i.postimg.cc/0jKQyGYc/default-profile.png';
 
 export default function UserProfileDashboard() {
     const [user, setUser] = useState({
-        name: '',
+        pseudo: '',
         email: '',
         profilePicture: '',
     });
 
     useEffect(() => {
         setUser({
-            name: 'Play Doe',
-            email: 'play.doe@example.com',
-            profilePicture: '',
+            pseudo: '{pseudo}',
+            email: '{email}',
+            profilePicture: '{profilePicture}',
         });
     }, []);
 
-    const handleChange = (e: { target: { name: any; value: any; }; }) => {
-        const { name, value } = e.target;
+    const handleChange = (e: { target: { pseudo: any; value: any; }; }) => {
+        const { pseudo, value } = e.target;
         setUser((prevState) => ({
             ...prevState,
-            [name]: value,
+            [pseudo]: value,
         }));
     };
 
@@ -55,17 +54,18 @@ export default function UserProfileDashboard() {
         <main>
             <div className='user-profile-wrapper'>
                 <form className='user-form' onSubmit={handleSubmit}>
-                    <h2>Bonjour, {user.name}</h2>
+                    <h2>Bonjour, {user.pseudo}</h2>
                     <div className="form-group">
-                        <label htmlFor="profilePicture">Image de Profil</label>
-                        <input type="file" id="profilePicture" onChange={handleProfilePictureChange} accept="image/*" />
-                        {user.profilePicture && (
-                            <img src={user.profilePicture || defaultProfilePicture} alt="Profile" style={{ width: '10em', height: '10em', borderRadius: '50%' }} />
+                    <label htmlFor="profilePicture">Image de Profil</label>
+                    {user.profilePicture && (
+                            <img className="profile-dashboard-img" src={user.profilePicture || defaultProfilePicture} alt="Profile" style={{ width: '10em', height: '10em', borderRadius: '50%' }} />
                         )}
+                        
+                        <input type="file" id="profilePicture" onChange={handleProfilePictureChange} accept="image/*" />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="name">Nom</label>
-                        <input type="text" id="name" name="name" value={user.name} onChange={handleChange} />
+                        <label htmlFor="pseudo">Nom</label>
+                        <input type="text" id="pseudo" name="pseudo" value={user.pseudo} onChange={handleChange} />
                     </div>
                     <div className="form-group">
                         <label htmlFor="email">Email</label>

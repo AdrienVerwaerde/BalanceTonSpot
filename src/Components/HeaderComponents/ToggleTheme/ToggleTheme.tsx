@@ -1,12 +1,15 @@
 import './ToggleTheme.css';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import ThemeContext from '../../../contextAPI/themeContext';
 
 export default function ToggleTheme() {
   const { setTheme } = useContext(ThemeContext);
-  const [alignment, setAlignment] = React.useState('skate');
+  const [alignment, setAlignment] = React.useState(() => {
+    // Lire le thème depuis le localStorage ou utiliser 'skate' par défaut
+    return localStorage.getItem('theme') || 'skate';
+  });
 
   const handleChange = (
     _event: React.MouseEvent<HTMLElement>,
@@ -14,8 +17,19 @@ export default function ToggleTheme() {
   ) => {
     if (newAlignment !== null) {
       setAlignment(newAlignment);
+      // Définir le nouveau thème dans le contexte et le localStorage
+      const theme = newAlignment === 'skate' ? 'skateboard' : 'snowboard';
+      setTheme(theme);
+      localStorage.setItem('theme', newAlignment);
     }
   };
+
+  // Utiliser useEffect pour mettre à jour le thème du contexte au chargement du composant
+  useEffect(() => {
+    // Mise à jour du thème basée sur l'état local 'alignment'
+    const theme = alignment === 'skate' ? 'skateboard' : 'snowboard';
+    setTheme(theme);
+  }, []); // Le tableau vide assure que cet effet s'exécute une seule fois, au montage du composant
 
   return (
     <div className="toggle-buttons-container">
