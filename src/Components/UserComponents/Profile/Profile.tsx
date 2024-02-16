@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import './Profile.css';
 
+//Add a default profile picture
+const defaultProfilePicture = 'https://i.postimg.cc/0jKQyGYc/default-profile.png';
+
 export default function UserProfileDashboard() {
     const [user, setUser] = useState({
         name: '',
@@ -12,7 +15,7 @@ export default function UserProfileDashboard() {
         setUser({
             name: 'Play Doe',
             email: 'play.doe@example.com',
-            profilePicture: 'https://via.placeholder.com/150',
+            profilePicture: '',
         });
     }, []);
 
@@ -57,7 +60,7 @@ export default function UserProfileDashboard() {
                         <label htmlFor="profilePicture">Image de Profil</label>
                         <input type="file" id="profilePicture" onChange={handleProfilePictureChange} accept="image/*" />
                         {user.profilePicture && (
-                            <img src={user.profilePicture} alt="Profile" style={{ width: '10em', height: '10em', borderRadius: '50%' }} />
+                            <img src={user.profilePicture || defaultProfilePicture} alt="Profile" style={{ width: '10em', height: '10em', borderRadius: '50%' }} />
                         )}
                     </div>
                     <div className="form-group">

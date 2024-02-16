@@ -7,7 +7,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #214c5c;
+    background-color: #897b68;
 }
 
 .input-signup {
@@ -18,7 +18,7 @@
     padding: 1.5rem 2rem;
     border-radius: 0.2rem;
     background-color: rgb(255, 255, 255);
-    border:#214c5c 1px solid;
+    border:#897b68 1px solid;
     width: 90%;
     display: block;
     transition: all 0.3s;
@@ -26,13 +26,13 @@
 }
 
 .input-signup:focus{
-    outline-color: #214c5c;
+    outline-color: #897b68 ;
 }
 
 .form-container {
     width: 400px;
     text-align: center;
-    color: #214c5c;
+    color: #897b68;
 }
 
 .form-container h1 {
@@ -64,7 +64,6 @@
     transition: all 0.4s;
     cursor: pointer;
     width: 91% !important;
-
 }
 
 .button-signup span {

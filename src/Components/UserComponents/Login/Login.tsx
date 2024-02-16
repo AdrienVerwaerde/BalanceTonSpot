@@ -107,7 +107,7 @@ export default function LoginForm() {
                     {/* Form submission button. */}
                     <div>   
                         <button type="submit" className="button-login" disabled={loading}>
-                            {loading ? "Chargement..." : "Connexion"}
+                            <span>{loading ? "Chargement..." : "Connexion"}</span>
                         </button>
                     </div>
 

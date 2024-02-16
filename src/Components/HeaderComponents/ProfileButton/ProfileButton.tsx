@@ -32,7 +32,7 @@ export default function ProfileButton() {
 
     document.addEventListener('mousedown', handleClickOutside);
 
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('userToken');
     setIsLoggedIn(!!token);
 
     return () => {
