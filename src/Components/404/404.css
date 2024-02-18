@@ -1,0 +1,38 @@
+/*PAGE 404 STYLE*/
+
+
+.page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+}
+
+.not-found-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  padding: 3em;
+  border: #e3e3e3 1px solid;
+  border-radius: 0.5em;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  
+}
+
+.error-404-button {
+    transition: 0.2s ease-in-out;
+    color: white;
+    background-color: #897b68;
+    border-radius: 0.5em;
+    border-color: transparent;
+    padding: 1em;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+.error-404-button:hover {
+    background-color: #333;
+  }

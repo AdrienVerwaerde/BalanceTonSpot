@@ -18,6 +18,7 @@ import "semantic-ui-css/semantic.min.css";
 
 // Import of react-router-dom components to create our Router
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import NotFoundPage from "./Components/404/404.tsx";
 
 const spots = [
   {
@@ -102,6 +103,11 @@ const router = createBrowserRouter([
   {
     path: "our-team",
     element: <AboutUs />,
+  },
+  //Adding route for 404 page
+  {
+    path: "*",
+    element: <NotFoundPage />,
   },
 ]);
 
