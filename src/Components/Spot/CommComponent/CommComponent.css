@@ -71,7 +71,7 @@
 }
 
 .comments-text-input {
-  height: 26em;
+  height: 20em;
   width: 100%;
   resize: none;
   border: #897b68 1px solid;
@@ -88,6 +88,30 @@
 #comments-submit-title {
   color: #897b68;
   margin-bottom: 0.5em;
+}
+
+/*RATING*/
+
+.notation {
+  width: 100%;
+  resize: none;
+  border: #897b68 1px solid;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-radius: 0.5em;
+  padding: 0.5em;
+  margin-right: 32.2em;
+}
+
+.notation:focus {
+  outline: none !important;
+  border: #897b68 1px solid;
+}
+
+#notation-title {
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  color: #897b68;
 }
 
 /*BUTTONS*/
