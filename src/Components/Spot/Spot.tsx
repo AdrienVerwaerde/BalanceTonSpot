@@ -18,11 +18,17 @@ interface spot {
   rating: number;
 }
 
+interface Picture {
+  id: number;
+  url: string;
+}
+
 /**
  * Component that displays details of a spot.
  */
 export default function Spot() {
   const [spot, setSpot] = useState<spot | null>(null);
+  const [pictures, setPictures] = useState<Picture[]>([]);
   const [error, setError] = useState('');
 
   // Extract the 'name' parameter from the URL
@@ -47,6 +53,25 @@ export default function Spot() {
     fetchSpotDetails();
   }, [name]); // Add 'name' as a dependency for useEffect
 
+  useEffect(() => {
+    // Fetches the pictures for the spot from the server.
+    const fetchSpotPictures = async () => {
+      if (name) {
+        try {
+          const formattedSpotName = name.toLowerCase().replace(/\s/g, "-");
+          const response = await axios.get(`http://ombelinepinoche-server.eddi.cloud:8443/api/spot/${formattedSpotName}/pictures`);
+          setPictures(response.data);
+        } catch (err) {
+          // Handle error, maybe set an error message if needed
+          console.error("Error fetching pictures:", err);
+        }
+      }
+    };
+
+    fetchSpotPictures();
+  }, [name]);
+
+
   if (error) {
     return <p className='no-result'>{error}</p>;
   }
@@ -58,25 +83,13 @@ export default function Spot() {
 
         {/*CARROUSEL*/}
         <Carousel fade>
-          <Carousel.Item>
-            <img src={spot?.picture} alt="First slide" />
-            <Carousel.Caption>
-              <h3>CECI</h3>
-            </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item>
-            <img src={spot?.picture} alt="First slide" />
-            <Carousel.Caption>
-              <h3>EST UN TRÈS BEAU</h3>
-            </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item>
-            <img src={spot?.picture} alt="First slide" />
-            <Carousel.Caption>
-              <h3>SLIDER</h3>
-            </Carousel.Caption>
-          </Carousel.Item>
+        {pictures.map((picture, index) => (
+            <Carousel.Item key={index}>
+              <img src={picture.path} alt={`Slide ${index + 1}`} />
+            </Carousel.Item>
+          ))}
         </Carousel>
+
         <div id="ratings">
           <StarRating rating={spot?.rating || 0} id={0} />
           <p>({spot?.rating})</p>

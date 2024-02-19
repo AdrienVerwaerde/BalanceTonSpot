@@ -14,8 +14,8 @@ interface Comment {
   username: string;
   spot: number;
   content: string;
-  picture: string;
   date: string;
+  user: {pseudo: string, profilpicture: string};
 }
 
 // Définition de l'interface pour les props
@@ -33,12 +33,11 @@ interface User {
 
 const API_BASE_URL = "http://ombelinepinoche-server.eddi.cloud:8443/api";
 const USER_ENDPOINT = `${API_BASE_URL}/user`;
-const COMMENTS_ENDPOINT = `${API_BASE_URL}/comments`;
 
 export default function CommentSection({ spot }: SpotProps) {
   const [comments, setComments] = useState<Comment[]>([]);
   const [newComment, setNewComment] = useState('');
-  const [user, setUser] = useState<User>({});
+  const [me, setMe] = useState<User>({});
   const [open, setOpen] = useState(false);
   const [rating, setRating] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -51,7 +50,7 @@ export default function CommentSection({ spot }: SpotProps) {
           const response = await axios.get(USER_ENDPOINT, {
             headers: { Authorization: `Bearer ${token}` },
           });
-          setUser({ pseudo: response.data.pseudo });
+          setMe({ pseudo: response.data.pseudo });
         } catch (error) {
           console.error('Error fetching user data', error);
           setError("Erreur lors de la récupération des données utilisateur.");
@@ -88,16 +87,14 @@ export default function CommentSection({ spot }: SpotProps) {
     setRating(value === "" ? null : Number(value));
   };
 
-  const handleCommentSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    if (newComment.trim() !== '' && user.pseudo) {
+  const handleCommentSubmit = async () => {
+    if (newComment.trim() !== '' && me.pseudo) {
       const commentToSubmit = {
         content: newComment.trim(),
-        username: user.pseudo,
+        username: me.pseudo,
         spot: spot.name,
         date: new Date().toISOString(),
-        rating: rating || null,
+        rating: rating,
       };
 
       // Affichage des valeurs dans la console pour débogage
@@ -109,7 +106,8 @@ export default function CommentSection({ spot }: SpotProps) {
 
       try {
         const token = localStorage.getItem('userToken');
-        const response = await axios.post(`${COMMENTS_ENDPOINT}`, commentToSubmit, {
+        const formattedSpotName = spot.name.toLowerCase().replace(/\s/g, "-");
+        const response = await axios.post(`${API_BASE_URL}/spot/${formattedSpotName}/comments`, commentToSubmit, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -190,8 +188,8 @@ export default function CommentSection({ spot }: SpotProps) {
       <ul className="comments-list">
         {comments.map((comment) => (
           <li key={comment.id}>
-            <img src={comment.picture} alt={comment.username} className="user-image" />
-            <h3>{comment.username}</h3>
+            <img src={comment.user.profilpicture} alt={comment.user.pseudo} className="user-image" />
+            <h3>{comment.user.pseudo}</h3>
             <p>{comment.content}</p>
             <p>{comment.date}</p>
           </li>

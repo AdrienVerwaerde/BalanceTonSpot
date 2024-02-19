@@ -12,15 +12,7 @@
   width: 90% !important;
 }
 
-
-/* SURPRISE */
-
-@keyframes shimmer {
-  0% { box-shadow: 0 0 5px #fff; }
-  50% { box-shadow: 0 0 10px #ff0; }
-  100% { box-shadow: 0 0 5px #fff; }
-}
-
-.button-fav.shimmer-effect {
-  animation: shimmer 0.5s ease-out;
+.button-fav img.shimmer-effect {
+    animation-name: pulse; 
+    animation-duration: 0.3s; 
 }

@@ -9,10 +9,14 @@ export default function SpotCard({ spot }) {
             <img src={spot.picture} alt={spot.name} id="spotslist-image" />
 
             <div className="spotslist-content">
+
+                <div id="ratings">
                 <StarRating
                     id={spot.id}
                     rating={spot.rating || 0} // Utilisez la note du spot ou 0 si non défini
                 />
+                <p>({spot.rating})</p>
+                </div>
 
                 {/* BUTTON FAVS */}
                 <FavoriteButton spotId={spot.id} />

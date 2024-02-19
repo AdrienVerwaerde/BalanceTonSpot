@@ -2,7 +2,7 @@
 
 #spotslist {
   width: 30em;
-  background: white;
+  background: rgb(255, 255, 255);
   border: 1px solid #e3e3e3;
   border-radius: 5px;
   overflow: hidden;
