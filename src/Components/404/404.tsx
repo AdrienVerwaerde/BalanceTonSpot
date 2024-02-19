@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './404.css';
+import { Link } from 'react-router-dom';
+import { ImCross } from 'react-icons/im';
 
 export default function NotFoundPage() {
 
@@ -48,9 +50,8 @@ export default function NotFoundPage() {
         <img src={images[currentImage].url} alt={images[currentImage].title} />
         <h2>{images[currentImage].title}</h2>
         <button className="error-404-button" onClick={nextImage}>Autre Variante de "404" Hilarante </button>
+        <Link to="/"><button className="close-button-404"><ImCross />Retour à l'Accueil</button></Link>
       </div>
     </div>
   );
 };
-
-

@@ -71,6 +71,10 @@ const router = createBrowserRouter([
         path: "contact",
         //element: <Admin />,
       },
+      {
+        path: "our-team",
+        element: <AboutUs />,
+      },
     ],
   },
   // 2. Adding routes on login, signup
@@ -100,10 +104,6 @@ const router = createBrowserRouter([
     ],
   },
 
-  {
-    path: "our-team",
-    element: <AboutUs />,
-  },
   //Adding route for 404 page
   {
     path: "*",

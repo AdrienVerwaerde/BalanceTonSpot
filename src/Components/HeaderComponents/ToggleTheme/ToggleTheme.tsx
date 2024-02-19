@@ -41,11 +41,11 @@ export default function ToggleTheme() {
         onChange={handleChange}
         aria-label="Platform"
       >
-        <ToggleButton
+        <ToggleButton disableRipple
           className="toggle-button-snow"
           value="snow"
           onClick={() => setTheme('snowboard')}><img src="https://i.postimg.cc/cJMjjDVX/bouton-snow.png" id="image-button-snow" alt="Snow Thème"></img>SNOWBOARD</ToggleButton>
-        <ToggleButton
+        <ToggleButton disableRipple
           className="toggle-button-skate"
           value="skate"
           onClick={() => setTheme('skateboard')}><img src="https://i.postimg.cc/XNkr7zqf/bouton-skate.png" id="image-button-skate" alt="Skate Thème"></img>SKATEBOARD</ToggleButton>

@@ -22,6 +22,8 @@
   
 }
 
+/*BUTTONS*/
+
 .error-404-button {
     transition: 0.2s ease-in-out;
     color: white;
@@ -36,3 +38,22 @@
 .error-404-button:hover {
     background-color: #333;
   }
+
+
+.close-button-404 {
+    display: flex;
+    justify-content: center;
+    background-color: transparent;
+    border: none;
+    color: #897b68;
+    width: 100%;
+    align-self: left;
+    margin-top: 1em;
+    font-weight: bold;
+    font-size: medium;
+
+}
+
+.close-button-404 svg {
+  margin-right: 0.5em;
+}

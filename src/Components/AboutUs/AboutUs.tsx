@@ -36,8 +36,6 @@ export default function AboutUs() {
     ];
 
     return (
-        <div className='team-container'>
-        <Header />
         <div className="team-presentation">
             <h2>Notre Équipe</h2>
             <div className="members">
@@ -51,8 +49,6 @@ export default function AboutUs() {
                     </div>
                 ))}
             </div>
-        </div>
-        <Footer />
         </div>
     );
 }
