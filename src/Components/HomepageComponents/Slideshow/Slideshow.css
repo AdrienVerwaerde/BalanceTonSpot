@@ -88,6 +88,10 @@
   max-width: 100%;
 }
 
+#spotlight-text {
+  text-align: left !important;
+}
+
 #spotlight p{
   padding-top: 1em;
   text-align: right;

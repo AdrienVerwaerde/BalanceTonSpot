@@ -1,0 +1,26 @@
+/* Styles for favorite button */
+.button-fav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border:none;
+  padding: 0px;
+}
+
+.button-fav img{
+  width: 90% !important;
+}
+
+
+/* SURPRISE */
+
+@keyframes shimmer {
+  0% { box-shadow: 0 0 5px #fff; }
+  50% { box-shadow: 0 0 10px #ff0; }
+  100% { box-shadow: 0 0 5px #fff; }
+}
+
+.button-fav.shimmer-effect {
+  animation: shimmer 0.5s ease-out;
+}

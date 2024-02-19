@@ -1,0 +1,96 @@
+/* STYLES FOR EACH SPOT CARD*/
+
+#spotslist {
+  width: 30em;
+  background: white;
+  border: 1px solid #e3e3e3;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#spotslist-container h2 {
+  background: #e3e3e3;
+  margin: 0;
+  padding: 10px;
+  font-size: 1.2em;
+  color: #000000;
+}
+
+#spotslist-description {
+  margin-top: 0.5em;
+}
+
+#spotslist-description,
+#spotslist-address {
+  padding-right: 1em;
+}
+
+#spotslist-address {
+  max-width: 60%;
+  margin-bottom: 0em;
+  padding: 0em;
+}
+
+#spotslist-address img {
+  width: 1.2em;
+}
+
+/* Images styles */
+
+#spotslist-image {
+  width: 100%;
+  display: block;
+  aspect-ratio: 1.5/1;
+}
+
+#spotslist-pin {
+  width: 5%;
+}
+
+/* Styles for favorite button */
+#spotslist-button-fav {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border:none;
+}
+
+
+#spotslist-container button img {
+  display: block;
+  width: 100%;
+}
+
+/* Button styles */
+
+#spotslist-button-detail {
+  transition: 0.2s ease-in-out;
+  color: white;
+  background-color: #897b68;
+  border-radius: 0.5em;
+  border-color: transparent;
+  padding: 1em;
+}
+
+#spotslist-button-detail:hover {
+  background-color: #e3e3e3;
+}
+
+/* Styles for filter boxes */
+
+.filter-boxes-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+#filter-box {
+  width: 8em;
+  height: 2em;
+  border: #e3e3e3 1px solid;
+  border-radius: 0.5em;
+  background-color: white;
+  margin: 0em 0.5em 1em 0;
+}

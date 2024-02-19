@@ -1,11 +1,15 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Favoris.css';
+import SpotCard from '../../SpotsList/SpotCard/SpotCard';
 
 interface Spot {
+  id: number;
   name: string;
-  image: string;
+  picture: string;
   description: string;
+  address: string;
+  rating: number;
 }
 
 export default function Favoris() {
@@ -34,24 +38,17 @@ export default function Favoris() {
   };
 
   if (!spots || spots.length === 0) {
-    return <div className="favorite-spots"><h2>Aucun spot en favoris.</h2></div>;
+    return <div className="fav-none-title"><h2>Aucun spot en favoris.</h2></div>;
   }
 
   return (
     <main>
-      <div className="favorite-spots">
-        <h2>BALANCE MES FAVORIS</h2>
-        <ul>
-          {(spots as Spot[]).map((spot, index) => (
-            <li key={index} className="spot-item">
-              <img src={spot.image} alt={spot.name} className="spot-image" />
-              <div className="spot-info">
-                <h3>{spot.name}</h3>
-                <p>{spot.description}</p>
-              </div>
-            </li>
+      <div className="favs-container">
+        <h1 id="fav-title">BALANCE MES FAVORIS</h1>
+          {/* CARD SPOT */}
+          {(spots as Spot[]).map((spot) => (
+            <SpotCard key={spot.id} spot={spot} />
           ))}
-        </ul>
       </div>
     </main>
   );

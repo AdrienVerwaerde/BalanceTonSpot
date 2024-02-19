@@ -6,7 +6,7 @@ import StarRating from '../StarRating/StarRating';
 import Carousel from 'react-bootstrap/Carousel';
 
 import CommComponent from './CommComponent/CommComponent';
-
+import FavoriteButton from '../FavButton/FavButton';
 
 // Interface TS for spot
 interface spot {
@@ -23,20 +23,7 @@ interface spot {
  */
 export default function Spot() {
   const [spot, setSpot] = useState<spot | null>(null);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [isFavorite, setIsFavorite] = useState<{ [key: number]: boolean }>({});
-
-  /**
-    * Handler function to toggle the favorite status of a spot.
-    * @param spotId - The ID of the spot.
-    */
-  const handleFavoriteToggle = (spotId: number) => {
-    setIsFavorite((prevIsFavorite) => ({
-      ...prevIsFavorite,
-      [spotId]: !prevIsFavorite[spotId],
-    }));
-  };
 
   // Extract the 'name' parameter from the URL
   const { name } = useParams<{ name: string }>();
@@ -51,27 +38,14 @@ export default function Spot() {
           const formattedSpotName = name.toLowerCase().replace(/\s/g, "-");
           const response = await axios.get(`http://ombelinepinoche-server.eddi.cloud:8443/api/spot/${formattedSpotName}`);
           setSpot(response.data);
-          setLoading(false);
         } catch (err) {
           setError('404');
-          setLoading(false);
         }
       }
     };
 
     fetchSpotDetails();
   }, [name]); // Add 'name' as a dependency for useEffect
-
-  // if (loading) {
-  //   return (
-  //     <div className="loader-container">
-  //       <img src="https://i.postimg.cc/fLvdb7fR/bouton-skate-color-2.png"
-  //         alt="loader"
-  //         className="loader-img" />
-  //       <p id="loader-message">Recherche des spots...</p>
-  //     </div>
-  //   );
-  // }
 
   if (error) {
     return <p className='no-result'>{error}</p>;
@@ -107,17 +81,8 @@ export default function Spot() {
           <StarRating rating={spot?.rating || 0} id={0} />
           <p>({spot?.rating})</p>
         </div>
-        <button
-          onClick={() => handleFavoriteToggle(spot?.id ?? 0)}
-          id="spotslist-button-fav"
-          aria-label="toggle favorite"
-        >
-          {isFavorite[spot?.id ?? 0] ? (
-            <img src="https://i.postimg.cc/BQgtKhT4/heart-solid-24-1.png"></img>
-          ) : (
-            <img src="https://i.postimg.cc/bY1ZzYdG/heart-regular-24-2.png"></img>
-          )}
-        </button>
+
+        <FavoriteButton spotId={spot?.id} />
 
         <p id="spot-details-description">{spot?.description}</p>
         <p id="spot-details-address"><img src="https://i.postimg.cc/P5YNtVhs/pin-solid-24.png"></img>{spot?.address}</p>

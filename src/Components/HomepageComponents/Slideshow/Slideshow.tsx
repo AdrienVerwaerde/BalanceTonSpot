@@ -25,9 +25,13 @@ export default function Slideshow() {
 
   useEffect(() => {
     const fetchSpots = async () => {
+      if (!theme) { // Vérifie si le thème est défini et non vide
+        console.log("Pilule Bleu ou Pilule Rouge ?");
+        return; 
+      }
+
       try {
-        const sportType = theme === 'snowboard' ? 'snowboard' : 'skateboard';
-        const response = await axios.get(`http://ombelinepinoche-server.eddi.cloud:8443/api/sport/${sportType}/spots`);
+        const response = await axios.get(`http://ombelinepinoche-server.eddi.cloud:8443/api/sport/${theme}/spots`);
         setSpots(response.data.slice(0, 3));
       } catch (error) {
         console.error("Erreur lors de la récupération des spots:", error);
@@ -59,12 +63,12 @@ export default function Slideshow() {
     <div className="slideshow" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <div className="slideshowSlider" style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}>
         {spots.map((spot: spot, idx: number) => (
-          <div className="slide" key={idx} onClick={() => {
+          <div className="slide" key={idx}>
+            <div id="spotlight"  onClick={() => {
             window.location.href = `/spot/${spot.name.toLowerCase().replace(/\s+/g, '-')}`;
           }}>
-            <div id="spotlight">
               <h2>SPOTLIGHT : {spot.name}</h2>
-              <text id="spotlight-text">{spot.description.length > 150 ? `${spot.description.slice(0, 150)}...` : spot.description}</text>
+              <p id="spotlight-text">{spot.description.length > 150 ? `${spot.description.slice(0, 150)}...` : spot.description}</p>
               <p>Découvrir {'>>'}</p>
             </div>
             <img id="slideshow-img" src={spot.picture} alt="" />

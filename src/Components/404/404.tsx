@@ -30,6 +30,7 @@ export default function NotFoundPage() {
       url: 'https://i.postimg.cc/9QvfM799/pun6.png',
       title: "Carte sans Castres.",
     },
+    
   ];
 
   const [currentImage, setCurrentImage] = useState(0);
