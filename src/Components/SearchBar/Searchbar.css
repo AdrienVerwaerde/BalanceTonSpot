@@ -29,6 +29,38 @@
 }
 
 
+/* LOADER */
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+#loader-message {
+  margin-top: 1em;
+  color: #897b68;
+  font-weight: bold;
+}
+
+/* LOADER ANIMATION */
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+  
+.loader-img {
+  animation: rotate 1s linear infinite;
+  width: 3em;
+}
+
+
 /* Media Queries */
 
 @media screen and (max-width: 768px) {

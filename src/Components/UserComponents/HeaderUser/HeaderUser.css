@@ -27,3 +27,17 @@
 .header-user-link:hover {
   color: rgb(217, 217, 217);
 }
+
+/* HAMBRUGER MENU */
+
+.navbar-toggler.collapsed {
+  border: #ffffff 2px solid;
+}
+
+.navbar-toggler-icon {
+  color: #ffffff;
+}
+
+.navbar-light .navbar-toggler-icon {
+  background-image: url(https://i.postimg.cc/Ghv5wQKc/menu-regular-24.png);
+}

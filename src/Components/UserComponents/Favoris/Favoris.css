@@ -1,6 +1,7 @@
 /*FAVORITES*/
 
 .favs-container {
+    transition: all ease-in-out 0.5s;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;

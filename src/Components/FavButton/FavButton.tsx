@@ -3,27 +3,32 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './FavButton.css';
 
-// FavoriteButton component definition
-export default function FavoriteButton({ spotId }) {
+// Define props type for FavoriteButton component
+interface FavoriteButtonProps {
+    spotId: number; // Type of spotId is string
+    onToggle: () => void; // onToggle is a function that doesn't take any arguments and doesn't return anything
+}
+
+// FavoriteButton component definition with props typed according to the interface
+export default function FavoriteButton({ spotId, onToggle }: FavoriteButtonProps) {
     // State to manage favorite status
-    const [isFavorite, setIsFavorite] = useState(false);
+    const [isFavorite, setIsFavorite] = useState<boolean>(false);
+    // State to manage animation
+    const [animate, setAnimate] = useState<boolean>(false);
     // Retrieve the user token from local storage
     const token = localStorage.getItem('userToken');
 
-    // Ajout d'un état pour gérer l'animation
-    const [animate, setAnimate] = useState(false);
-
-    // Effet pour gérer l'application/la suppression de l'animation
+    // Effect for handling the addition/removal of animation
     useEffect(() => {
         if (animate) {
-            // Réinitialise l'état d'animation après que l'animation est terminée
+            // Reset animation state after the animation is finished
             const timer = setTimeout(() => {
                 setAnimate(false);
-            }, 300); // La durée doit correspondre à celle de l'animation CSS
+            }, 300); // Duration should match CSS animation duration
 
             return () => clearTimeout(timer);
         }
-    }, [animate]);
+    }, [animate]); // Dependency array to re-run the effect when animate changes
 
     // Effect hook to check favorite status on component mount and when spotId or token changes
     useEffect(() => {
@@ -36,7 +41,7 @@ export default function FavoriteButton({ spotId }) {
                     });
                     const favorites = response.data;
                     // Set the isFavorite state based on if the current spot is in the favorites list
-                    setIsFavorite(favorites.some(fav => fav.id === spotId));
+                    setIsFavorite(favorites.some((fav: { id: number }) => fav.id === spotId));
                 } catch (err) {
                     console.error('Error fetching favorite status:', err);
                 }
@@ -52,9 +57,6 @@ export default function FavoriteButton({ spotId }) {
             return;
         }
         try {
-            // Toggle the isFavorite state immediately
-            setIsFavorite(!isFavorite);
-
             if (isFavorite) {
                 // If the spot is already a favorite, remove it from favorites
                 await axios.delete(`http://ombelinepinoche-server.eddi.cloud:8443/api/favorites/${spotId}`, {
@@ -66,9 +68,10 @@ export default function FavoriteButton({ spotId }) {
                     headers: { Authorization: `Bearer ${token}` },
                 });
             }
-            // Toggle the isFavorite state
+            // Update favorite status and trigger animation
             setIsFavorite(!isFavorite);
             setAnimate(true);
+            onToggle();
         } catch (error) {
             console.error('Error updating favorite status:', error);
         }
@@ -85,3 +88,4 @@ export default function FavoriteButton({ spotId }) {
         </button>
     );
 };
+

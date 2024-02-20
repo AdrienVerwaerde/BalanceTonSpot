@@ -84,13 +84,12 @@ export default function UserProfileDashboard() {
                     formData.append('profilePicture', user.profilePicture);
                 }
 
-                await axios.patch(`http://ombelinepinoche-server.eddi.cloud:8443/api/user`, formData, {
+                await axios.put(`http://ombelinepinoche-server.eddi.cloud:8443/api/user`, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         Authorization: `Bearer ${token}`,
                     },
                 });
-
                 alert('Profile updated successfully!');
             } catch (error) {
                 console.error('Error updating profile', error);
@@ -110,7 +109,7 @@ export default function UserProfileDashboard() {
                         <input type="file" id="profilePicture" onChange={handleProfilePictureChange} accept="image/*" />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="pseudo">Nom</label>
+                        <label htmlFor="pseudo">Nom affiché</label>
                         <input type="text" id="pseudo" name="pseudo" value={user.pseudo} onChange={handleChange} />
                     </div>
                     <div className="form-group">
