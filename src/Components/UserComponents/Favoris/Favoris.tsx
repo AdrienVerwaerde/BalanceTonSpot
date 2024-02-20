@@ -52,7 +52,7 @@ export default function Favoris() {
     return (
         <main>
             <div className="favs-container">
-                <h1 id="fav-title">MES FAVORIS</h1>
+                <h1 id="fav-title">SPOTS FAVORIS</h1>
                 {spots.map((spot) => (
                     <SpotCard key={spot.id} spot={spot} onFavoriteToggle={fetchFavoriteSpots} />
                 ))}

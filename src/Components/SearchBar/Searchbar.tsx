@@ -4,6 +4,7 @@ import { Input, Icon } from "semantic-ui-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./Searchbar.css";
 import SearchButtons from "./SearchButtons/SearchButtons";
+import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 
 import SearchContext from '../../contextAPI/searchContext';
 
@@ -63,12 +64,14 @@ export default function Searchbar() {
     }
   };
 
-  // Nouvelle fonction pour récupérer tous les spots
+  /**
+   * New function to fetch all the spots
+   */
   const fetchAllSpots = async () => {
     try {
       setIsLoading(true);
       setError('');
-      const response = await axios.get(`${API_BASE_URL}/spots`); // Ajustez selon votre endpoint
+      const response = await axios.get(`${API_BASE_URL}/spots`);
       setSpots(response.data);
     } catch (error) {
       console.error('Error fetching all spots:', error);
@@ -80,7 +83,7 @@ export default function Searchbar() {
 
   const searchSpots = async (name: string) => {
     if (!name.trim()) {
-      fetchAllSpots(); // Appelle fetchAllSpots si la recherche est vide
+      fetchAllSpots(); // Calls fetchAllSpots if search is empty
       return;
     }
 

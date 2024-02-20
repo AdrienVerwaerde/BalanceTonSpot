@@ -2,15 +2,13 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Profile.css';
 
-const defaultProfilePicture = 'https://i.postimg.cc/0jKQyGYc/default-profile.png';
-
 export default function UserProfileDashboard() {
     const [user, setUser] = useState({
         pseudo: '',
         email: '',
         firstname: '',
         lastname: '', 
-        profilePicture: defaultProfilePicture,
+        profilPicture: ''
     });
 
     useEffect(() => {
@@ -32,7 +30,7 @@ export default function UserProfileDashboard() {
                     email: response.data.email,
                     firstname: response.data.firstname || '',
                     lastname: response.data.lastname || '', 
-                    profilePicture: response.data.profilpicture || defaultProfilePicture,
+                    profilPicture: response.data.profilpicture,
                 });
             } catch (error) {
                 console.error('Error fetching user data', error);
@@ -52,6 +50,8 @@ export default function UserProfileDashboard() {
     };
 
     // Handle profile picture change
+    const defaultProfilePicture = ''; // Define defaultProfilePicture variable
+
     const handleProfilePictureChange = (e) => {
         const file = e.target.files[0];
         if (file && file.type.startsWith('image/')) {
@@ -59,7 +59,7 @@ export default function UserProfileDashboard() {
             reader.onloadend = () => {
                 setUser(prevState => ({
                     ...prevState,
-                    profilePicture: reader.result ? reader.result.toString() : defaultProfilePicture,
+                    profilPicture: reader.result ? reader.result.toString() : defaultProfilePicture,
                 }));
             };
             reader.readAsDataURL(file);
@@ -80,13 +80,13 @@ export default function UserProfileDashboard() {
                 formData.append('firstname', user.firstname);
                 formData.append('lastname', user.lastname);
 
-                if (user.profilePicture.startsWith('data:image')) {
-                    formData.append('profilePicture', user.profilePicture);
+                if (user.profilPicture.startsWith('data:image')) {
+                    formData.append('profilPicture', user.profilPicture);
                 }
 
                 await axios.put(`http://ombelinepinoche-server.eddi.cloud:8443/api/user`, formData, {
                     headers: {
-                        'Content-Type': 'multipart/form-data',
+                        'Content-Type': 'application/json',
                         Authorization: `Bearer ${token}`,
                     },
                 });
@@ -105,8 +105,8 @@ export default function UserProfileDashboard() {
                     <h2>Bonjour, {user.pseudo}</h2>
                     <div className="form-group">
                         <label htmlFor="profilePicture">Image de Profil</label>
-                        <img className="profile-dashboard-img" src={user.profilePicture} alt="Profile" style={{ width: '10em', height: '10em', borderRadius: '50%' }} />
-                        <input type="file" id="profilePicture" onChange={handleProfilePictureChange} accept="image/*" />
+                        <img className="profile-dashboard-img" src={user.profilPicture} alt="Profilpicture" style={{ width: '10em', height: '10em', borderRadius: '50%' }} />
+                        <input type="file" id="profilPicture" onChange={handleProfilePictureChange} accept="image/*" />
                     </div>
                     <div className="form-group">
                         <label htmlFor="pseudo">Nom affiché</label>
