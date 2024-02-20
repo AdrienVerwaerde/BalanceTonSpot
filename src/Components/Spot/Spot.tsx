@@ -42,7 +42,7 @@ export default function SpotDetail() {
           const response = await axios.get<Spot>(`http://ombelinepinoche-server.eddi.cloud:8443/api/spot/${formattedSpotName}`);
           setSpot(response.data);
         } catch (err) {
-          setError('Spot not found.'); // More user-friendly error message
+          setError(' '); // More user-friendly error message
         }
       }
     };

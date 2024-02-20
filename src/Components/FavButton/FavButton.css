@@ -11,8 +11,3 @@
 .button-fav img {
   width: 90% !important;
 }
-
-.button-fav img.shimmer-effect {
-    animation-name: pulse; 
-    animation-duration: 0.3s; 
-}

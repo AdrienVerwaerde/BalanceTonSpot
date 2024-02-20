@@ -8,7 +8,7 @@ import Fade from "@mui/material/Fade";
 import Button from "@mui/material/Button";
 import StarRating from "../../StarRating/StarRating";
 
-// Définition de l'interface pour le commentaire
+// Definition of the Comment interface
 interface Comment {
   rating: number;
   id: number;
@@ -20,7 +20,7 @@ interface Comment {
   user: { pseudo: string; profilpicture: string };
 }
 
-// Définition de l'interface pour les props
+// Definition of the Props interface
 interface SpotProps {
   spot: {
     id: number;
@@ -36,6 +36,7 @@ export default function CommentSection({ spot }: SpotProps) {
   const [open, setOpen] = useState(false);
   const [rating, setRating] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [visibleComments, setVisibleComments] = useState(5); // Base number of visible comments
 
   useEffect(() => {
     const fetchComments = async () => {
@@ -60,7 +61,9 @@ export default function CommentSection({ spot }: SpotProps) {
     fetchComments();
   }, [spot]);
 
-  // Fonction pour formater la date
+  /**
+   * Function to display date in the desired format
+   */
   const formatDate = (dateString: string | number | Date) => {
     const date = new Date(dateString);
     const day = date.getDate().toString().padStart(2, "0");
@@ -126,6 +129,10 @@ export default function CommentSection({ spot }: SpotProps) {
     setRating(null);
   };
 
+  const loadMoreComments = () => {
+    setVisibleComments((prev) => prev + 5); // Adds 5 more comments to display
+  };
+
   console.log(comments.map((comment) => comment.user.profilpicture));
   return (
     <div className="comments-container">
@@ -161,7 +168,8 @@ export default function CommentSection({ spot }: SpotProps) {
                 />
 
                 {/* Notation of the spot */}
-                <h3 id="notation-title">Balance Ta Note (facultatif) :</h3>
+                <div className="notation-container">
+                <h3 id="notation-title">Balance Ta Note :</h3>
                 <select
                   className="notation"
                   value={rating === null ? "" : rating.toString()}
@@ -176,6 +184,7 @@ export default function CommentSection({ spot }: SpotProps) {
                     </option>
                   ))}
                 </select>
+                </div>
 
                 {/* Cancel & Submit*/}
                 <button
@@ -202,7 +211,7 @@ export default function CommentSection({ spot }: SpotProps) {
         </Modal>
       </div>
       <ul className="comments-list">
-        {comments.map((comment) => (
+      {comments.slice(0, visibleComments).map((comment) => (
           <li key={comment.id}>
             <div className="comments-user-block">
               <img
@@ -220,6 +229,9 @@ export default function CommentSection({ spot }: SpotProps) {
           </li>
         ))}
       </ul>
+      {comments.length > visibleComments && (
+        <button className="comments-load-button" onClick={loadMoreComments}>Charger plus de commentaires</button>
+      )}
     </div>
   );
 }
