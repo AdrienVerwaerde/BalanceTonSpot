@@ -16,7 +16,7 @@ export default function ProfileButton() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState({ pseudo: '' });
 
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext) || {};
   const listGroupItem = `list-group-item list-group-item-${theme}`;
 
   useEffect(() => {
@@ -47,7 +47,7 @@ export default function ProfileButton() {
   }, []);
 
 // Fonction pour récupérer les données utilisateur à partir du token
-const fetchUserData = async (token) => {
+const fetchUserData = async (token: string) => {
   try {
     const response = await axios.get(`http://ombelinepinoche-server.eddi.cloud:8443/api/user`, {
       headers: {

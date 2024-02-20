@@ -1,5 +1,3 @@
-import Header from '../HeaderComponents/Header/Header';
-import Footer from '../Footer/Footer';
 import './AboutUs.css';
 
 export default function AboutUs() {

@@ -7,7 +7,7 @@ import ThemeContext from '../../../contextAPI/themeContext';
 
 export default function Header() {
 
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext) || { theme: 'default' };
   const headerClassName = `header header-${theme}`;
 
   return (

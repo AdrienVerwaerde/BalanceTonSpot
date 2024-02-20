@@ -41,19 +41,19 @@ export default function UserProfileDashboard() {
     };
 
     // Handle form input changes
-    const handleChange = (e) => {
+    const handleChange = (e: { target: { name: unknown; value: unknown; }; }) => {
         const { name, value } = e.target;
         setUser(prevState => ({
             ...prevState,
-            [name]: value,
+            [name as string]: value,
         }));
     };
 
     // Handle profile picture change
     const defaultProfilePicture = ''; // Define defaultProfilePicture variable
 
-    const handleProfilePictureChange = (e) => {
-        const file = e.target.files[0];
+    const handleProfilePictureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files && e.target.files[0];
         if (file && file.type.startsWith('image/')) {
             const reader = new FileReader();
             reader.onloadend = () => {
@@ -69,7 +69,7 @@ export default function UserProfileDashboard() {
     };
 
     // Handle form submission
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         const token = localStorage.getItem('userToken');
         if (token) {

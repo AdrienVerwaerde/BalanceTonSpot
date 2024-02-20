@@ -1,6 +1,11 @@
 // ThemeContext.js
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 
-const ThemeContext = React.createContext([]);
+interface ThemeContextType {
+    theme: string;
+    setTheme: Dispatch<SetStateAction<string>>;
+}
+
+const ThemeContext = React.createContext<ThemeContextType | undefined>(undefined);
 
 export default ThemeContext;

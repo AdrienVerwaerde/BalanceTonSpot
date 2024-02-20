@@ -4,14 +4,13 @@ import { Input, Icon } from "semantic-ui-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./Searchbar.css";
 import SearchButtons from "./SearchButtons/SearchButtons";
-import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 
 import SearchContext from '../../contextAPI/searchContext';
 
 const API_BASE_URL = 'http://ombelinepinoche-server.eddi.cloud:8443/api';
 
 export default function Searchbar() {
-  const { setSpots } = useContext(SearchContext);
+  const { setSpots } = useContext(SearchContext) || {};
   const [searchTerm, setSearchTerm] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
@@ -72,7 +71,9 @@ export default function Searchbar() {
       setIsLoading(true);
       setError('');
       const response = await axios.get(`${API_BASE_URL}/spots`);
-      setSpots(response.data);
+      if (setSpots) {
+        setSpots(response.data);
+      }
     } catch (error) {
       console.error('Error fetching all spots:', error);
       setError('Erreur lors de la récupération des spots.');
@@ -89,7 +90,9 @@ export default function Searchbar() {
 
     setIsLoading(true);
     setError('');
+    if (setSpots) {
     setSpots([]);
+    }
 
     const [locationSpotsResult, singleSpotResult] = await Promise.all([
       fetchLocationSpots(name),
@@ -111,7 +114,9 @@ export default function Searchbar() {
     }
 
     if (spots.length > 0) {
+      if (setSpots) {
       setSpots(spots);
+      }
     } else {
       setError('Aucun spot trouvé.');
     }

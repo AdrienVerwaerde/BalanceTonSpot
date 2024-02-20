@@ -7,7 +7,7 @@ import ThemeContext from '../../contextAPI/themeContext'; // Importing the Theme
 // Footer component definition
 export default function Footer() {
   // Using useContext hook to access the current theme from ThemeContext
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext) || {};
   // Dynamically setting the class name based on the current theme
   const footerClassName = `footer footer-${theme}`;
 

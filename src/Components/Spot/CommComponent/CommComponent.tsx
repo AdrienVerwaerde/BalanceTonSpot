@@ -45,8 +45,10 @@ export default function CommentSection({ spot }: SpotProps) {
           const response = await axios.get(
             `${API_BASE_URL}/spot/${formattedSpotName}/comments`
           );
-          
-          const sortedComments = response.data.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+          const sortedComments = response.data.sort(
+            (a: { date: string | number | Date; }, b: { date: string | number | Date; }) => new Date(b.date).getTime() - new Date(a.date).getTime()
+          );
           setComments(sortedComments);
         } catch (error) {
           console.error("Erreur lors du chargement des commentaires", error);
@@ -124,7 +126,7 @@ export default function CommentSection({ spot }: SpotProps) {
     setRating(null);
   };
 
-  console.log(comments.map((comment) => comment.user.profilpicture))
+  console.log(comments.map((comment) => comment.user.profilpicture));
   return (
     <div className="comments-container">
       {error && <p className="error-message">{error}</p>}
@@ -205,7 +207,7 @@ export default function CommentSection({ spot }: SpotProps) {
             <div className="comments-user-block">
               <img
                 src={comment.user.profilpicture}
-                alt={comment.user}
+                alt={comment.user.pseudo}
                 className="user-image"
               />
               <h3>{comment.user.pseudo}</h3>

@@ -7,13 +7,15 @@ import './SearchButtons.css'
 const API_BASE_URL = 'http://ombelinepinoche-server.eddi.cloud:8443/api';
 
 export default function SearchButtons() {
-    const { setSpots } = useContext(SearchContext);
+    const { setSpots } = useContext(SearchContext) || {};
     const navigate = useNavigate();
 
     const fetchData = async (name: string) => {
         try {
             const response = await axios.get(`${API_BASE_URL}/${name}`);
+            if (setSpots) {
             setSpots(response.data);
+            }
             navigate('/spotslist');
         } catch (error) {
             console.error('Erreur lors de la récupération des données:', error);

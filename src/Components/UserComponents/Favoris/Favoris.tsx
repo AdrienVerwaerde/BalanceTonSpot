@@ -26,22 +26,22 @@ export default function Favoris() {
 
     const fetchFavoriteSpots = async () => {
       const token = localStorage.getItem('userToken');
-      if (token) {
-          try {
-              const response = await axios.get('http://ombelinepinoche-server.eddi.cloud:8443/api/favorites', {
-                  headers: { Authorization: `Bearer ${token}` },
-              });
-              setSpots(response.data);
-          } catch (error) {
-              if (error.response && error.response.status === 404) {
-                  // Si une erreur 404 est reçue, considérer qu'il n'y a plus de favoris
-                  setSpots([]);
-              } else {
-                  console.error('Error fetching favorite spots:', error);
-              }
-          }
-      }
-  };
+    if (token) {
+        try {
+            const response = await axios.get('http://ombelinepinoche-server.eddi.cloud:8443/api/favorites', {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+            setSpots(response.data);
+        } catch (error: any) {
+            if (error.response && error.response.status === 404) {
+                // Si une erreur 404 est reçue, considérer qu'il n'y a plus de favoris
+                setSpots([]);
+            } else {
+                console.error('Error fetching favorite spots:', error);
+            }
+        }
+    }
+};
 
     // Render message if there are no favorite spots
     if (!spots || spots.length === 0) {

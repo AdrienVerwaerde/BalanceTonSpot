@@ -20,30 +20,6 @@ import "semantic-ui-css/semantic.min.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import NotFoundPage from "./Components/404/404.tsx";
 
-const spots = [
-  {
-    name: "Un Spot",
-    description:
-      "Une magnifique plage urbaine à Marseille offrant une vue imprenable sur la mer Méditerranée.",
-    image:
-      "https://cdn-s-www.ledauphine.com/images/0B4C75D1-BE1B-47ED-9CDF-B171D74277BD/NW_raw/le-snowpark-de-vars-s-etale-sur-plus-de-1-000-metres-de-denivele-c-est-ce-qui-fait-sa-singularite-et-sa-notoriete-qui-depassent-aujourd-hui-les-frontieres-europeennes-1390340766.jpg",
-  },
-  {
-    name: "Un deuxième Spot",
-    description:
-      "Îlot rocheux en Normandie, connu pour son abbaye médiévale perchée au sommet.",
-    image:
-      "https://static.savoie-mont-blanc.com/wp-content/uploads/external/e132d5d4d725e4a69beabf7bcc818ecf-3800129-1745x1163.jpg",
-  },
-  {
-    name: "ET ATTENTION... Un troisième Spot",
-    description:
-      "L'un des châteaux les plus reconnaissables de la Loire grâce à son architecture française de la Renaissance.",
-    image:
-      "https://www.laclusaz.com/app/uploads/apidae/7138618-diaporama-890x500.jpg",
-  },
-];
-
 const router = createBrowserRouter([
   // 1. Adding the routes to application pages (Homepage, SpotsList, SpotDetails, etc.)
   {
@@ -99,7 +75,7 @@ const router = createBrowserRouter([
       },
       {
         path: "favoris",
-        element: <Favoris spots={spots} />,
+        element: <Favoris />,
       },
     ],
   },

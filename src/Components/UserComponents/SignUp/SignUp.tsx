@@ -13,7 +13,7 @@ export default function SignUpForm() {
 
     const navigate = useNavigate(); // Call useNavigate to get the navigation function
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
 
         if (password !== confirmPassword) {
@@ -40,8 +40,8 @@ export default function SignUpForm() {
 
             // Redirection vers la page de profil après l'inscription réussie
             navigate('/');
-        } catch (error) {
-            console.log(pseudo, email, password)
+        } catch (error: any) {
+            console.log(pseudo, email, password);
             setError(error.response?.data.message || 'Une erreur est survenue lors de l\'inscription ou de la connexion.');
         }
     };

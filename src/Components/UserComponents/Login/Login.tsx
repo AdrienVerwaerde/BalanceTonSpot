@@ -31,14 +31,14 @@ export default function LoginForm() {
             } else {
                 throw new Error("Réponse de l'API invalide, token manquant.");
             }
-        } catch (error) {
+        } catch (error: any) {
             setError(error.response?.data.message || "Erreur lors de l'authentification.");
         } finally {
             setLoading(false); // Arrête l'indicateur de chargement quelle que soit l'issue de la tentative
         }
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         await authenticateUser();
     };

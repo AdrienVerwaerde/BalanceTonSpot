@@ -23,7 +23,7 @@ export default function SpotsList() {
     /**
      * Context variable to access the spots data.
      */
-    const { spots } = useContext(SearchContext);
+    const { spots } = useContext(SearchContext) || {};
 
     /**
      * Sorts spots based on the selected criteria.
@@ -58,7 +58,9 @@ export default function SpotsList() {
             <div id="spotslist-container">
                 {/* CARD SPOT */}
                 {triSpots().map((spot: Spot) => (
-                    <SpotCard key={spot.id} spot={spot} />
+                    <SpotCard key={spot.id} spot={spot} onFavoriteToggle={function (): void {
+                        throw new Error("Function not implemented.");
+                    } } />
                 ))}
             </div>
         </>

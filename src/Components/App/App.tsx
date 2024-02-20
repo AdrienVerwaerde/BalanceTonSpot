@@ -9,7 +9,7 @@ import ThemeContext from '../../contextAPI/themeContext.ts'
 
 export default function App() {
   const [spots, setSpots] = useState([]);
-  const [theme, setTheme] = useState([]);
+  const [theme, setTheme] = useState("skate");
 
 return (
     <div className="app-container">

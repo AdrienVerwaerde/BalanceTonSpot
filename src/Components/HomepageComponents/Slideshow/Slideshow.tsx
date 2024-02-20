@@ -12,7 +12,7 @@ interface spot {
 const delay = 4000;
 
 export default function Slideshow() {
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext) || { theme: 'skate' };
   const [spots, setSpots] = useState([]); // State variable to store the spots data
   const [index, setIndex] = useState(0); // State variable to store the current index of the slideshow
   const timeoutRef = useRef<number>(); // Reference to the timeout used for automatic slideshow
