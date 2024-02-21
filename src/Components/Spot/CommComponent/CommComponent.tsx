@@ -7,6 +7,8 @@ import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 import Button from "@mui/material/Button";
 import StarRating from "../../StarRating/StarRating";
+import { Link, useLocation } from "react-router-dom";
+import TrashButton from "./TrashButton/TrashButton";
 
 // Definition of the Comment interface
 interface Comment {
@@ -37,6 +39,53 @@ export default function CommentSection({ spot }: SpotProps) {
   const [rating, setRating] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [visibleComments, setVisibleComments] = useState(5); // Base number of visible comments
+  const [currentUserPseudo, setCurrentUserPseudo] = useState("");
+
+  const token = localStorage.getItem("userToken");
+
+  const location = useLocation();
+
+  const handleCommentSubmit = async () => {
+    // Vérifie d'abord si le commentaire ou la note n'ont pas été fournis
+    if (!newComment.trim() || rating === null) {
+      setError("Vous devez écrire un commentaire et donner une note avant de soumettre.");
+      return; // Sort de la fonction pour ne pas continuer la soumission
+    }
+
+    // Prépare les données du commentaire pour la soumission
+    const commentToSubmit = {
+      content: newComment.trim(),
+      rating,
+    };
+
+    try {
+      // Vérifie si le token est présent
+      if (!token) {
+        console.error("Token d'autorisation manquant");
+        setError("Vous devez être connecté pour poster un commentaire.");
+        return; // Sort de la fonction si le token est manquant
+      }
+
+      // Effectue la requête POST pour soumettre le commentaire
+      const formattedSpotName = spot.name.toLowerCase().replace(/\s/g, "-");
+      const response = await axios.post(
+        `${API_BASE_URL}/spot/${formattedSpotName}/comments`,
+        commentToSubmit,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      // Met à jour l'état avec le nouveau commentaire
+      setComments((prevComments) => [...prevComments, response.data]);
+      setNewComment("");
+      setRating(null);
+      setOpen(false); // Ferme le modal
+    } catch (error) {
+      console.error("Erreur lors de l'envoi du commentaire", error);
+      setError("Erreur lors de l'envoi du commentaire.");
+    }
+  };
 
   useEffect(() => {
     const fetchComments = async () => {
@@ -47,9 +96,7 @@ export default function CommentSection({ spot }: SpotProps) {
             `${API_BASE_URL}/spot/${formattedSpotName}/comments`
           );
 
-          const sortedComments = response.data.sort(
-            (a: { date: string | number | Date; }, b: { date: string | number | Date; }) => new Date(b.date).getTime() - new Date(a.date).getTime()
-          );
+          const sortedComments = response.data.slice().reverse();
           setComments(sortedComments);
         } catch (error) {
           console.error("Erreur lors du chargement des commentaires", error);
@@ -83,66 +130,76 @@ export default function CommentSection({ spot }: SpotProps) {
     setRating(value === "" ? null : Number(value));
   };
 
-  const handleCommentSubmit = async () => {
-    if (newComment.trim() !== "" && rating !== null) {
-      const commentToSubmit = {
-        content: newComment.trim(),
-        rating,
-      };
+  const handleOpen = () => {
+  if(token) {
+  setOpen(true);
+  } else {
+    setError("Vous devez être connecté pour poster un commentaire.");
+  }
+};
 
-      try {
-        const token = localStorage.getItem("userToken");
-        if (!token) {
-          console.error("Token d'autorisation manquant");
-          setError("Vous devez être connecté pour poster un commentaire.");
-          return; // Stoppe l'exécution si le token est manquant
-        }
-        const formattedSpotName = spot.name.toLowerCase().replace(/\s/g, "-");
-        const response = await axios.post(
-          `${API_BASE_URL}/spot/${formattedSpotName}/comments`,
-          commentToSubmit,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
-
-        setComments((prevComments) => [...prevComments, response.data]);
-        setNewComment("");
-        setRating(null);
-        setOpen(false);
-      } catch (error) {
-        console.error("Erreur lors de l'envoi du commentaire", error);
-        setError("Erreur lors de l'envoi du commentaire.");
-      }
-    } else {
-      // Handle the case where the comment or rating isn't provided.
-      setError(
-        "Vous devez écrire un commentaire et donner une note avant de soumettre."
-      );
-    }
-  };
-
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => {
+  const handleClose = (event: { preventDefault: () => void; }) => {
+    event.preventDefault();
     setOpen(false);
     setNewComment("");
     setRating(null);
   };
 
+  /**
+   * Adds 5 more comments to display
+   **/
   const loadMoreComments = () => {
-    setVisibleComments((prev) => prev + 5); // Adds 5 more comments to display
+    setVisibleComments((prev) => prev + 5);
   };
 
-  console.log(comments.map((comment) => comment.user.profilpicture));
+  async function fetchUserData() {
+    if (!token) {
+      console.error("Aucun token trouvé");
+      return;
+    }
+
+    try {
+      const response = await axios.get('http://ombelinepinoche-server.eddi.cloud:8443/api/user', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      const userName = response.data.pseudo;
+      console.log("Nom d'utilisateur récupéré", userName)
+      return userName;
+
+    } catch (error) {
+      console.error("Erreur lors de la récupération des données de l'utilisateur", error);
+    }
+  }
+
+  useEffect(() => {
+    // Appel de la fonction au chargement du composant
+    const fetchAndSetUserData = async () => {
+      const userName = await fetchUserData();
+      setCurrentUserPseudo(userName);
+    };
+  
+    if (token) {
+      fetchAndSetUserData();
+    }
+  }, [token]);
+
   return (
     <div className="comments-container">
       {error && <p className="error-message">{error}</p>}
 
       <h2 id="comments-section-title">Les Avis des Riders</h2>
-      <div className="modal-container">
-        <Button id="button-modal-open" onClick={handleOpen}>
-          COMMENTER ET NOTER
-        </Button>
+        {
+          token ? (
+            <Button id="button-modal-open" onClick={handleOpen}>
+              COMMENTER ET NOTER
+            </Button>
+          ) : (
+            <Link to="/login" state={{ from: location }}><Button id="button-modal-login">VEUILLEZ VOUS CONNECTER POUR COMMENTER ET NOTER</Button></Link>
+          )
+        }
         <Modal
           aria-labelledby="transition-modal-title"
           aria-describedby="transition-modal-description"
@@ -161,7 +218,7 @@ export default function CommentSection({ spot }: SpotProps) {
               <form className="comments-form" onSubmit={handleCommentSubmit}>
                 {/* Comment */}
                 <h2 id="comments-submit-title">Balance Ton Com' !</h2>
-                <textarea
+                <textarea required
                   className="comments-text-input"
                   value={newComment}
                   onChange={handleCommentChange}
@@ -169,21 +226,21 @@ export default function CommentSection({ spot }: SpotProps) {
 
                 {/* Notation of the spot */}
                 <div className="notation-container">
-                <h3 id="notation-title">Balance Ta Note :</h3>
-                <select
-                  className="notation"
-                  value={rating === null ? "" : rating.toString()}
-                  onChange={handleRatingChange}
-                >
-                  <option disabled value="">
-                    --
-                  </option>
-                  {[...Array(6).keys()].map((n) => (
-                    <option key={n} value={n}>
-                      {n}
+                  <h3 id="notation-title">Balance Ta Note :</h3>
+                  <select required
+                    className="notation"
+                    value={rating === null ? "" : rating.toString()}
+                    onChange={handleRatingChange}
+                  >
+                    <option disabled value="">
+                      --
                     </option>
-                  ))}
-                </select>
+                    {[...Array(6).keys()].map((n) => (
+                      <option key={n} value={n}>
+                        {n}
+                      </option>
+                    ))}
+                  </select>
                 </div>
 
                 {/* Cancel & Submit*/}
@@ -209,9 +266,10 @@ export default function CommentSection({ spot }: SpotProps) {
             </Box>
           </Fade>
         </Modal>
-      </div>
+
+      {/* Comments display*/}
       <ul className="comments-list">
-      {comments.slice(0, visibleComments).map((comment) => (
+        {comments.slice(0, visibleComments).map((comment) => (
           <li key={comment.id}>
             <div className="comments-user-block">
               <img
@@ -225,7 +283,8 @@ export default function CommentSection({ spot }: SpotProps) {
               <StarRating rating={comment.rating} id={0} />
             </div>
             <p>{comment.content}</p>
-            <p>Posté le : {formatDate(comment.date)}</p>
+            <p id="comments-date">Posté le : {formatDate(comment.date)}</p>
+            {currentUserPseudo === comment.user.pseudo && <TrashButton commentId={comment.id} />}
           </li>
         ))}
       </ul>

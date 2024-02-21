@@ -1,0 +1,19 @@
+/*TRASH BUTTON*/
+
+.trash-button {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  background-color: transparent;
+  border:none;
+  padding: 0px;
+}
+
+.trash-button img {
+  width: 80% !important;
+}
+
+.trash-button img:hover {
+  background-image: url(https://i.postimg.cc/SRH6fFgH/trash-solid-alt.png);
+  width: 100% !important;
+}

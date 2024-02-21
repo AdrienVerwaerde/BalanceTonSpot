@@ -25,7 +25,7 @@ export default function Favoris() {
     }, []);
 
     const fetchFavoriteSpots = async () => {
-      const token = localStorage.getItem('userToken');
+    const token = localStorage.getItem('userToken');
     if (token) {
         try {
             const response = await axios.get('http://ombelinepinoche-server.eddi.cloud:8443/api/favorites', {

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./Login.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { ImCross } from "react-icons/im";
 
 export default function LoginForm() {
@@ -11,12 +11,17 @@ export default function LoginForm() {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
+    const location = useLocation();
+
+    // Récupère le paramètre de redirection depuis l'URL, ou définit '/' comme valeur par défaut
+    const from = location.state?.from?.pathname || "/";
+
     useEffect(() => {
         const userToken = localStorage.getItem("userToken");
         if (userToken) {
-            navigate("/");
+            navigate(from);
         }
-    }, [navigate]);
+    }, [navigate, from]);
 
     const authenticateUser = async () => {
         setLoading(true);
@@ -27,14 +32,14 @@ export default function LoginForm() {
             });
             if (response.data && response.data.token) {
                 localStorage.setItem("userToken", response.data.token);
-                navigate("/");
+                navigate(from);
             } else {
                 throw new Error("Réponse de l'API invalide, token manquant.");
             }
         } catch (error: any) {
             setError(error.response?.data.message || "Erreur lors de l'authentification.");
         } finally {
-            setLoading(false); // Arrête l'indicateur de chargement quelle que soit l'issue de la tentative
+            setLoading(false);
         }
     };
 

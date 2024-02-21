@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Profile.css';
+import Swal from 'sweetalert2'
+
 
 export default function UserProfileDashboard() {
     const [user, setUser] = useState({
@@ -15,7 +17,9 @@ export default function UserProfileDashboard() {
         fetchUserData();
     }, []);
 
-    // Fetch user data from the server
+    /**
+     *Fetch user data from the server
+     */
     const fetchUserData = async () => {
         const token = localStorage.getItem('userToken');
         if (token && token.trim() !== '') {
@@ -40,7 +44,9 @@ export default function UserProfileDashboard() {
         }
     };
 
-    // Handle form input changes
+    /**
+     * Handles form input changes
+     */
     const handleChange = (e: { target: { name: unknown; value: unknown; }; }) => {
         const { name, value } = e.target;
         setUser(prevState => ({
@@ -49,8 +55,10 @@ export default function UserProfileDashboard() {
         }));
     };
 
-    // Handle profile picture change
-    const defaultProfilePicture = ''; // Define defaultProfilePicture variable
+    /**
+     * Handles profile picture change
+     */
+    const defaultProfilePicture = ''; // Defines defaultProfilePicture variable
 
     const handleProfilePictureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files && e.target.files[0];
@@ -64,11 +72,18 @@ export default function UserProfileDashboard() {
             };
             reader.readAsDataURL(file);
         } else {
-            alert('Please select an image file.');
+            Swal.fire({
+                title: 'Error!',
+                text: 'Do you want to continue',
+                icon: 'error',
+                confirmButtonText: 'Cool'
+            });
         }
     };
 
-    // Handle form submission
+    /**
+     * Handles form submission
+     */
     const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         const token = localStorage.getItem('userToken');
@@ -83,17 +98,39 @@ export default function UserProfileDashboard() {
                 if (user.profilPicture.startsWith('data:image')) {
                     formData.append('profilPicture', user.profilPicture);
                 }
-
+                
                 await axios.put(`http://ombelinepinoche-server.eddi.cloud:8443/api/user`, formData, {
                     headers: {
                         'Content-Type': 'application/json',
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                alert('Profile updated successfully!');
+                //Pop-up alert component 
+                Swal.fire({
+                    title: "Profil mis à jour",
+                    text: 'Tout beau, tout propre !',
+                    icon: "success",
+                    color: "#000000",
+                    background: "#ffffff",
+                    backdrop: `#e3e3e36z`,
+                    buttonsStyling: false,
+                    confirmButtonText: 'OK',
+                    scrollbarPadding: false  
+                });
             } catch (error) {
                 console.error('Error updating profile', error);
-                alert('Failed to update profile.');
+                //Pop-up alert component 
+                Swal.fire({
+                    title: 'Erreur',
+                    text: 'Veuillez réessayer plus tard. (phrase bateau... je sais)',
+                    icon: 'error',
+                    color: "#000000",
+                    background: "#ffffff",
+                    backdrop: `#e3e3e36z`,
+                    buttonsStyling: false,
+                    confirmButtonText: 'OK',
+                    scrollbarPadding: false 
+                });
             }
         }
     };

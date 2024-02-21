@@ -73,6 +73,12 @@
   justify-content: flex-end;
 }
 
+#comments-date {
+  width: 50%;
+  font-size: smaller; 
+}
+
+
 .comments-load-button {
   display: flex;
   flex-wrap: wrap;
@@ -88,6 +94,7 @@
   margin-top: 0.5em;
   margin-bottom: 0.5em;
   transition: ease-in-out 0.2s;
+  flex: 1;
 }
 
 .comments-load-button:hover {
@@ -125,12 +132,6 @@
 
 /*MODAL*/
 
-.modal-container {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
 #button-modal-open {
   background-color: #897b68;
   color: white;
@@ -144,6 +145,22 @@
 }
 
 #button-modal-open:hover {
+  background-color: #e3e3e3;
+}
+
+#button-modal-login {
+  background-color: #897b68;
+  color: white;
+  width: 100%;
+  font-weight: bold;
+  font-size: small;
+  padding: 1em;
+  border-radius: 0.5em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+#button-modal-login:hover {
   background-color: #e3e3e3;
 }
 
@@ -224,6 +241,7 @@
 .comments-button-cancel:hover {
   background-color: red !important;
 }
+
 
 /*MEDIA QUERIES*/
 
