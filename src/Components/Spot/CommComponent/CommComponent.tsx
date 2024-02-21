@@ -152,6 +152,10 @@ export default function CommentSection({ spot }: SpotProps) {
     setVisibleComments((prev) => prev + 5);
   };
 
+  const removeCommentById = (commentId: number) => {
+    setComments((currentComments) => currentComments.filter(comment => comment.id !== commentId));
+  };
+
   async function fetchUserData() {
     if (!token) {
       console.error("Aucun token trouvé");
@@ -184,6 +188,7 @@ export default function CommentSection({ spot }: SpotProps) {
     if (token) {
       fetchAndSetUserData();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
   return (
@@ -284,7 +289,7 @@ export default function CommentSection({ spot }: SpotProps) {
             </div>
             <p>{comment.content}</p>
             <p id="comments-date">Posté le : {formatDate(comment.date)}</p>
-            {currentUserPseudo === comment.user.pseudo && <TrashButton commentId={comment.id} />}
+            {currentUserPseudo === comment.user.pseudo && <TrashButton commentId={comment.id} onCommentDeleted={() => removeCommentById(comment.id)} />}
           </li>
         ))}
       </ul>

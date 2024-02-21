@@ -12,8 +12,3 @@
 .trash-button img {
   width: 80% !important;
 }
-
-.trash-button img:hover {
-  background-image: url(https://i.postimg.cc/SRH6fFgH/trash-solid-alt.png);
-  width: 100% !important;
-}
