@@ -7,10 +7,91 @@
   background-color: transparent;
   border:none;
   padding: 0px;
-  width: 50%;
-  aspect-ratio: 1/1;
+
 }
 
 .update-button img {
   width: 80% !important;
+}
+
+/*EDITION BUTTONS*/
+
+.editing-container {
+  border: #e3e3e3 1px solid;
+  border-radius: 0.5em;
+  padding: 0.5em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: right;
+  align-items: center;
+  width: 80%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.editing-container textarea {
+  resize: none;
+  border: #897b68 1px solid;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-radius: 0.5em;
+  padding: 0.5em;
+  margin-right: 0.5em;
+  width: 80%;
+}
+
+.editing-container textarea:focus {
+  outline: none !important;
+  border: #897b68 1px solid;
+}
+
+.edit-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  width: 2.5em;
+  padding: 0px;
+  background-color: #897b68;
+  font-weight: bold;
+  font-size: small;
+  border-radius: 0.5em;
+  margin-top: 0.5em;
+  transition: ease-in-out 0.2s;
+}
+
+.edit-buttons img {
+  display: block;
+  width: 100%;
+}
+
+.validate {
+  background-color: green;
+  margin-right: 0.5em;
+}
+
+.validate:hover {
+  background-color: #e3e3e3;
+}
+
+.cancel {
+  background-color: #333;
+}
+
+.cancel:hover {
+  background-color: red;
+}
+
+.edit-notation {
+  width: 19%;
+  height: 52.5%;
+  resize: none;
+  border: #897b68 1px solid;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-radius: 0.5em;
+  padding: 0.5em;
+}
+
+.edit-notation:focus {
+  outline: none !important;
+  border: #897b68 1px solid;
 }

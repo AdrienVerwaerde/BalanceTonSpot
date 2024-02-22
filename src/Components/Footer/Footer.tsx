@@ -17,8 +17,8 @@ export default function Footer() {
       <ul>
         {/* Using semantic HTML for accessibility and SEO */}
         {/* Ensure unique IDs or remove them if they are not necessary */}
-        <li><a id="footer-link" href="#" aria-label="Legal Mentions">MENTIONS LÉGALES</a></li>
-        <li><a id="footer-link" href="#" aria-label="Contact Us">NOUS CONTACTER</a></li>
+        <li><Link to="/legal-notice" id="footer-link">MENTIONS LÉGALES</Link></li>
+        <li><Link to="/contact" id="footer-link">NOUS CONTACTER</Link></li>
         {/* Using the Link component from react-router-dom for internal navigation */}
         {/* This prevents full page reloads and improves user experience */}
         <li><Link to="/our-team" id="footer-link">À PROPOS</Link></li>

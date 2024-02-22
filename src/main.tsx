@@ -13,6 +13,8 @@ import SpotsList from "./Components/SpotsList/SpotsList.tsx";
 import Spot from "./Components/Spot/Spot.tsx";
 import AboutUs from "./Components/AboutUs/AboutUs.tsx";
 import PrivateRoute from "./PrivateRoute/PrivateRoute.tsx";
+import LegalNotice from "./Components/LegalNotice/LegalNotice.tsx";
+import Contact from "./Components/Contact/Contact.tsx";
 
 // Import of the semantic-ui-css library to use the semantic-ui components
 import "semantic-ui-css/semantic.min.css";
@@ -42,11 +44,11 @@ const router = createBrowserRouter([
       },
       {
         path: "legal-notice",
-        //element: <Admin />,
+        element: <LegalNotice />,
       },
       {
         path: "contact",
-        //element: <Admin />,
+        element: <Contact />,
       },
       {
         path: "our-team",

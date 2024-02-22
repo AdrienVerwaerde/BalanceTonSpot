@@ -169,11 +169,9 @@ export default function CommentSection({ spot }: SpotProps) {
           Authorization: `Bearer ${token}`
         }
       });
-
       const userName = response.data.pseudo;
       console.log("Nom d'utilisateur récupéré", userName)
       return userName;
-
     } catch (error) {
       console.error("Erreur lors de la récupération des données de l'utilisateur", error);
     }
@@ -192,13 +190,13 @@ export default function CommentSection({ spot }: SpotProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
-  const updateCommentById = (commentId: number, updatedText: string) => {
+  const updateCommentById = (commentId: number, updatedText: string, updatedRating: number) => {
     setComments(currentComments =>
-      currentComments.map(comment =>
-        comment.id === commentId ? { ...comment, content: updatedText } : comment
-      )
+        currentComments.map(comment =>
+            comment.id === commentId ? { ...comment, content: updatedText, rating: updatedRating } : comment
+        )
     );
-  };
+};
 
   return (
     <div className="comments-container">
@@ -300,7 +298,7 @@ export default function CommentSection({ spot }: SpotProps) {
             <p id="comments-date">Posté le : {formatDate(comment.date)}</p>
             {currentUserPseudo === comment.user.pseudo && (
               <div className="comments-options-container">
-                <UpdateButton commentId={comment.id} onCommentUpdated={(updatedComment) => updateCommentById(comment.id, updatedComment)} />
+                <UpdateButton commentId={comment.id} onCommentContent={comment.content} onCommentRating={comment.rating} onCommentUpdated={(updatedComment, updatedRating) => updateCommentById(comment.id, updatedComment, updatedRating)} />
                 <TrashButton commentId={comment.id} onCommentDeleted={() => removeCommentById(comment.id)} />
               </div>
             )}
