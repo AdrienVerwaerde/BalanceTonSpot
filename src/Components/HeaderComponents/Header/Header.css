@@ -1,0 +1,47 @@
+/* HEADER */
+.header,
+.header-skateboard {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #333;
+    box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.5);
+}
+
+.header-snowboard {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #214c5c;
+    box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.5);
+}
+
+#button-logo {
+    text-align: center;
+    width: 15%;
+    margin-bottom: 3em;
+    margin-top: 2em;
+}
+
+#logo {
+    width: 100%;
+}
+
+
+/* MEDIA QUERRIES */
+
+@media screen and (max-width: 1024px) {
+
+    #button-logo {
+        width: 30%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+
+    #button-logo {
+        width: 50%;
+    }
+}

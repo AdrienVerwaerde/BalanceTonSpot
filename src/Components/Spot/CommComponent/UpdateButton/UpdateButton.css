@@ -1,0 +1,16 @@
+/* UPDATE BUTTON */
+
+.update-button {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  background-color: transparent;
+  border:none;
+  padding: 0px;
+  width: 50%;
+  aspect-ratio: 1/1;
+}
+
+.update-button img {
+  width: 80% !important;
+}

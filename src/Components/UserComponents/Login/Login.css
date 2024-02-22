@@ -1,0 +1,143 @@
+/* LOGIN */
+
+.wrapper-login {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #897b68;
+}
+
+.input-login {
+    color: #333;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    font-size: 1.2rem;
+    margin: 0 auto;
+    padding: 1.5rem 2rem;
+    border-radius: 0.2rem;
+    background-color: rgb(255, 255, 255);
+    border:#897b68 1px solid;
+    width: 90%;
+    display: block;
+    transition: all 0.3s;
+    margin-bottom: 25px;
+}
+
+.input-login:focus{
+    outline-color: #897b68;
+}
+
+.form-login {
+    width: 400px;
+    max-width: 90%;
+    text-align: center;
+    color: #897b68;
+}
+
+.form-login h1 {
+    color: white;
+    margin-top: 2em;
+    margin-bottom: 1em;
+}
+
+.signup-link {
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    text-decoration: underline;
+}
+    
+
+.signup-link:hover {
+    color: #ccc;
+}
+
+.title-login {
+    width: 100%;
+    font-size: 2.3em;
+}
+
+/* BUTTONS */
+
+.button-login {
+    background-color: #333 !important;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 22px;
+    transition: all 0.4s;
+    cursor: pointer;
+    width: 91% !important;
+    margin-bottom: 0.5em;
+
+}
+
+.button-login span {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    background: white;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.4s;
+    padding: 0.5em;
+}
+
+.button-login span:after {
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    transition: 0.5s;
+}
+.button-login:hover span {
+    scale: 1.1;
+}
+.button-login:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+.button-login:hover {
+    background-color: #ccc !important;
+}
+
+/* CLOSE BUTTON */
+
+.close-button-login {
+    display: flex;
+    justify-content: center;
+    background-color: transparent;
+    border: none;
+    color: #ffffff;
+    width: 100%;
+    align-self: left;
+    margin-top: 1em;
+    font-weight: bold;
+    font-size: medium;
+
+}
+
+.close-button-login svg {
+    margin-right: 0.5em;
+}
+
+/* RESPONSIVE DESIGN */
+
+@media screen and (max-width: 768px) {
+    .form-login {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .form-login {
+        width: 100%;
+    }
+    .button-login {
+        width: 100% !important;
+    }
+}

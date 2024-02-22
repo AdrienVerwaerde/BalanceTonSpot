@@ -1,0 +1,128 @@
+/* BUTTON PROFILE */
+
+.profile-btn-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  width: 5em;
+  margin-left: 5em;
+  top: 1.8em;
+  z-index: 1500;
+}
+
+.btn-profile {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  width: 100%;
+  background-color: transparent;
+  border: none;
+}
+
+.mb-5 {
+  margin-bottom: 0px !important;
+}
+
+.btn-profile:hover {
+  background-color: transparent;
+}
+
+.btn-profile:focus,
+.btn-profile:active {
+  background-color: transparent;
+  border: none;
+}
+
+#button-img {
+  width: 100%;
+}
+
+#profile-button-pseudo {
+  color: white;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* LIST OF LINKS */
+
+.list-group {
+  position: relative;
+}
+
+.list-group-item,
+.list-group-item-skateboard {
+  width: 10em;
+  text-decoration: none;
+  transition: 0.2s ease-in-out;
+  color: #333;
+  border-color: white;
+  padding: 1em;
+  margin-bottom: 0px !important;
+
+}
+
+.list-group-item-snowboard {
+  width: 10em;
+  text-decoration: none;
+  transition: 0.2s ease-in-out;
+  color: #214c5c;
+  border-color: white;
+  padding: 1em;
+  margin-bottom: 0px !important;
+}
+
+.fade:not(.show){
+display: none;
+}
+
+
+.list-group-item:hover {
+  background-color: #333;
+  color: white;
+}
+
+.list-group-item-snowboard:hover {
+  background-color: #214c5c;
+  color: white;
+}
+
+/* MEDIA QUERIES */
+
+@media screen and (max-width: 768px) {
+  .profile-btn-container {
+    width: 4em;
+    margin-left: 1em;
+  }
+
+  .list-group-item,
+  .list-group-item-skateboard,
+  .list-group-item-snowboard {
+    margin-left: 7em;
+    justify-content: left;
+    width: 10em;
+  }
+
+  #profile-button-pseudo {
+    display: none;
+  }
+
+}
+
+@media screen and (max-width: 480px) {
+  .profile-btn-container {
+    width: 4em;
+    margin-left: 1em;
+  }
+
+  .list-group-item,
+  .list-group-item-skateboard,
+  .list-group-item-snowboard {
+    margin-left: 7em;
+    justify-content: left;
+    width: 10em;
+  }
+}
