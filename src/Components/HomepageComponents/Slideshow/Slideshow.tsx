@@ -67,7 +67,7 @@ export default function Slideshow() {
             <div id="spotlight"  onClick={() => {
             window.location.href = `/spot/${spot.name.toLowerCase().replace(/\s+/g, '-')}`;
           }}>
-              <h2>SPOTLIGHT : {spot.name}</h2>
+              <h2 id="spotlight-title">SPOTLIGHT : {spot.name}</h2>
               <p id="spotlight-text">{spot.description.length > 150 ? `${spot.description.slice(0, 150)}...` : spot.description}</p>
               <p>Découvrir {'>>'}</p>
             </div>

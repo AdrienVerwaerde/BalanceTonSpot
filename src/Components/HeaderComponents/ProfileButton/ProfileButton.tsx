@@ -46,7 +46,9 @@ export default function ProfileButton() {
     };
   }, []);
 
-// Fonction pour récupérer les données utilisateur à partir du token
+/**
+ *  Fonction pour récupérer les données utilisateur à partir du token
+ */ 
 const fetchUserData = async (token: string) => {
   try {
     const response = await axios.get(`http://ombelinepinoche-server.eddi.cloud:8443/api/user`, {
@@ -67,8 +69,8 @@ const fetchUserData = async (token: string) => {
         onClick={() => setOpen(!open)}
         className="shadow-none btn btn-primary btn-profile mb-5">
         <img id="button-img" src="https://i.postimg.cc/QCdf9cNS/585e4bf3cb11b227491c339a.png" alt="Profile button"></img>
-        {isLoggedIn && <span id="profile-button-pseudo">{user.pseudo}</span>}
       </button>
+      {isLoggedIn && <span id="profile-button-pseudo">{user.pseudo}</span>}
       <div ref={menuRef} style={{ minHeight: '150px' }}>
         <Fade in={open}>
           <ul className="list-group">

@@ -12,6 +12,7 @@ import HeaderUser from "./Components/UserComponents/HeaderUser/HeaderUser.tsx";
 import SpotsList from "./Components/SpotsList/SpotsList.tsx";
 import Spot from "./Components/Spot/Spot.tsx";
 import AboutUs from "./Components/AboutUs/AboutUs.tsx";
+import PrivateRoute from "./PrivateRoute/PrivateRoute.tsx";
 
 // Import of the semantic-ui-css library to use the semantic-ui components
 import "semantic-ui-css/semantic.min.css";
@@ -71,11 +72,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "profile",
-        element: <Profile />,
+        element: <PrivateRoute><Profile /></PrivateRoute>,
       },
       {
         path: "favoris",
-        element: <Favoris />,
+        element: <PrivateRoute><Favoris /></PrivateRoute>,
       },
     ],
   },
