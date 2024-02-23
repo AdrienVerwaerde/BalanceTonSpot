@@ -3,6 +3,8 @@ import './SpotCard.css';
 import StarRating from '../../StarRating/StarRating';
 import FavoriteButton from '../../FavButton/FavButton';
 
+const FETCH_PICTURES = "http://ombelinepinoche-server.eddi.cloud:8443/uploads/";
+
 // Define the type for the 'spot' prop
 interface Spot {
     id: number;
@@ -24,7 +26,7 @@ export default function SpotCard({ spot, onFavoriteToggle }: SpotCardProps) {
     return (
         <div key={spot.id} id="spotslist">
             <h2 id="spotslist-title">{spot.name}</h2>
-            <img src={spot.picture} alt={spot.name} id="spotslist-image" />
+            <img src={`${FETCH_PICTURES}${spot.picture}`} alt={spot.name} id="spotslist-image" />
 
             <div className="spotslist-content">
 

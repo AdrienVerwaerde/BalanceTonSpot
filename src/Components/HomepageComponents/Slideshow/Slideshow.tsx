@@ -3,6 +3,7 @@ import axios from 'axios';
 import './Slideshow.css';
 import ThemeContext from '../../../contextAPI/themeContext';
 
+const FETCH_PICTURES = "http://ombelinepinoche-server.eddi.cloud:8443/uploads/";
 interface spot {
   name: string;
   description: string;
@@ -63,6 +64,8 @@ export default function Slideshow() {
     timeoutRef.current = setTimeout(() => setIndex(prevIndex => prevIndex === spots.length - 1 ? 0 : prevIndex + 1), delay); // Update the index after a delay
   }
 
+console.log(spots);
+
   return (
     <div className="slideshow" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <div className="slideshowSlider" style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}>
@@ -75,7 +78,7 @@ export default function Slideshow() {
               <p id="spotlight-text">{spot.description.length > 150 ? `${spot.description.slice(0, 150)}...` : spot.description}</p>
               <p>Découvrir {'>>'}</p>
             </div>
-            <img id="slideshow-img" src={spot.picture} alt="" />
+            <img id="slideshow-img" src={`${FETCH_PICTURES}${spot.picture}`} alt="" />
           </div>
         ))}
       </div>

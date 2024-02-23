@@ -5,6 +5,9 @@ import './ProfileButton.css'
 import ThemeContext from '../../../contextAPI/themeContext';  
 import axios from 'axios';
 
+const API_USER = "http://ombelinepinoche-server.eddi.cloud:8443/api/user";
+const FETCH_PICTURES = "http://ombelinepinoche-server.eddi.cloud:8443/uploads/";
+
 export default function ProfileButton() {
   //This function uses useState to toggle the list of options from the button
   const [open, setOpen] = useState(false);
@@ -14,7 +17,7 @@ export default function ProfileButton() {
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState({ pseudo: '' });
+  const [user, setUser] = useState({ pseudo: '', profilPicture: ''});
 
   const { theme } = useContext(ThemeContext) || {};
   const listGroupItem = `list-group-item list-group-item-${theme}`;
@@ -52,12 +55,18 @@ export default function ProfileButton() {
  */ 
 const fetchUserData = async (token: string) => {
   try {
-    const response = await axios.get(`http://ombelinepinoche-server.eddi.cloud:8443/api/user`, {
+    const response = await axios.get(`${API_USER}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    setUser({ pseudo: response.data.pseudo });
+    console.log("response.data", response.data); // Pour déboguer et voir la structure exacte
+
+    // Assurez-vous que la clé correspond exactement à celle dans response.data
+    setUser({ 
+      pseudo: response.data.pseudo, 
+      profilPicture: response.data.profilpicture || '', // Utilisez la bonne clé ici
+    });
   } catch (error) {
     console.error('Erreur lors de la récupération des données utilisateur', error);
   }
@@ -69,7 +78,7 @@ const fetchUserData = async (token: string) => {
         ref={buttonRef}
         onClick={() => setOpen(!open)}
         className="shadow-none btn btn-primary btn-profile mb-5">
-        <img id="button-img" src="https://i.postimg.cc/QCdf9cNS/585e4bf3cb11b227491c339a.png" alt="Profile button"></img>
+        <img id="button-img" src={isLoggedIn ? `${FETCH_PICTURES}${user.profilPicture}` : "https://i.postimg.cc/QCdf9cNS/585e4bf3cb11b227491c339a.png"} alt="Profile button"></img>
       </button>
       {isLoggedIn && <span id="profile-button-pseudo">{user.pseudo}</span>}
       <div ref={menuRef} style={{ minHeight: '150px' }}>
