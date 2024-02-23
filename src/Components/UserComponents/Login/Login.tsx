@@ -4,16 +4,17 @@ import "./Login.css";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { ImCross } from "react-icons/im";
 
+/**
+ * Component for the login form.
+ */
 export default function LoginForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-
     const location = useLocation();
 
-    // Récupère le paramètre de redirection depuis l'URL, ou définit '/' comme valeur par défaut
     const from = location.state?.from?.pathname || "/";
 
     useEffect(() => {
@@ -23,6 +24,9 @@ export default function LoginForm() {
         }
     }, [navigate, from]);
 
+    /**
+     * Authenticates the user by sending a login request to the API.
+     */
     const authenticateUser = async () => {
         setLoading(true);
         try {
@@ -43,6 +47,10 @@ export default function LoginForm() {
         }
     };
 
+    /**
+     * Handles the form submission.
+     * @param e - The form event.
+     */
     const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         await authenticateUser();

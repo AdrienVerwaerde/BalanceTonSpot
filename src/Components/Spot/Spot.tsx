@@ -26,6 +26,11 @@ interface Picture {
 /**
  * Component that displays details of a spot.
  */
+/**
+ * Component for displaying the details of a spot.
+ * 
+ * @returns JSX element
+ */
 export default function SpotDetail() {
   const [spot, setSpot] = useState<Spot>({} as Spot); // Initialize as an empty object
   const [pictures, setPictures] = useState<Picture[]>([]);
@@ -35,6 +40,9 @@ export default function SpotDetail() {
   const { name } = useParams<{ name: string }>();
 
   useEffect(() => {
+    /**
+     * Fetches the details of the spot from the server.
+     */
     const fetchSpotDetails = async () => {
       if (name) {
         try {
@@ -42,15 +50,18 @@ export default function SpotDetail() {
           const response = await axios.get<Spot>(`http://ombelinepinoche-server.eddi.cloud:8443/api/spot/${formattedSpotName}`);
           setSpot(response.data);
         } catch (err) {
-          setError(' '); // More user-friendly error message
+          setError(' ');
         }
       }
     };
 
     fetchSpotDetails();
-  }, [name]); // Depend on 'name' to refetch when it changes
+  }, [name]);
 
   useEffect(() => {
+    /**
+     * Fetches the pictures of the spot from the server.
+     */
     const fetchSpotPictures = async () => {
       if (name) {
         try {
@@ -89,7 +100,7 @@ export default function SpotDetail() {
         </div>
 
         {/* Ensure spot?.id is converted to a string if your FavoriteButton expects a string type */}
-        <FavoriteButton spotId={spot?.id} onToggle={() => {}} /> {/* Placeholder function for onToggle */}
+        <FavoriteButton spotId={spot?.id} onToggle={() => {}} />
 
         <p id="spot-details-description">{spot?.description}</p>
         <p id="spot-details-address"><img src="https://i.postimg.cc/P5YNtVhs/pin-solid-24.png" alt="Location pin"/>{spot?.address}</p>

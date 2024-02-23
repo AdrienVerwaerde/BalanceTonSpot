@@ -14,7 +14,6 @@ interface Spot {
     address: string;
 }
 
-// Favoris component, does not take props
 export default function Favoris() {
     // State to store the list of favorite spots
     const [spots, setSpots] = useState<Spot[]>([]);
@@ -24,6 +23,11 @@ export default function Favoris() {
         fetchFavoriteSpots();
     }, []);
 
+    /**
+     * Fetches the favorite spots for the user.
+     * 
+     * A promise that resolves when the favorite spots are fetched.
+     */
     const fetchFavoriteSpots = async () => {
     const token = localStorage.getItem('userToken');
     if (token) {
@@ -34,7 +38,6 @@ export default function Favoris() {
             setSpots(response.data);
         } catch (error: any) {
             if (error.response && error.response.status === 404) {
-                // Si une erreur 404 est reçue, considérer qu'il n'y a plus de favoris
                 setSpots([]);
             } else {
                 console.error('Error fetching favorite spots:', error);

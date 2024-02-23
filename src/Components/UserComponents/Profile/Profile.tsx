@@ -3,7 +3,9 @@ import axios from 'axios';
 import './Profile.css';
 import Swal from 'sweetalert2'
 
-
+/**
+ * Component for the user profile dashboard.
+ */
 export default function UserProfileDashboard() {
     const [user, setUser] = useState({
         pseudo: '',
@@ -18,7 +20,7 @@ export default function UserProfileDashboard() {
     }, []);
 
     /**
-     *Fetch user data from the server
+     * Fetches user data from the server.
      */
     const fetchUserData = async () => {
         const token = localStorage.getItem('userToken');
@@ -45,7 +47,8 @@ export default function UserProfileDashboard() {
     };
 
     /**
-     * Handles form input changes
+     * Handles form input changes.
+     * @param e - The event object.
      */
     const handleChange = (e: { target: { name: unknown; value: unknown; }; }) => {
         const { name, value } = e.target;
@@ -56,7 +59,8 @@ export default function UserProfileDashboard() {
     };
 
     /**
-     * Handles profile picture change
+     * Handles profile picture change.
+     * @param e - The event object.
      */
     const defaultProfilePicture = ''; // Defines defaultProfilePicture variable
 
@@ -82,7 +86,8 @@ export default function UserProfileDashboard() {
     };
 
     /**
-     * Handles form submission
+     * Handles form submission.
+     * @param e - The event object.
      */
     const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
@@ -105,7 +110,7 @@ export default function UserProfileDashboard() {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                //Pop-up alert component 
+                // Pop-up alert component 
                 Swal.fire({
                     title: "Profil mis à jour",
                     text: 'Tout beau, tout propre !',
@@ -119,7 +124,7 @@ export default function UserProfileDashboard() {
                 });
             } catch (error) {
                 console.error('Error updating profile', error);
-                //Pop-up alert component 
+                // Pop-up alert component 
                 Swal.fire({
                     title: 'Erreur',
                     text: 'Veuillez réessayer plus tard. (phrase bateau... je sais)',

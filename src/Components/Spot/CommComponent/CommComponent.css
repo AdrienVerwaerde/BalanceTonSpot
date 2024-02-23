@@ -50,6 +50,7 @@
   margin-top: 0.5em;
   margin-bottom: 0em;
   color: #333;
+  padding-right: 8em;
 }
 
 .user-image {
@@ -249,9 +250,31 @@
 
 /*MEDIA QUERIES*/
 
+
+@media screen and (max-width: 1400px) {
+
+  .comments-options-container {
+    width: 100%;
+  }
+
+  #comments-date {
+    width: 100%;
+  }
+}
+
+
 @media screen and (max-width: 768px) {
+
+  .comments-options-container {
+    width: 100%;
+  }
+
+  #comments-date {
+    width: 100%;
+  }
+
   .modal-box {
-    width: 70%;
+    width: 90%;
   }
 
   .comments-button-cancel {
@@ -265,11 +288,15 @@
   .notation {
     width: 50% !important;
   }
+
+  .comments-list p {
+    padding-right: 0px;
+  }
 }
 
 @media screen and (max-width: 400px) {
   .modal-box {
-    width: 70%;
+    width: 90%;
   }
 
   .comments-button-cancel {
@@ -291,5 +318,17 @@
 
   .notation {
     width: 50% !important;
+  }
+
+  .comments-list p {
+    padding-right: 0px;
+  }
+
+  #comments-date {
+    width: 100%;
+  }
+
+  .comments-options-container {
+    width: 100%;
   }
 }

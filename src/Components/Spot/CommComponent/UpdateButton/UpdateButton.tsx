@@ -17,6 +17,11 @@ export default function UpdateButton({ commentId, onCommentUpdated, onCommentCon
     const [newComment, setNewComment] = useState(onCommentContent);
     const [newRating, setNewRating] = useState(onCommentRating);
 
+    /**
+     * Handles the update of a comment.
+     * 
+     * @returns A promise that resolves when the comment is successfully updated.
+     */
     const handleUpdate = async () => {
         try {
             const token = localStorage.getItem('userToken');
@@ -24,10 +29,9 @@ export default function UpdateButton({ commentId, onCommentUpdated, onCommentCon
                 console.error('Token manquant');
                 return;
             }
-            await axios.put(`${API_BASE_URL}/secure/comment/${commentId}`, { text: newComment, rating: newRating }, {
+            await axios.put(`${API_BASE_URL}/secure/comment/${commentId}`, { content: newComment, rating: newRating }, {
                 headers: { Authorization: `Bearer ${token}` },
             });
-
             onCommentUpdated(newComment, newRating);
             setEditing(false);
         } catch (error) {

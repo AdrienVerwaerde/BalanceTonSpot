@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import './SignUp.css';
-import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
+import { Link, useNavigate } from 'react-router-dom';
 import { ImCross } from 'react-icons/im';
 
 export default function SignUpForm() {
@@ -10,9 +10,13 @@ export default function SignUpForm() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
-    const navigate = useNavigate(); // Call useNavigate to get the navigation function
-
+    /**
+     * Handles the form submission for user sign up.
+     * 
+     * @param e - The event object.
+     */
     const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
 

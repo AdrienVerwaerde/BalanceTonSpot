@@ -12,7 +12,12 @@ const API_BASE_URL = "http://ombelinepinoche-server.eddi.cloud:8443/api";
 export default function TrashButton ({ commentId, onCommentDeleted } : TrashButtonProps){
   const [isHovering, setIsHovering] = useState(false);
 
-  const handleDelete = async () => {
+  /**
+   * Handles the deletion of a comment.
+   * 
+   * @returnsA promise that resolves when the comment is successfully deleted.
+   */
+  const handleDelete = async (): Promise<void> => {
     try {
       const token = localStorage.getItem('userToken');
       if (!token) {
@@ -23,7 +28,7 @@ export default function TrashButton ({ commentId, onCommentDeleted } : TrashButt
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      // Appel de la fonction de rappel après la suppression réussie
+      // Call the callback function after successful deletion
       onCommentDeleted();
     } catch (error) {
       console.error('Erreur lors de la suppression', error);

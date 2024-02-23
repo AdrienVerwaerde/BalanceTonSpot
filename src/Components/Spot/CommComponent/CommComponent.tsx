@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
-import "./CommComponent.css";
 import axios from "axios";
+import { Link, useLocation } from "react-router-dom";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 import Button from "@mui/material/Button";
 import StarRating from "../../StarRating/StarRating";
-import { Link, useLocation } from "react-router-dom";
 import TrashButton from "./TrashButton/TrashButton";
 import UpdateButton from "./UpdateButton/UpdateButton";
+import "./CommComponent.css";
 
 // Definition of the Comment interface
 interface Comment {
@@ -41,9 +41,7 @@ export default function CommentSection({ spot }: SpotProps) {
   const [error, setError] = useState<string | null>(null);
   const [visibleComments, setVisibleComments] = useState(5); // Base number of visible comments
   const [currentUserPseudo, setCurrentUserPseudo] = useState("");
-
   const token = localStorage.getItem("userToken");
-
   const location = useLocation();
 
   const handleCommentSubmit = async () => {
