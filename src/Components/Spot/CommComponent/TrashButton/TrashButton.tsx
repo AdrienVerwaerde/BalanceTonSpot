@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './TrashButton.css';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 interface TrashButtonProps {
   commentId: number;
@@ -9,7 +10,7 @@ interface TrashButtonProps {
 
 const API_BASE_URL = "http://ombelinepinoche-server.eddi.cloud:8443/api";
 
-export default function TrashButton ({ commentId, onCommentDeleted } : TrashButtonProps){
+export default function TrashButton({ commentId, onCommentDeleted }: TrashButtonProps) {
   const [isHovering, setIsHovering] = useState(false);
 
   /**
@@ -27,7 +28,6 @@ export default function TrashButton ({ commentId, onCommentDeleted } : TrashButt
       await axios.delete(`${API_BASE_URL}/secure/comment/${commentId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-
       // Call the callback function after successful deletion
       onCommentDeleted();
     } catch (error) {
@@ -36,15 +36,15 @@ export default function TrashButton ({ commentId, onCommentDeleted } : TrashButt
   };
 
   return (
-    <button 
-      className="trash-button" 
-      onClick={handleDelete} 
-      onMouseEnter={() => setIsHovering(true)} 
+    <button
+      className="trash-button"
+      onClick={handleDelete}
+      onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
       aria-label="Delete comment"
     >
-      <img 
-        src={isHovering ? "https://i.postimg.cc/SRH6fFgH/trash-solid-alt.png" : "https://i.postimg.cc/DyNN0K01/trash-solid-24.png"} 
+      <img
+        src={isHovering ? "https://i.postimg.cc/SRH6fFgH/trash-solid-alt.png" : "https://i.postimg.cc/DyNN0K01/trash-solid-24.png"}
         alt="Delete"
       ></img>
     </button>

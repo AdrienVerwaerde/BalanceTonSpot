@@ -3,6 +3,9 @@ import axios from 'axios';
 import './Profile.css';
 import Swal from 'sweetalert2'
 
+const API_BASE_URL = 'http://ombelinepinoche-server.eddi.cloud:8443/api';
+const FETCH_PICTURES = "http://ombelinepinoche-server.eddi.cloud:8443/uploads/";
+
 /**
  * Component for the user profile dashboard.
  */
@@ -11,9 +14,11 @@ export default function UserProfileDashboard() {
         pseudo: '',
         email: '',
         firstname: '',
-        lastname: '', 
+        lastname: '',
         profilPicture: ''
     });
+
+    const token = localStorage.getItem('userToken');
 
     useEffect(() => {
         fetchUserData();
@@ -23,10 +28,9 @@ export default function UserProfileDashboard() {
      * Fetches user data from the server.
      */
     const fetchUserData = async () => {
-        const token = localStorage.getItem('userToken');
         if (token && token.trim() !== '') {
             try {
-                const response = await axios.get(`http://ombelinepinoche-server.eddi.cloud:8443/api/user`, {
+                const response = await axios.get(`${API_BASE_URL}/user`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -35,7 +39,7 @@ export default function UserProfileDashboard() {
                     pseudo: response.data.pseudo,
                     email: response.data.email,
                     firstname: response.data.firstname || '',
-                    lastname: response.data.lastname || '', 
+                    lastname: response.data.lastname || '',
                     profilPicture: response.data.profilpicture,
                 });
             } catch (error) {
@@ -62,27 +66,42 @@ export default function UserProfileDashboard() {
      * Handles profile picture change.
      * @param e - The event object.
      */
-    const defaultProfilePicture = ''; // Defines defaultProfilePicture variable
-
-    const handleProfilePictureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files && e.target.files[0];
+    const handleProfilePictureChange = (event) => {
+        const file = event.target.files && event.target.files[0];
         if (file && file.type.startsWith('image/')) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setUser(prevState => ({
-                    ...prevState,
-                    profilPicture: reader.result ? reader.result.toString() : defaultProfilePicture,
-                }));
-            };
-            reader.readAsDataURL(file);
+            uploadProfilePicture(file);
+            console.log('File:', file);
         } else {
             Swal.fire({
-                title: 'Error!',
-                text: 'Do you want to continue',
+                title: 'Erreur!',
+                text: 'Seuls les fichiers image sont autorisés.',
                 icon: 'error',
-                confirmButtonText: 'Cool'
+                confirmButtonText: 'OK'
             });
         }
+    };
+
+    const uploadProfilePicture = (file: string | Blob) => {
+        const formData = new FormData();
+        formData.append('profilPictureFile', file);
+
+        axios.post(`${API_BASE_URL}/profile/upload/`, formData, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+        })
+        .then((response) => {
+            // Mettre à jour l'image de profil dans l'état local après le téléchargement réussi
+            setUser(prevState => ({
+                ...prevState,
+                profilPicture: response.data.url, // Assurez-vous que cette clé correspond à la réponse de votre API
+            }));
+            Swal.fire('Succès!', 'La photo de profil a été prise en compte', 'success');
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            Swal.fire('Erreur!', 'Le téléchargement de la photo de profil a échoué.', 'error');
+        });
     };
 
     /**
@@ -100,11 +119,7 @@ export default function UserProfileDashboard() {
                 formData.append('firstname', user.firstname);
                 formData.append('lastname', user.lastname);
 
-                if (user.profilPicture.startsWith('data:image')) {
-                    formData.append('profilPicture', user.profilPicture);
-                }
-                
-                await axios.put(`http://ombelinepinoche-server.eddi.cloud:8443/api/user`, formData, {
+                await axios.put(`${API_BASE_URL}/user`, formData, {
                     headers: {
                         'Content-Type': 'application/json',
                         Authorization: `Bearer ${token}`,
@@ -120,7 +135,7 @@ export default function UserProfileDashboard() {
                     backdrop: `#e3e3e36z`,
                     buttonsStyling: false,
                     confirmButtonText: 'OK',
-                    scrollbarPadding: false  
+                    scrollbarPadding: false
                 });
             } catch (error) {
                 console.error('Error updating profile', error);
@@ -134,11 +149,13 @@ export default function UserProfileDashboard() {
                     backdrop: `#e3e3e36z`,
                     buttonsStyling: false,
                     confirmButtonText: 'OK',
-                    scrollbarPadding: false 
+                    scrollbarPadding: false
                 });
             }
         }
     };
+
+    console.log(FETCH_PICTURES, user.profilPicture)
 
     return (
         <main>
@@ -147,7 +164,7 @@ export default function UserProfileDashboard() {
                     <h2>Bonjour, {user.pseudo}</h2>
                     <div className="form-group">
                         <label htmlFor="profilePicture">Image de Profil</label>
-                        <img className="profile-dashboard-img" src={user.profilPicture} alt="Profilpicture" style={{ width: '10em', height: '10em', borderRadius: '50%' }} />
+                        <img className="profile-dashboard-img" src={`${FETCH_PICTURES}${user.profilPicture}`} alt="Profilpicture" style={{ width: '10em', height: '10em', borderRadius: '50%' }} />
                         <input type="file" id="profilPicture" onChange={handleProfilePictureChange} accept="image/*" />
                     </div>
                     <div className="form-group">
@@ -156,7 +173,7 @@ export default function UserProfileDashboard() {
                     </div>
                     <div className="form-group">
                         <label htmlFor="email">Email</label>
-                        <input type="email" id="email" name="email" value={user.email} onChange={handleChange} />
+                        <input type="email" id="email" name="email" value={user.email} onChange={handleChange} required />
                     </div>
                     <div className="form-group">
                         <label htmlFor="firstname">Prénom</label>

@@ -68,7 +68,7 @@ export default function SpotDetail() {
         <Carousel fade>
           {spot.pictures && spot.pictures.map((picture, index) => (
             <Carousel.Item key={index}>
-              <img className="spot-carousel-img" src= {`${FETCH_PICTURES}${picture.path}`} alt={`Slide ${index + 1}`} />
+              <img className="spot-carousel-img" src={`${FETCH_PICTURES}${picture.path}`} alt={`Slide ${index + 1}`} />
             </Carousel.Item>
           ))}
         </Carousel>
