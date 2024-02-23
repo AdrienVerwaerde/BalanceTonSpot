@@ -6,11 +6,12 @@
     justify-content: center;
     align-items: center;
     color: #ffffff;
+
 }
 
 .toggle-buttons-container h4 {
     font-size: small;
-    margin-bottom: 0.5em;
+    margin: 0em;
 }
 
 .toggle-button-snow {
@@ -53,3 +54,45 @@
     background-color: rgba(0, 0, 0, 0.133) !important;
 }
 
+/*COLLAPSE*/
+
+/*Button*/
+.collapse-button {
+    background-color: transparent;
+    border: none;
+    padding: 0em;
+    margin: 1em 0 1em 0;
+    
+}
+
+.collapse-button:hover {
+    background-color: transparent;
+    
+}
+
+.collapse-button:focus {
+    background-color: transparent;
+}
+
+#collapse-chevron {
+    display: block;
+}
+
+
+/*Box*/
+
+.card-body {
+    padding: 0px;
+    
+}
+
+.card.mt-3 {
+    margin-top: 1em;
+    background: none;
+    border: none;
+}
+
+.rotate {
+    transform: rotate(-180deg); 
+    transition: transform 0.3s ease; 
+}

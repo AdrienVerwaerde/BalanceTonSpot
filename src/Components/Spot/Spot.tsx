@@ -7,33 +7,31 @@ import Carousel from 'react-bootstrap/Carousel';
 import CommComponent from './CommComponent/CommComponent';
 import FavoriteButton from '../FavButton/FavButton';
 
-// TypeScript interface for Spot details
-interface Spot {
-  id: number; // Assuming id is numeric, adjust based on your backend
-  name: string;
-  description: string;
-  picture: string;
-  address: string;
-  rating: number;
-}
-
-// TypeScript interface for Picture
 interface Picture {
-  id: number;
+  name: string;
   path: string;
 }
 
-/**
- * Component that displays details of a spot.
- */
-/**
+interface Spot {
+  id: number;
+  name: string;
+  description: string;
+  picture: string; // URL de l'image principale
+  address: string;
+  rating: number;
+  pictures: Picture[]; // Ajout de cette ligne
+}
+
+const API_BASE_URL = "http://ombelinepinoche-server.eddi.cloud:8443/api/spot";
+const FETCH_PICTURES = "http://ombelinepinoche-server.eddi.cloud:8443/uploads/";
+
+/*
  * Component for displaying the details of a spot.
  * 
  * @returns JSX element
  */
 export default function SpotDetail() {
   const [spot, setSpot] = useState<Spot>({} as Spot); // Initialize as an empty object
-  const [pictures, setPictures] = useState<Picture[]>([]);
   const [error, setError] = useState('');
 
   // Extract the 'name' parameter from the URL using useParams with a generic type
@@ -47,7 +45,7 @@ export default function SpotDetail() {
       if (name) {
         try {
           const formattedSpotName = name.toLowerCase().replace(/\s/g, "-");
-          const response = await axios.get<Spot>(`http://ombelinepinoche-server.eddi.cloud:8443/api/spot/${formattedSpotName}`);
+          const response = await axios.get<Spot>(`${API_BASE_URL}/${formattedSpotName}`);
           setSpot(response.data);
         } catch (err) {
           setError(' ');
@@ -56,25 +54,6 @@ export default function SpotDetail() {
     };
 
     fetchSpotDetails();
-  }, [name]);
-
-  useEffect(() => {
-    /**
-     * Fetches the pictures of the spot from the server.
-     */
-    const fetchSpotPictures = async () => {
-      if (name) {
-        try {
-          const formattedSpotName = name.toLowerCase().replace(/\s/g, "-");
-          const response = await axios.get<Picture[]>(`http://ombelinepinoche-server.eddi.cloud:8443/api/spot/${formattedSpotName}/pictures`);
-          setPictures(response.data);
-        } catch (err) {
-          console.error("Error fetching pictures:", err);
-        }
-      }
-    };
-
-    fetchSpotPictures();
   }, [name]);
 
   if (error) {
@@ -87,9 +66,9 @@ export default function SpotDetail() {
         <h2 id="spot-details-title">{spot?.name}</h2>
 
         <Carousel fade>
-          {pictures.map((picture, index) => (
+          {spot.pictures && spot.pictures.map((picture, index) => (
             <Carousel.Item key={index}>
-              <img className="spot-carousel-img" src={picture.path} alt={`Slide ${index + 1}`} />
+              <img className="spot-carousel-img" src= {`${FETCH_PICTURES}${picture.path}`} alt={`Slide ${index + 1}`} />
             </Carousel.Item>
           ))}
         </Carousel>
@@ -100,10 +79,10 @@ export default function SpotDetail() {
         </div>
 
         {/* Ensure spot?.id is converted to a string if your FavoriteButton expects a string type */}
-        <FavoriteButton spotId={spot?.id} onToggle={() => {}} />
+        <FavoriteButton spotId={spot?.id} onToggle={() => { }} />
 
         <p id="spot-details-description">{spot?.description}</p>
-        <p id="spot-details-address"><img src="https://i.postimg.cc/P5YNtVhs/pin-solid-24.png" alt="Location pin"/>{spot?.address}</p>
+        <p id="spot-details-address"><img src="https://i.postimg.cc/P5YNtVhs/pin-solid-24.png" alt="Location pin" />{spot?.address}</p>
 
         <CommComponent spot={spot} />
       </div>
