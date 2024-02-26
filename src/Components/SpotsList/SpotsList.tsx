@@ -1,4 +1,4 @@
-import { useState, useContext} from "react";
+import { useState, useContext } from "react";
 import "./SpotsList.css";
 import SearchContext from "../../contextAPI/searchContext.ts";
 import SpotCard from "./SpotCard/SpotCard.tsx";
@@ -21,6 +21,11 @@ export default function SpotsList() {
     const [tri, setTri] = useState({ triPar: 'alphabet', order: 'asc' });
 
     /**
+     * Gets the current page
+     */
+    const [currentPage, setCurrentPage] = useState(1);
+
+    /**
      * Context variable to access the spots data.
      */
     const { spots } = useContext(SearchContext) || {};
@@ -29,6 +34,12 @@ export default function SpotsList() {
      * Sorts spots based on the selected criteria.
      */
     const triSpots = () => {
+
+        /**
+         * Defining the number of spots per page
+         */
+        const startIndex = (currentPage - 1) * 20;
+        const endIndex = startIndex + 20;
         return [...spots].sort((a, b) => {
             // Tri par alphabet
             if (tri.triPar === 'alphabet') {
@@ -38,7 +49,15 @@ export default function SpotsList() {
             else if (tri.triPar === 'rating') {
                 return tri.order === 'asc' ? a.rating - b.rating : b.rating - a.rating;
             }
-        });
+        }).slice(startIndex, endIndex);
+    };
+
+    /**
+     * Handles changing the current page.
+     * @param {number} page - The page number to navigate to.
+     */
+    const handlePageChange = (page: number) => {
+        setCurrentPage(page);
     };
 
     return (
@@ -60,9 +79,17 @@ export default function SpotsList() {
                 {triSpots().map((spot: Spot) => (
                     <SpotCard key={spot.id} spot={spot} onFavoriteToggle={function (): void {
                         throw new Error("Function not implemented.");
-                    } } />
+                    }} />
+                ))}
+            </div>
+
+            {/* Pagination */}
+            <div className="pagination">
+                {/*Array with .map thate creates a button for each necessary page*/}
+                {Array(Math.ceil(spots.length / 20)).fill(null).map((_, i) => (
+                    <button key={i + 1} onClick={() => handlePageChange(i + 1)}>{i + 1}</button>
                 ))}
             </div>
         </>
-    )
+    );
 }

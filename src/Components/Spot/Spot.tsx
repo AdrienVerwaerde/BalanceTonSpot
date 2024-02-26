@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import './Spot.css';
 import StarRating from '../StarRating/StarRating';
 import Carousel from 'react-bootstrap/Carousel';
@@ -85,7 +85,16 @@ export default function SpotDetail() {
         <p id="spot-details-address"><img src="https://i.postimg.cc/P5YNtVhs/pin-solid-24.png" alt="Location pin" />{spot?.address}</p>
 
         <CommComponent spot={spot} />
+        <div className="backtolist-button-container">
+        <Link to="/spotslist">
+        <button className="backtolist-button">
+        {'<'} Retour à la liste
+        </button>
+      </Link>
       </div>
+        
+      </div>
+      
     </div>
   );
 }

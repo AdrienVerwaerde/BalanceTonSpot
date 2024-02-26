@@ -60,7 +60,6 @@ const fetchUserData = async (token: string) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log("response.data", response.data); // Pour déboguer et voir la structure exacte
 
     // Assurez-vous que la clé correspond exactement à celle dans response.data
     setUser({ 
@@ -78,7 +77,7 @@ const fetchUserData = async (token: string) => {
         ref={buttonRef}
         onClick={() => setOpen(!open)}
         className="shadow-none btn btn-primary btn-profile mb-5">
-        <img id="button-img" src={isLoggedIn ? `${FETCH_PICTURES}${user.profilPicture}` : "https://i.postimg.cc/QCdf9cNS/585e4bf3cb11b227491c339a.png"} alt="Profile button"></img>
+        <img id="button-img" src={isLoggedIn ? `${FETCH_PICTURES}${user.profilPicture}` : "/src/assets/images/profile-button.png"} alt="Profile button"></img>
       </button>
       {isLoggedIn && <span id="profile-button-pseudo">{user.pseudo}</span>}
       <div ref={menuRef} style={{ minHeight: '150px' }}>

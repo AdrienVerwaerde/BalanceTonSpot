@@ -20,13 +20,14 @@ export default function TrashButton({ commentId, onCommentDeleted }: TrashButton
    */
   const handleDelete = async (): Promise<void> => {
     const result = await Swal.fire({
-      title: 'Êtes-vous sûr?',
-      text: "Vous ne pourrez pas revenir en arrière!",
+      title: 'Supprimer le commentaire',
+      text: "Es-tu sûr.e ?",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Oui, supprimez-le!'
+      confirmButtonText: 'Oui, supprimez-le!',
+      cancelButtonText: 'Annuler',
+      buttonsStyling: false,
+      scrollbarPadding: false
     });
 
     if (result.isConfirmed) {
@@ -41,18 +42,24 @@ export default function TrashButton({ commentId, onCommentDeleted }: TrashButton
         });
         // Call the callback function after successful deletion
         onCommentDeleted();
-        Swal.fire(
-          'Supprimé!',
-          'Votre commentaire a été supprimé.',
-          'success'
-        );
+        Swal.fire({
+          title: 'Commentaire supprimé',
+          text: "On ne le reverra pas de sitôt !",
+          icon: 'success',
+          confirmButtonText: 'OK',
+          buttonsStyling: false,
+          scrollbarPadding: false
+      });
       } catch (error) {
         console.error('Erreur lors de la suppression', error);
-        Swal.fire(
-          'Erreur!',
-          'Une erreur est survenue lors de la suppression.',
-          'error'
-        );
+        Swal.fire({
+          title: 'Erreur',
+          text: "Une erreur s'est produite",
+          icon: 'error',
+          confirmButtonText: 'OK',
+          buttonsStyling: false,
+          scrollbarPadding: false
+      });
       }
     }
   };
@@ -66,7 +73,7 @@ export default function TrashButton({ commentId, onCommentDeleted }: TrashButton
       aria-label="Delete comment"
     >
       <img
-        src={isHovering ? "https://i.postimg.cc/SRH6fFgH/trash-solid-alt.png" : "https://i.postimg.cc/DyNN0K01/trash-solid-24.png"}
+        src={isHovering ? "/src/assets/images/trash-solid-alt.png" : "/src/assets/images/trash-solid-24.png"}
         alt="Delete"
       ></img>
     </button>

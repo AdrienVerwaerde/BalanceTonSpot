@@ -21,7 +21,6 @@
 .header-user-link {
   color: rgb(255, 255, 255);
   padding-right: 1em;
-  
 }
 
 .header-user-link:hover {
@@ -39,5 +38,32 @@
 }
 
 .navbar-light .navbar-toggler-icon {
-  background-image: url(https://i.postimg.cc/Ghv5wQKc/menu-regular-24.png);
+  background-image: url("/src/assets/images/menu-regular-24.png");
 }
+
+
+/*MEDIA QUERIES*/
+
+@media screen and (max-width: 990px) {
+  #my-profile {
+      width: 50%;
+      margin-bottom: 0.5em;
+  }
+
+  .header-user-link {
+    margin: 0.5em 0 0.5em 0;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #my-profile {
+      width: 50%;
+      margin-bottom: 0.5em;
+  }
+
+  .header-user-link {
+    margin: 0.5em 0 0.5em 0;
+    width: 50%;
+  }
+}
+

@@ -61,8 +61,8 @@ export default function UpdateButton({ commentId, onCommentUpdated, onCommentCon
                         </option>
                     ))}
                 </select>
-                <button className="edit-buttons validate" onClick={handleUpdate}><img src="https://i.postimg.cc/g289LpYg/check-regular-24-1.png"></img></button>
-                <button className="edit-buttons cancel" onClick={() => setEditing(false)}><img src="https://i.postimg.cc/W12KzkH1/x-regular-24-2.png"></img></button>
+                <button className="edit-buttons validate" onClick={handleUpdate}><img src="/src/assets/images/check-regular-24-1.png"></img></button>
+                <button className="edit-buttons cancel" onClick={() => setEditing(false)}><img src="/src/assets/images/x-regular-24-2.png"></img></button>
             </div>
         );
 
@@ -77,7 +77,7 @@ export default function UpdateButton({ commentId, onCommentUpdated, onCommentCon
             aria-label="Update comment"
         >
             <img
-                src={isHovering ? "https://i.postimg.cc/NfqLyztF/edit-alt-solid-24.png" : "https://i.postimg.cc/K8hbv4KV/pencil-solid-24-1.png"}
+                src={isHovering ? "/src/assets/images/edit-alt-solid-24.png" : "/src/assets/images/pencil-solid-24-1.png"}
                 alt="Edit"
             ></img>
         </button>

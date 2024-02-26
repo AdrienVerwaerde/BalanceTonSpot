@@ -200,7 +200,7 @@ export default function UserProfileDashboard() {
                             {isLoading ? (
                                 <div className="loader-container">
                                     <img
-                                        src="https://i.postimg.cc/fLvdb7fR/bouton-skate-color-2.png"
+                                        src="/src/assets/images/bouton-skate-color-2.png"
                                         alt="loader"
                                         className="loader-img"
                                     />

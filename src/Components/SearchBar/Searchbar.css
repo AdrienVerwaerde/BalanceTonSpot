@@ -18,14 +18,14 @@
   color: #897b68 !important;
 }
 
-.ui.input:focus-within label {
-  color: #ff0000 !important;
-}
-
 .search-error {
   text-align: center;
   padding: 20px;
   color: #897b68;
+}
+
+.search.link.icon::before {
+  color: #897b68 !important;
 }
 
 

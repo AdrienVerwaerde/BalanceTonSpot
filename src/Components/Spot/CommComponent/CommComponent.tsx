@@ -31,6 +31,7 @@ interface SpotProps {
   };
 }
 
+const FETCH_USER = "http://ombelinepinoche-server.eddi.cloud:8443/uploads/";
 const API_BASE_URL = "http://ombelinepinoche-server.eddi.cloud:8443/api";
 
 export default function CommentSection({ spot }: SpotProps) {
@@ -76,7 +77,7 @@ export default function CommentSection({ spot }: SpotProps) {
       );
 
       // Met à jour l'état avec le nouveau commentaire
-      setComments((prevComments) => [...prevComments, response.data]);
+      setComments((prevComments) => [response.data, ...prevComments]);
       setNewComment("");
       setRating(null);
       setOpen(false); // Ferme le modal
@@ -196,6 +197,8 @@ export default function CommentSection({ spot }: SpotProps) {
     );
 };
 
+console.log(comments.map(comment => comment.user.profilpicture))
+
   return (
     <div className="comments-container">
       {error && <p className="error-message">{error}</p>}
@@ -261,7 +264,7 @@ export default function CommentSection({ spot }: SpotProps) {
               >
                 <img
                   id="button-cancel-img"
-                  src="https://i.postimg.cc/ZRpy77dM/x-regular-24.png"
+                  src="/src/assets/images/x-regular-24-2.png"
                 />
                 ANNULER
               </button>
@@ -269,7 +272,7 @@ export default function CommentSection({ spot }: SpotProps) {
                 ENVOYER
                 <img
                   id="button-submit-img"
-                  src="https://i.postimg.cc/QMxygx8Y/send-regular-24-1.png"
+                  src="/src/assets/images/send-regular-24-1.png"
                 />
               </button>
             </form>
@@ -283,18 +286,18 @@ export default function CommentSection({ spot }: SpotProps) {
           <li key={comment.id}>
             <div className="comments-user-block">
               <img
-                src={comment.user.profilpicture}
-                alt={comment.user.pseudo}
+                src={`${FETCH_USER}${comment.user?.profilpicture}`}
+                alt={comment.user?.pseudo}
                 className="user-image"
               />
-              <h3>{comment.user.pseudo}</h3>
+              <h3>{comment.user?.pseudo}</h3>
             </div>
             <div className="comment-notation">
               <StarRating rating={comment.rating} id={0} />
             </div>
             <p>{comment.content}</p>
             <p id="comments-date">Posté le : {formatDate(comment.date)}</p>
-            {currentUserPseudo === comment.user.pseudo && (
+            {currentUserPseudo === comment.user?.pseudo && (
               <div className="comments-options-container">
                 <UpdateButton commentId={comment.id} onCommentContent={comment.content} onCommentRating={comment.rating} onCommentUpdated={(updatedComment, updatedRating) => updateCommentById(comment.id, updatedComment, updatedRating)} />
                 <TrashButton commentId={comment.id} onCommentDeleted={() => removeCommentById(comment.id)} />
