@@ -1,0 +1,37 @@
+/*FAVORITES*/
+
+.favs-container {
+    transition: all ease-in-out 0.5s;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3em;
+    padding: 1.5em;
+}
+
+.favs-container h2 {
+    background: #e3e3e3;
+    margin: 0;
+    padding: 10px;
+    font-size: 1.2em;
+    color: #000000;
+}
+
+#fav-title {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 0px;
+    margin-top: 1.5em;
+    color: #897b68;
+}
+
+/*If there is no spots in the fav list*/
+
+.fav-none-title {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 0px;
+    margin-top: 5em;
+    color: #897b68;
+    text-transform: uppercase;
+}

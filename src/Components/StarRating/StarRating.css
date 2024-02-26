@@ -1,0 +1,10 @@
+/*STAR DESIGN*/
+
+.star-rating {
+    display: flex;
+}
+
+.star-rating img {
+    width: 1.7em !important;
+}
+

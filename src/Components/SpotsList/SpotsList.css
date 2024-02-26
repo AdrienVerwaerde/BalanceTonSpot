@@ -1,0 +1,40 @@
+/* LIST OF SPOTS */
+
+#spotslist-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 3em;
+  padding: 1.5em;
+}
+
+.spotslist-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em;
+}
+
+/* Styles for filter boxes */
+
+.filter-boxes-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+#filter-box {
+  width: 8em;
+  height: 2em;
+  border: #e3e3e3 1px solid;
+  border-radius: 0.5em;
+  background-color: white;
+  margin: 0em 0.5em 1em 0;
+}
+
+#filter-box:focus {
+  outline: none !important;
+  border: #e3e3e3 1px solid;
+}
