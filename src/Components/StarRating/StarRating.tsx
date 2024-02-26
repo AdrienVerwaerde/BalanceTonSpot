@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './StarRating.css'; 
 import starFilledSvg from '../../assets/images/svg/starfilled.svg';
 import starEmptySvg from '../../assets/images/svg/starempty.svg';
@@ -61,4 +61,4 @@ export default function StarRating({rating} : StarRatingProps): JSX.Element{
             {renderStars()}
         </div>
     );
-};
+}
