@@ -1,7 +1,12 @@
-import React, { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useContext } from 'react'
 import Fade from 'react-bootstrap/Fade';
 import { Link } from 'react-router-dom';
 import './ProfileButton.css'
+import ThemeContext from '../../../contextAPI/themeContext';  
+import axios from 'axios';
+
+const API_USER = "http://ombelinepinoche-server.eddi.cloud:8443/api/user";
+const FETCH_PICTURES = "http://ombelinepinoche-server.eddi.cloud:8443/uploads/";
 
 export default function ProfileButton() {
   //This function uses useState to toggle the list of options from the button
@@ -10,6 +15,13 @@ export default function ProfileButton() {
   const menuRef = useRef<HTMLDivElement>(null);
   //This function will check if the menu is already active
   const buttonRef = useRef<HTMLButtonElement>(null);
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState({ pseudo: '', profilPicture: ''});
+
+  const { theme } = useContext(ThemeContext) || {};
+  const listGroupItem = `list-group-item list-group-item-${theme}`;
+  
 
   useEffect(() => {
     // Adds an event listener on the whole document to detect when we click anywhere but on the button and also allows to close the menu by clicking the button again
@@ -26,10 +38,38 @@ export default function ProfileButton() {
 
     document.addEventListener('mousedown', handleClickOutside);
 
+    // Vérifiez si l'utilisateur est connecté et récupérez ses données
+    const token = localStorage.getItem('userToken');
+    if (token) {
+      setIsLoggedIn(true);
+      fetchUserData(token);
+    }
+
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
+/**
+ *  Fonction pour récupérer les données utilisateur à partir du token
+ */ 
+const fetchUserData = async (token: string) => {
+  try {
+    const response = await axios.get(`${API_USER}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    // Assurez-vous que la clé correspond exactement à celle dans response.data
+    setUser({ 
+      pseudo: response.data.pseudo, 
+      profilPicture: response.data.profilpicture || '', // Utilisez la bonne clé ici
+    });
+  } catch (error) {
+    console.error('Erreur lors de la récupération des données utilisateur', error);
+  }
+};
 
   return (
     <div className='profile-btn-container'>
@@ -37,18 +77,30 @@ export default function ProfileButton() {
         ref={buttonRef}
         onClick={() => setOpen(!open)}
         className="shadow-none btn btn-primary btn-profile mb-5">
-        <img id="button-img" src="https://i.postimg.cc/QCdf9cNS/585e4bf3cb11b227491c339a.png" alt="Profile button"></img>
+        <img id="button-img" src={isLoggedIn ? `${FETCH_PICTURES}${user.profilPicture}` : "/src/assets/images/profile-button.png"} alt="Profile button"></img>
       </button>
+      {isLoggedIn && <span id="profile-button-pseudo">{user.pseudo}</span>}
       <div ref={menuRef} style={{ minHeight: '150px' }}>
         <Fade in={open}>
           <ul className="list-group">
-          <Link to="/profile"><li className="list-group-item">PROFIL</li></Link>
-            <Link to="/favoris"><li className="list-group-item">FAVORIS</li></Link>
-            <a href="#"><li className="list-group-item">DECONNEXION</li></a>
+            {isLoggedIn ? (
+              // Displayed if user is logged in
+              <>
+                <Link to="/profile"><li className={listGroupItem}>PROFIL</li></Link>
+                <Link to="/favoris"><li className={listGroupItem}>FAVORIS</li></Link>
+                <Link to="/" onClick={() => {localStorage.removeItem('userToken'); setIsLoggedIn(false);}}><li className={listGroupItem}>DECONNEXION</li></Link>
+              </>
+            ) : (
+              // Displayed if user isn't logged in
+              <>
+                <Link to="/login"><li className={listGroupItem}>CONNEXION</li></Link>
+                <Link to="/signup"><li className={listGroupItem}>INSCRIPTION</li></Link>
+              </>
+            )}
           </ul>
         </Fade>
       </div>
     </div>
-  )
+  );
 }
 

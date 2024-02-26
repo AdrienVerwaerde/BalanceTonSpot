@@ -1,11 +1,21 @@
 /* HEADER */
+.header,
+.header-skateboard {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #333;
+    box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.5);
+}
 
-.header {
+.header-snowboard {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
     background-color: #214c5c;
+    box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.5);
 }
 
 #button-logo {

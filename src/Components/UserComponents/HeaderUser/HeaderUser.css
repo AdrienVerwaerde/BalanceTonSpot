@@ -3,9 +3,8 @@
 .profile-navbar {
   display: flex;
   justify-content: space-between;
-  
   width: 100%;
-  background: #214C5C;
+  background: #897b68;
   box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.5);
   padding: 2em;
   font-size: large;
@@ -22,9 +21,49 @@
 .header-user-link {
   color: rgb(255, 255, 255);
   padding-right: 1em;
-  
 }
 
 .header-user-link:hover {
   color: rgb(217, 217, 217);
 }
+
+/* HAMBRUGER MENU */
+
+.navbar-toggler.collapsed {
+  border: #ffffff 2px solid;
+}
+
+.navbar-toggler-icon {
+  color: #ffffff;
+}
+
+.navbar-light .navbar-toggler-icon {
+  background-image: url("/src/assets/images/menu-regular-24.png");
+}
+
+
+/*MEDIA QUERIES*/
+
+@media screen and (max-width: 990px) {
+  #my-profile {
+      width: 50%;
+      margin-bottom: 0.5em;
+  }
+
+  .header-user-link {
+    margin: 0.5em 0 0.5em 0;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #my-profile {
+      width: 50%;
+      margin-bottom: 0.5em;
+  }
+
+  .header-user-link {
+    margin: 0.5em 0 0.5em 0;
+    width: 50%;
+  }
+}
+

@@ -1,0 +1,56 @@
+/*TRASH BUTTON*/
+
+.trash-button {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  background-color: transparent;
+  border:none;
+  padding: 0px;
+}
+
+.trash-button img {
+  width: 80% !important;
+}
+
+/*POPUP ALERT*/
+
+.swal2-container {
+  padding: 0px;
+  margin: 0px;
+}
+
+.swal2-actions {
+  display: flex !important;
+  flex-direction: column !important;
+
+}
+
+.swal2-confirm {
+  background-color: #897b68;
+  border: 0;
+  border-radius: 0.3em;
+  padding: 1em;
+  margin-bottom: 0.5em;
+  color: #fff;
+  font-size: 1em;
+  transition: ease-in-out 0.2s;
+}
+
+.swal2-confirm:hover{
+  background-color:#e3e3e3;
+}
+
+.swal2-cancel {
+  background-color: #333;
+  border: 0;
+  border-radius: 0.3em;
+  padding: 1em;
+  color: #fff;
+  font-size: 1em;
+  transition: ease-in-out 0.2s;
+}
+
+.swal2-cancel:hover{
+  background-color:#ff0000;
+}

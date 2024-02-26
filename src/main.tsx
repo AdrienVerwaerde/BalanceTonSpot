@@ -12,36 +12,16 @@ import HeaderUser from "./Components/UserComponents/HeaderUser/HeaderUser.tsx";
 import SpotsList from "./Components/SpotsList/SpotsList.tsx";
 import Spot from "./Components/Spot/Spot.tsx";
 import AboutUs from "./Components/AboutUs/AboutUs.tsx";
+import PrivateRoute from "./PrivateRoute/PrivateRoute.tsx";
+import LegalNotice from "./Components/LegalNotice/LegalNotice.tsx";
+import Contact from "./Components/Contact/Contact.tsx";
 
 // Import of the semantic-ui-css library to use the semantic-ui components
 import "semantic-ui-css/semantic.min.css";
 
 // Import of react-router-dom components to create our Router
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
-const spots = [
-  {
-    name: "Un Spot",
-    description:
-      "Une magnifique plage urbaine à Marseille offrant une vue imprenable sur la mer Méditerranée.",
-    image:
-      "https://cdn-s-www.ledauphine.com/images/0B4C75D1-BE1B-47ED-9CDF-B171D74277BD/NW_raw/le-snowpark-de-vars-s-etale-sur-plus-de-1-000-metres-de-denivele-c-est-ce-qui-fait-sa-singularite-et-sa-notoriete-qui-depassent-aujourd-hui-les-frontieres-europeennes-1390340766.jpg",
-  },
-  {
-    name: "Un deuxième Spot",
-    description:
-      "Îlot rocheux en Normandie, connu pour son abbaye médiévale perchée au sommet.",
-    image:
-      "https://static.savoie-mont-blanc.com/wp-content/uploads/external/e132d5d4d725e4a69beabf7bcc818ecf-3800129-1745x1163.jpg",
-  },
-  {
-    name: "ET ATTENTION... Un troisième Spot",
-    description:
-      "L'un des châteaux les plus reconnaissables de la Loire grâce à son architecture française de la Renaissance.",
-    image:
-      "https://www.laclusaz.com/app/uploads/apidae/7138618-diaporama-890x500.jpg",
-  },
-];
+import NotFoundPage from "./Components/404/404.tsx";
 
 const router = createBrowserRouter([
   // 1. Adding the routes to application pages (Homepage, SpotsList, SpotDetails, etc.)
@@ -64,11 +44,15 @@ const router = createBrowserRouter([
       },
       {
         path: "legal-notice",
-        //element: <Admin />,
+        element: <LegalNotice />,
       },
       {
         path: "contact",
-        //element: <Admin />,
+        element: <Contact />,
+      },
+      {
+        path: "our-team",
+        element: <AboutUs />,
       },
     ],
   },
@@ -90,25 +74,26 @@ const router = createBrowserRouter([
     children: [
       {
         path: "profile",
-        element: <Profile />,
+        element: <PrivateRoute><Profile /></PrivateRoute>,
       },
       {
         path: "favoris",
-        element: <Favoris spots={spots} />,
+        element: <PrivateRoute><Favoris /></PrivateRoute>,
       },
     ],
   },
 
+  //Adding route for 404 page
   {
-    path: "our-team",
-    element: <AboutUs />,
+    path: "*",
+    element: <NotFoundPage />,
   },
 ]);
 
 // X. Rending of the Router
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    {/* ici on ne veut plus rendre simplement le composant App, mais notre router qui contient la logique de routage => c'est lui qui va décider en fonction de l'URL, quel composant rendre */}
-    <RouterProvider router={router} />
+      {/* ici on ne veut plus rendre simplement le composant App, mais notre router qui contient la logique de routage => c'est lui qui va décider en fonction de l'URL, quel composant rendre */}
+      <RouterProvider router={router} />
   </React.StrictMode>
 );

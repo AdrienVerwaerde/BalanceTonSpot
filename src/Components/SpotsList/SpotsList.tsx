@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import "./SpotsList.css";
 import SearchContext from "../../contextAPI/searchContext.ts";
-import StarRating from "../StarRating/StarRating.tsx";
+import SpotCard from "./SpotCard/SpotCard.tsx";
 
 interface Spot {
     rating: number;
@@ -10,6 +10,7 @@ interface Spot {
     description: string;
     picture: string;
     address: string;
+    sport_id: [{ name: string }];
 }
 
 /**
@@ -17,78 +18,78 @@ interface Spot {
  */
 export default function SpotsList() {
 
+    const [tri, setTri] = useState({ triPar: 'alphabet', order: 'asc' });
+
     /**
-     * State variable to store whether each spot is marked as favorite or not.
+     * Gets the current page
      */
-    const [isFavorite, setIsFavorite] = useState<{ [key: number]: boolean }>({});
+    const [currentPage, setCurrentPage] = useState(1);
 
     /**
      * Context variable to access the spots data.
      */
-    const { spots } = useContext(SearchContext);
+    const { spots } = useContext(SearchContext) || {};
 
     /**
-     * Handler function to toggle the favorite status of a spot.
-     * @param spotId - The ID of the spot.
+     * Sorts spots based on the selected criteria.
      */
-    const handleFavoriteToggle = (spotId: number) => {
-        setIsFavorite((prevIsFavorite) => ({
-            ...prevIsFavorite,
-            [spotId]: !prevIsFavorite[spotId],
-        }));
+    const triSpots = () => {
+
+        /**
+         * Defining the number of spots per page
+         */
+        const startIndex = (currentPage - 1) * 20;
+        const endIndex = startIndex + 20;
+        return [...spots].sort((a, b) => {
+            // Tri par alphabet
+            if (tri.triPar === 'alphabet') {
+                return tri.order === 'asc' ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
+            }
+            // Tri par note
+            else if (tri.triPar === 'rating') {
+                return tri.order === 'asc' ? a.rating - b.rating : b.rating - a.rating;
+            }
+        }).slice(startIndex, endIndex);
     };
 
-    return spots.length === 0 ? (
-        <p className="no-result">
-            C'est trop calme, j'aime pas trop beaucoup ça. J'préfère quand c'est un
-            peu trop plus moins calme...
-        </p>
-    ) : (
-        <div id="spotslist-container">
-            {/* CARD SPOT */}
-            {spots.map((spot: Spot) => (
-                <div key={spot.id} id="spotslist">
-                    <h2 id="spotslist-title">{spot.name}</h2>
-                    <img src={spot.picture} alt={spot.name} id="spotslist-image" />
+    /**
+     * Handles changing the current page.
+     * @param {number} page - The page number to navigate to.
+     */
+    const handlePageChange = (page: number) => {
+        setCurrentPage(page);
+    };
 
-                    <div className="spotslist-content">
-                        <StarRating
-                            id={spot.id}
-                            rating={spot.rating || 0} // Utilisez la note du spot ou 0 si non défini
-                        />
+    return (
+        <>
+            <div className="filter-boxes-container">
+                <select id="filter-box" value={tri.triPar} onChange={(e) => setTri({ ...tri, triPar: e.target.value })}>
+                    <option value="alphabet">A à Z</option>
+                    <option value="rating">Par Note</option>
 
-                        {/* BUTTON FAVS */}
-                        <div>
-                            <button
-                                onClick={() => handleFavoriteToggle(spot.id)}
-                                id="spotslist-button-fav"
-                                aria-label="toggle favorite"
-                            >
-                                {isFavorite[spot.id] ? (
-                                    <img src="https://i.postimg.cc/BQgtKhT4/heart-solid-24-1.png"></img>
-                                ) : (
-                                    <img src="https://i.postimg.cc/bY1ZzYdG/heart-regular-24-2.png"></img>
-                                )}
-                            </button>
-                        </div>
+                </select>
+                <select id="filter-box" value={tri.order} onChange={(e) => setTri({ ...tri, order: e.target.value })}>
+                    <option value="asc">Croissant</option>
+                    <option value="desc">Décroissant</option>
+                </select>
+            </div>
 
-                        <p id="spotslist-description">{spot.description.length > 150 ? `${spot.description.slice(0, 150)}...` : spot.description}</p>
-                        <p id="spotslist-address"><img src="https://i.postimg.cc/P5YNtVhs/pin-solid-24.png"></img>{spot.address}</p>
-                        
-                            {/* BUTTON DETAILS */}
-                            <button
-                                onClick={() => {
-                                    window.location.href = `/spot/${spot.name
-                                        .toLowerCase()
-                                        .replace(/\s+/g, "-")}`;
-                                }}
-                                id="spotslist-button-detail"
-                            >
-                            Voir le détail
-                            </button>
-                        </div>
-                    </div>
-            ))}
-        </div>
+            <div id="spotslist-container">
+                {/* CARD SPOT */}
+                {triSpots().map((spot: Spot) => (
+                    <SpotCard key={spot.id} spot={spot} onFavoriteToggle={function (): void {
+                        throw new Error("Function not implemented.");
+                    }} />
+                ))}
+            </div>
+
+            {/* Pagination */}
+            <div className="pagination">
+                {/*Array with .map thate creates a button for each necessary page*/}
+                {Array(Math.ceil(spots.length / 20)).fill(null).map((_, i) => (
+                    <button key={i + 1} onClick={() => handlePageChange(i + 1)}>{i + 1}</button>
+                ))}
+            </div>
+        </>
     );
 }

@@ -12,7 +12,7 @@ export default function HeaderUser() {
         <>
             {/* Header section */}
             <header className="navbar-container">
-                <Navbar expand="lg" className="bg-body-tertiary profile-navbar">
+                <Navbar expand="lg" className="shadow-none bg-body-tertiary profile-navbar">
                     <Container>
                         {/* Navbar brand */}
                         <Navbar.Brand id="my-profile">

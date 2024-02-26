@@ -1,22 +1,10 @@
+/*STAR DESIGN*/
+
 .star-rating {
-    direction: rtl;
-    font-size: 150%;
-    position: relative;
-    unicode-bidi: bidi-override;
-    display: inline-block;
+    display: flex;
 }
 
-.star {
-    cursor: pointer;
-    color: #214C5C;
+.star-rating img {
+    width: 1.7em !important;
 }
 
-.partial-filled {
-    position: absolute;
-    left: 0;
-    top: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    direction: ltr;
-    color: rgb(251, 29, 0);
-}

@@ -1,47 +1,40 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import './Spot.css';
 import StarRating from '../StarRating/StarRating';
 import Carousel from 'react-bootstrap/Carousel';
+import CommComponent from './CommComponent/CommComponent';
+import FavoriteButton from '../FavButton/FavButton';
 
+interface Picture {
+  name: string;
+  path: string;
+}
 
-// Interface TS for spot
-interface spot {
+interface Spot {
   id: number;
   name: string;
   description: string;
-  picture: string;
+  picture: string; // URL de l'image principale
   address: string;
   rating: number;
+  pictures: Picture[]; // Ajout de cette ligne
 }
 
-/**
- * Component that displays details of a spot.
+const API_BASE_URL = "http://ombelinepinoche-server.eddi.cloud:8443/api/spot";
+const FETCH_PICTURES = "http://ombelinepinoche-server.eddi.cloud:8443/uploads/";
+
+/*
+ * Component for displaying the details of a spot.
+ * 
+ * @returns JSX element
  */
-export default function Spot() {
-  const [spot, setSpot] = useState<spot | null>(null);
-  const [loading, setLoading] = useState(true);
+export default function SpotDetail() {
+  const [spot, setSpot] = useState<Spot>({} as Spot); // Initialize as an empty object
   const [error, setError] = useState('');
-  const [isFavorite, setIsFavorite] = useState<{ [key: number]: boolean }>({});
-  const [index, setIndex] = useState(0);
 
-  const handleSelect = (selectedIndex) => {
-    setIndex(selectedIndex);
-  };
-
-  /**
-    * Handler function to toggle the favorite status of a spot.
-    * @param spotId - The ID of the spot.
-    */
-  const handleFavoriteToggle = (spotId: number) => {
-    setIsFavorite((prevIsFavorite) => ({
-      ...prevIsFavorite,
-      [spotId]: !prevIsFavorite[spotId],
-    }));
-  };
-
-  // Extract the 'name' parameter from the URL
+  // Extract the 'name' parameter from the URL using useParams with a generic type
   const { name } = useParams<{ name: string }>();
 
   useEffect(() => {
@@ -52,29 +45,16 @@ export default function Spot() {
       if (name) {
         try {
           const formattedSpotName = name.toLowerCase().replace(/\s/g, "-");
-          const response = await axios.get(`http://ombelinepinoche-server.eddi.cloud:8443/api/spot/${formattedSpotName}`);
+          const response = await axios.get<Spot>(`${API_BASE_URL}/${formattedSpotName}`);
           setSpot(response.data);
-          setLoading(false);
         } catch (err) {
-          setError('404');
-          setLoading(false);
+          setError(' ');
         }
       }
     };
 
     fetchSpotDetails();
-  }, [name]); // Add 'name' as a dependency for useEffect
-
-  if (loading) {
-    return (
-      <div className="loader-container">
-        <img src="https://i.postimg.cc/wjKvWdkq/bouton-skate-color.png"
-          alt="loader"
-          className="loader-img" />
-        <p id="loader-message">Recherche des spots...</p>
-      </div>
-    );
-  }
+  }, [name]);
 
   if (error) {
     return <p className='no-result'>{error}</p>;
@@ -83,52 +63,38 @@ export default function Spot() {
   return (
     <div className='details-global-container'>
       <div id="spot-details-container">
-      <h2 id="spot-details-title">{spot?.name}</h2>
+        <h2 id="spot-details-title">{spot?.name}</h2>
 
-        {/*CARROUSEL*/}
-          <Carousel fade>
-            <Carousel.Item>
-              <img src={spot?.picture} alt="First slide" />
-              <Carousel.Caption>
-                <h3>CECI</h3>
-              </Carousel.Caption>
+        <Carousel fade>
+          {spot.pictures && spot.pictures.map((picture, index) => (
+            <Carousel.Item key={index}>
+              <img className="spot-carousel-img" src={`${FETCH_PICTURES}${picture.path}`} alt={`Slide ${index + 1}`} />
             </Carousel.Item>
-            <Carousel.Item>
-              <img src={spot?.picture} alt="First slide" />
-              <Carousel.Caption>
-                <h3>EST UN TRÈS BEAU</h3>
-              </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item>
-              <img src={spot?.picture} alt="First slide" />
-              <Carousel.Caption>
-                <h3>SLIDER</h3>
-              </Carousel.Caption>
-            </Carousel.Item>
-          </Carousel>
-          <div id="ratings">
-        <StarRating
-          id={spot?.id}
-          rating={spot?.rating || 0}
-        /> <p>({spot.rating})</p>
-          </div>
-          <button
-            onClick={() => handleFavoriteToggle(spot?.id)}
-            id="spotslist-button-fav"
-            aria-label="toggle favorite"
-          >
-            {isFavorite[spot?.id] ? (
-              <img src="https://i.postimg.cc/BQgtKhT4/heart-solid-24-1.png"></img>
-            ) : (
-              <img src="https://i.postimg.cc/bY1ZzYdG/heart-regular-24-2.png"></img>
-            )}
-          </button>
-        
-      
+          ))}
+        </Carousel>
+
+        <div id="ratings">
+          <StarRating rating={spot?.rating || 0} id={spot?.id} /> {/* Adjusted to convert id to string */}
+          <p>({spot?.rating})</p>
+        </div>
+
+        {/* Ensure spot?.id is converted to a string if your FavoriteButton expects a string type */}
+        <FavoriteButton spotId={spot?.id} onToggle={() => { }} />
+
         <p id="spot-details-description">{spot?.description}</p>
-        <p id="spot-details-address"><img src="https://i.postimg.cc/P5YNtVhs/pin-solid-24.png"></img>{spot?.address}</p>
+        <p id="spot-details-address"><img src="https://i.postimg.cc/P5YNtVhs/pin-solid-24.png" alt="Location pin" />{spot?.address}</p>
+
+        <CommComponent spot={spot} />
+        <div className="backtolist-button-container">
+        <Link to="/spotslist">
+        <button className="backtolist-button">
+        {'<'} Retour à la liste
+        </button>
+      </Link>
+      </div>
+        
+      </div>
       
-    </div>
     </div>
   );
 }

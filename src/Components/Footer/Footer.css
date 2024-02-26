@@ -1,12 +1,18 @@
 /* FOOTER */
 
-footer {
-    
+.footer,
+.footer-skateboard  {
     margin-top: 3em;
-    background-color: #214c5c;
     text-align: center;
     padding: 1em;
+    background-color: #333;
+}
 
+.footer-snowboard {
+    margin-top: 3em;
+    text-align: center;
+    padding: 1em;
+    background-color: #214c5c;
 }
 
 ul {
@@ -29,11 +35,10 @@ li {
 }
 
 #footer-link:hover {
-    
-    color: #c4c4c4;
+    color: #e3e3e3;
     text-decoration: underline;
     text-underline-offset: 0.5em;
-    text-decoration-color: #c4c4c4;
+    text-decoration-color: #e3e3e3;
 }
 /* FOOTER */
 

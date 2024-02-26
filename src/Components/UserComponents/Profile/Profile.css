@@ -12,13 +12,21 @@
 
 .user-form {
     width: 25%;
+    padding: 1em;
+    border: #ffffff 1px solid;
+    border-radius: 0.5em;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .user-form h2 {
-    color: #214c5c;
+    color: #897b68;
 }
 
 .form-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
     margin-bottom: 15px;
 }
 
@@ -30,20 +38,31 @@
 
 .form-group input[type="text"],
 .form-group input[type="email"],
-.form-group input[type="file"] {
+.form-group input[type="file"],
+.form-group input[type="firstname"],
+.form-group input[type="lastname"] {
     width: 100%;
     padding: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid #e3e3e3;
     border-radius: 4px;
     box-sizing: border-box;
 }
 
-.form-group img {
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group input[type="file"]:focus,
+.form-group input[type="firstname"]:focus,
+.form-group input[type="lastname"]:focus {
+    outline: none !important;
+    border: #897b68 2px solid;
+}
+
+.profile-dashboard-img {
     display: block;
     margin-top: 10px;
-    max-width: 100%;
-    height: auto;
+    width: 100%;
     border-radius: 50%;
+    margin-bottom: 1em;
 }
 
 button[type="submit"] {
@@ -51,13 +70,54 @@ button[type="submit"] {
     padding: 10px;
     border: none;
     border-radius: 4px;
-    background-color: #214c5c;
+    background-color: #897b68;
     color: white;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 button[type="submit"]:hover {
-    
-    background-color: rgb(217, 217, 217);
+    background-color: #e3e3e3;
+}
+
+
+/*ALERT BOX*/
+
+.swal2-container {
+    padding: 0px;
+    margin: 0px;
+}
+
+.swal2-confirm {
+    background-color: #897b68;
+    border: 0;
+    border-radius: 0.3em;
+    padding: 1em;
+    color: #fff;
+    font-size: 1em;
+    transition: ease-in-out 0.2s;
+}
+
+.swal2-confirm:hover{
+    background-color:#e3e3e3;
+}
+
+
+/* MEDIA QUERIES */
+@media screen and (max-width: 1200px) {
+    .user-form {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .user-form {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .user-form {
+        width: 75%;
+    }
 }
