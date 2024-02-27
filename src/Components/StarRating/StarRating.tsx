@@ -49,7 +49,7 @@ export default function StarRating({ rating }: StarRatingProps): JSX.Element {
                     key={i}
                     className={`star ${isFilled ? 'filled' : ''}`} // Adds 'filled' class if the star is filled
                 >
-                    {starContent} // Renders the star content
+                    {starContent} 
                 </span>
             );
         }
@@ -59,7 +59,7 @@ export default function StarRating({ rating }: StarRatingProps): JSX.Element {
     // Render function of the StarRating component
     return (
         <div className="star-rating">
-            {renderStars()} // Renders the star elements
+            {renderStars()} 
         </div>
     );
 
