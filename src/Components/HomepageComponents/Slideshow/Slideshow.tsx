@@ -13,10 +13,14 @@ interface spot {
 const delay = 4000;
 
 export default function Slideshow() {
+  //Gets the current theme
   const { theme } = useContext(ThemeContext) || { theme: 'skate' };
-  const [spots, setSpots] = useState([]); // State variable to store the spots data
-  const [index, setIndex] = useState(0); // State variable to store the current index of the slideshow
-  const timeoutRef = useRef<number>(); // Reference to the timeout used for automatic slideshow
+  // State variable to store the spots data
+  const [spots, setSpots] = useState([]); 
+  // State variable to store the current index of the slideshow
+  const [index, setIndex] = useState(0); 
+  // Reference to the timeout used for automatic slideshow
+  const timeoutRef = useRef<number>(); 
 
   // Function to reset the timeout
   function resetTimeout() {
@@ -26,42 +30,45 @@ export default function Slideshow() {
   }
 
   useEffect(() => {
-    // Fetch spots data based on the selected theme
+    // Fetches spots data based on the selected theme
     const fetchSpots = async () => {
       if (!theme) {
-        console.log("Pilule Bleu ou Pilule Rouge ?"); // Log a message if the theme is not set
+        console.log("Pilule Bleu ou Pilule Rouge ?"); // Logs a message if the theme is not set
         return;
       }
 
       try {
+        /**
+         * Gets the spots data depending of the selected theme
+         */
         const response = await axios.get(`http://ombelinepinoche-server.eddi.cloud:8443/api/sport/${theme}/spots`);
-        setSpots(response.data.slice(0, 3)); // Set the spots data in the state variable
+        setSpots(response.data.slice(0, 3)); // Sets the spots data in the state variable
       } catch (error) {
-        console.error("Erreur lors de la récupération des spots:", error); // Log an error message if there is an error fetching the spots data
+        console.error("Erreur lors de la récupération des spots:", error); // Logs an error message if there is an error fetching the spots data
       }
     };
 
-    fetchSpots(); // Call the fetchSpots function
+    fetchSpots(); // Calls the fetchSpots function
   }, [theme]);
 
   useEffect(() => {
-    resetTimeout(); // Reset the timeout when the index or spots length changes
-    timeoutRef.current = setTimeout(() => setIndex(prevIndex => prevIndex === spots.length - 1 ? 0 : prevIndex + 1), delay); // Update the index after a delay
+    resetTimeout(); // Resets the timeout when the index or spots length changes
+    timeoutRef.current = setTimeout(() => setIndex(prevIndex => prevIndex === spots.length - 1 ? 0 : prevIndex + 1), delay); // Updates the index after a delay
 
     return () => {
-      resetTimeout(); // Clear the timeout when the component unmounts
+      resetTimeout(); // Clears the timeout when the component unmounts
     };
   }, [index, spots.length]);
 
   // Function to handle mouse enter event
   function handleMouseEnter() {
-    resetTimeout(); // Reset the timeout when the mouse enters the slideshow
+    resetTimeout(); // Resets the timeout when the mouse enters the slideshow
   }
 
   // Function to handle mouse leave event
   function handleMouseLeave() {
-    resetTimeout(); // Reset the timeout when the mouse leaves the slideshow
-    timeoutRef.current = setTimeout(() => setIndex(prevIndex => prevIndex === spots.length - 1 ? 0 : prevIndex + 1), delay); // Update the index after a delay
+    resetTimeout(); // Resets the timeout when the mouse leaves the slideshow
+    timeoutRef.current = setTimeout(() => setIndex(prevIndex => prevIndex === spots.length - 1 ? 0 : prevIndex + 1), delay); // Updates the index after a delay
   }
 
   return (
@@ -69,13 +76,18 @@ export default function Slideshow() {
       <div className="slideshowSlider" style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}>
         {spots.map((spot: spot, idx: number) => (
           <div className="slide" key={idx}>
+
+            {/* The link to selected spots on the slideshow */}
             <div id="spotlight" onClick={() => {
-              window.location.href = `/spot/${spot.name.toLowerCase().replace(/\s+/g, '-')}`;
+              {/* Sends the user to the details of the spot after clicking the link */}
+              window.location.href = `/spot/${spot.name.toLowerCase().replace(/\s+/g, '-')}`; // Ensures the name corresponds to the format set in backoffice
             }}>
               <h2 id="spotlight-title">SPOTLIGHT : {spot.name}</h2>
-              <p id="spotlight-text">{spot.description.length > 150 ? `${spot.description.slice(0, 150)}...` : spot.description}</p>
+              {/* Sets maximum length of spot description to 150 characters*/}
+              <p id="spotlight-text">{spot.description.length > 150 ? `${spot.description.slice(0, 150)}...` : spot.description}</p> 
               <p>Découvrir {'>>'}</p>
             </div>
+
             <img id="slideshow-img" src={`${FETCH_PICTURES}${spot.picture}`} alt="" />
           </div>
         ))}

@@ -4,10 +4,12 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import ThemeContext from '../../../contextAPI/themeContext';
 import { CButton, CCard, CCardBody, CCollapse } from '@coreui/react'
-import './ToggleTheme.css'; // Importing CSS for styling
+import './ToggleTheme.css';
 
 export default function ToggleTheme() {
-  // Access setTheme function from ThemeContext to change the theme
+  /**
+   *Access setTheme function from ThemeContext to change the theme
+  */
   const { setTheme } = useContext(ThemeContext) || {};
   // State for the current theme alignment, initialized from localStorage or default to 'skate'
   const [alignment, setAlignment] = useState(() => localStorage.getItem('theme') || 'skate');
@@ -31,8 +33,7 @@ export default function ToggleTheme() {
     if (setTheme) {
       setTheme(theme);
     }
-    // This effect should only run once, hence the empty dependency array
-  }, [alignment, setTheme]); // Adding dependencies to ensure correctness if the context or alignment changes
+  }, [alignment, setTheme]); // Adds dependencies to ensure correctness if the context or alignment changes
 
   const [visible, setVisible] = useState(false)
 
@@ -50,13 +51,14 @@ export default function ToggleTheme() {
               aria-label="Platform"
             >
               {/* Toggle buttons for selecting the theme */}
-              {/* Using onClick to directly set the theme seems redundant with the handleChange logic. */}
-              {/* If you decide to keep these onClick handlers, consider integrating their logic with handleChange to avoid confusion. */}
+              {/* Snowboard Theme */}
               <ToggleButton disableRipple
                 className="toggle-button-snow"
                 value="snow"
                 aria-label="Snowboard Thème"
                 onClick={() => setTheme && setTheme('snowboard')}><img src="/bouton-snow.png" id="image-button-snow" alt="Snow Thème"></img>SNOWBOARD</ToggleButton>
+
+                {/* Skateboard Theme */}
               <ToggleButton disableRipple
                 className="toggle-button-skate"
                 value="skate"
@@ -66,6 +68,7 @@ export default function ToggleTheme() {
           </CCardBody>
         </CCard>
       </CCollapse>
+      {/* Button image with rotation animation*/}
       <CButton className={`shadow-none collapse-button ${visible ? 'rotate' : ''}`} onClick={() => setVisible(!visible)}><img id="collapse-chevron"src="/toggle-theme-chevron.png"></img></CButton>
     </div>
   );

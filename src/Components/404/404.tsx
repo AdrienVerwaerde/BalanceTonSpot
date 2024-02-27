@@ -5,6 +5,9 @@ import { ImCross } from 'react-icons/im';
 
 export default function NotFoundPage() {
 
+  /**
+   * Array with the different images
+   */
   const images = [
     {
       url: 'https://i.postimg.cc/fLB8q3rk/pun1.png',
@@ -33,13 +36,20 @@ export default function NotFoundPage() {
     
   ];
 
+  /**
+   * Gets the current state of the DOM
+   */
   const [currentImage, setCurrentImage] = useState(0);
 
+  //Gets images by their index and sort them randomly
   useEffect(() => {
     const randomIndex = Math.floor(Math.random() * images.length);
     setCurrentImage(randomIndex);
 }, []);
 
+  /**
+   * Gets the next index when clicking the button
+   */
   const nextImage = () => {
     const nextIndex = (currentImage + 1) % images.length;
     setCurrentImage(nextIndex);

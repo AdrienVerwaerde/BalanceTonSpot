@@ -5,7 +5,7 @@ import FavoriteButton from '../../FavButton/FavButton';
 
 const FETCH_PICTURES = "http://ombelinepinoche-server.eddi.cloud:8443/uploads/";
 
-// Define the type for the 'spot' prop
+// Defines the type for the 'spot' prop
 interface Spot {
     id: number;
     name: string;
@@ -15,7 +15,7 @@ interface Spot {
     address: string;
 }
 
-// Define the props type for the SpotCard component
+// Defines the props type for the SpotCard component
 interface SpotCardProps {
     spot: Spot;
     onFavoriteToggle: () => void; // onFavoriteToggle is a function that doesn't take any arguments and doesn't return anything

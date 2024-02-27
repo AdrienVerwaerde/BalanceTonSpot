@@ -45,7 +45,7 @@ export default function SpotsList() {
             if (tri.triPar === 'alphabet') {
                 return tri.order === 'asc' ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
             }
-            // Tri par note
+            // Sorting by notation
             else if (tri.triPar === 'rating') {
                 return tri.order === 'asc' ? a.rating - b.rating : b.rating - a.rating;
             }

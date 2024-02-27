@@ -5,7 +5,7 @@ import axios from 'axios';
 import './FavButton.css';
 import Swal from 'sweetalert2';
 
-// Define props type for FavoriteButton component
+// Defines props type for FavoriteButton component
 interface FavoriteButtonProps {
     spotId: number; // Type of spotId is string
     onToggle: () => void; // onToggle is a function that doesn't take any arguments and doesn't return anything
@@ -26,7 +26,7 @@ export default function FavoriteButton({ spotId, onToggle }: FavoriteButtonProps
             // Reset animation state after the animation is finished
             const timer = setTimeout(() => {
                 setAnimate(false);
-            }, 300); // Duration should match CSS animation duration
+            }, 300); // Duration of the animation
 
             return () => clearTimeout(timer);
         }
@@ -42,7 +42,7 @@ export default function FavoriteButton({ spotId, onToggle }: FavoriteButtonProps
                         headers: { Authorization: `Bearer ${token}` },
                     });
                     const favorites = response.data;
-                    // Set the isFavorite state based on if the current spot is in the favorites list
+                    // Sets the isFavorite state based on if the current spot is in the favorites list
                     setIsFavorite(favorites.some((fav: { id: number }) => fav.id === spotId));
                 } catch (err) {
                     console.error('Error fetching favorite status:', err);
@@ -52,9 +52,11 @@ export default function FavoriteButton({ spotId, onToggle }: FavoriteButtonProps
         checkFavoriteStatus();
     }, [spotId, token]); // Dependencies array to re-run the effect when these values change
 
-    // Function to toggle the favorite status
+    /**
+     * Function to toggle the favorite status
+     */ 
     const toggleFavorite = async () => {
-        if (!token) {
+        if (!token) { //If there is no token, display popup alert
             Swal.fire({
                 title: 'Erreur',
                 text: "Il faut être connecté.e pour ajouter un favori !",
@@ -76,7 +78,7 @@ export default function FavoriteButton({ spotId, onToggle }: FavoriteButtonProps
                     headers: { Authorization: `Bearer ${token}` },
                 });
             }
-            // Update favorite status and trigger animation
+            // Updates the favorite status and trigger animation
             setAnimate(true);
             setIsFavorite(!isFavorite);
             onToggle();
@@ -85,7 +87,7 @@ export default function FavoriteButton({ spotId, onToggle }: FavoriteButtonProps
         }
     };
 
-    // Render the favorite button with conditional rendering based on the isFavorite state
+    // Renders the favorite button with conditional rendering based on the isFavorite state
     return (
         <button className="button-fav" onClick={toggleFavorite} aria-label="toggle favorite">
             {isFavorite ? (

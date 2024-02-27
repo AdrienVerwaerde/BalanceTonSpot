@@ -46,27 +46,27 @@ export default function CommentSection({ spot }: SpotProps) {
   const location = useLocation();
 
   const handleCommentSubmit = async () => {
-    // Vérifie d'abord si le commentaire ou la note n'ont pas été fournis
+    // Verifies if the comment or notation wasn't submitted
     if (!newComment.trim() || rating === null) {
       setError("Vous devez écrire un commentaire et donner une note avant de soumettre.");
-      return; // Sort de la fonction pour ne pas continuer la soumission
+      return; // Leaves the function to prevent from submitting over and over again
     }
 
-    // Prépare les données du commentaire pour la soumission
+    // Prepares comment data for submission
     const commentToSubmit = {
       content: newComment.trim(),
       rating,
     };
 
     try {
-      // Vérifie si le token est présent
+      // Checks if there is a token
       if (!token) {
         console.error("Token d'autorisation manquant");
         setError("Vous devez être connecté pour poster un commentaire.");
-        return; // Sort de la fonction si le token est manquant
+        return; // Leaves the function if token is absent
       }
 
-      // Effectue la requête POST pour soumettre le commentaire
+      // Makes POST request to submit the comment
       const formattedSpotName = spot.name.toLowerCase().replace(/\s/g, "-");
       const response = await axios.post(
         `${API_BASE_URL}/spot/${formattedSpotName}/comments`,
@@ -76,11 +76,11 @@ export default function CommentSection({ spot }: SpotProps) {
         }
       );
 
-      // Met à jour l'état avec le nouveau commentaire
+      // Udates state to display the new comment
       setComments((prevComments) => [response.data, ...prevComments]);
       setNewComment("");
       setRating(null);
-      setOpen(false); // Ferme le modal
+      setOpen(false); // Closes the modal
     } catch (error) {
       console.error("Erreur lors de l'envoi du commentaire", error);
       setError("Erreur lors de l'envoi du commentaire.");
@@ -177,7 +177,7 @@ export default function CommentSection({ spot }: SpotProps) {
   }
 
   useEffect(() => {
-    // Appel de la fonction au chargement du composant
+    // Calls the function when component is loading
     const fetchAndSetUserData = async () => {
       const userName = await fetchUserData();
       setCurrentUserPseudo(userName);

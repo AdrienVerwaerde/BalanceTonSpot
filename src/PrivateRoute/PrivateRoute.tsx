@@ -5,7 +5,7 @@ export default function PrivateRoute ({ children }: { children: React.ReactNode 
     const token = localStorage.getItem('userToken');
 
     if (!token) {
-        // Si le token n'est pas présent, redirige vers la page de connexion
+        // If token is absent, redirects to login page
         return <Navigate to="/login" state={{ from: location }} replace />;
     }
 

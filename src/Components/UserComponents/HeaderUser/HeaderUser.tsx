@@ -5,7 +5,7 @@ import './HeaderUser.css';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 
 export default function HeaderUser() {
-    // Get the current location using the useLocation hook from react-router-dom
+    // Gets the current location using the useLocation hook from react-router-dom
     const location = useLocation();
 
     return (

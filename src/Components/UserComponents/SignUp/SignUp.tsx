@@ -26,23 +26,22 @@ export default function SignUpForm() {
         }
 
         try {
-            // Ici, on suppose que l'inscription ne renvoie pas directement un token.
-            // Donc, on procède d'abord à l'inscription
+            // First, proceeds to registering the user
             await axios.post('http://ombelinepinoche-server.eddi.cloud:8443/api/users', {
                 pseudo,
                 email,
                 password,
-                roles: ["ROLE_USER"] // Ajoutez une valeur par défaut ou initialisez la variable de rôle
+                roles: ["ROLE_USER"] // Adds a default role to the user
             });
-            // Ensuite, effectuez une demande de connexion pour obtenir le token
+            // Makes a request to obtain a token
             const loginResponse = await axios.post('http://ombelinepinoche-server.eddi.cloud:8443/api/login_check', {
                 username: email,
                 password: password,
             });
-            // Stockez le token dans localStorage ou sessionStorage
+            // Stocks the token in localStorage or sessionStorage
             localStorage.setItem('userToken', loginResponse.data.token);
 
-            // Redirection vers la page de profil après l'inscription réussie
+            // Redirects to the profile page when signing up is successful 
             navigate('/');
         } catch (error: any) {
             console.log(pseudo, email, password);
@@ -53,7 +52,7 @@ export default function SignUpForm() {
     return (
         <div className="wrapper-signup">
             <div className="form-container">
-                <img src="/logo-bts-simplified-transparent-copie.png" className="title-signup" />
+                <img src="https://i.postimg.cc/0QHzDXTz/logo-bts-simplified-transparent-copie.png" className="title-signup" />
                 <h1>S'inscrire pour la Ride !</h1>
                 <form className="signup-form" onSubmit={handleSubmit}>
                     <input type="text" value={pseudo} onChange={(e) => setPseudo(e.target.value)} className="input-signup" placeholder="Nom affiché" required />

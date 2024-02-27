@@ -40,7 +40,7 @@ export default function TrashButton({ commentId, onCommentDeleted }: TrashButton
         await axios.delete(`${API_BASE_URL}/secure/comment/${commentId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        // Call the callback function after successful deletion
+        // Calls the callback function after successful deletion
         onCommentDeleted();
         Swal.fire({
           title: 'Commentaire supprimé',

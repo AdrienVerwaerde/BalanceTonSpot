@@ -7,24 +7,24 @@ import "./Searchbar.css";
 import SearchButtons from "./SearchButtons/SearchButtons";
 import SearchContext from '../../contextAPI/searchContext';
 
-// Define the base URL for API requests
+// Defines the base URL for API requests
 const API_BASE_URL = 'http://ombelinepinoche-server.eddi.cloud:8443/api';
 
-// Define the Searchbar component
+// Defines the Searchbar component
 export default function Searchbar() {
-  // Retrieve the setSpots function from the SearchContext
+  // Retrieves the setSpots function from the SearchContext
   const { setSpots } = useContext(SearchContext) || {};
 
-  // Define state variables
+  // Defines state variables
   const [searchTerm, setSearchTerm] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
-  // Get the navigate and location functions from react-router-dom
+  // Gets the navigate and location functions from react-router-dom
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Fetch spots based on the search query when the location.search changes
+  // Fetches spots based on the search query when the location.search changes
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     const name = searchParams.get('search') || '';
@@ -38,19 +38,19 @@ export default function Searchbar() {
     }
   }, [location.search]);
 
-  // Clear the error when the location.pathname changes
+  // Clears the error when the location.pathname changes
   useEffect(() => {
     return () => setError('');
   }, [location.pathname]);
 
-  // Clear the search term when isLoading changes
+  // Clears the search term when isLoading changes
   useEffect(() => {
     if (!isLoading) {
       setSearchTerm('');
     }
   }, [isLoading]);
 
-  // Fetch spots based on location name
+  // Fetches spots based on location name
   const fetchLocationSpots = async (name: string) => {
     try {
       const response = await axios.get(`${API_BASE_URL}/location/${name}/spots`, {
@@ -62,7 +62,7 @@ export default function Searchbar() {
     }
   };
 
-  // Fetch a single spot based on spot name
+  // Fetches a single spot based on spot name
   const fetchSingleSpot = async (name: string) => {
     try {
       const response = await axios.get(`${API_BASE_URL}/spot/${name}`);
@@ -72,7 +72,7 @@ export default function Searchbar() {
     }
   };
 
-  // Fetch all spots
+  // Fetches all spots
   const fetchAllSpots = async () => {
     try {
       setIsLoading(true);
@@ -89,7 +89,7 @@ export default function Searchbar() {
     }
   };
 
-  // Search for spots based on the search query
+  // Searches for spots based on the search query
   const searchSpots = async (name: string) => {
     if (!name.trim()) {
       fetchAllSpots(); // Calls fetchAllSpots if search is empty
@@ -131,7 +131,7 @@ export default function Searchbar() {
     setIsLoading(false);
   };
 
-  // Render the Searchbar component
+  // Renders the Searchbar component
   if (isLoading) {
     return (
       <div className="loader-container">
@@ -143,10 +143,10 @@ export default function Searchbar() {
     );
   }
 
-  // Clean the search term by replacing spaces with dashes and converting to lowercase
+  // Cleans the search term by replacing spaces with dashes and converting to lowercase
   const cleanSearchTerm = (term: string) => term.replace(/\s+/g, '-').toLowerCase();
 
-  // Handle key down event for search input
+  // Handles key down event for search input
   const handleKeyDown = (e: { key: string; }) => {
     if (e.key === 'Enter') {
       const cleanedSearchTerm = cleanSearchTerm(searchTerm);
@@ -154,13 +154,13 @@ export default function Searchbar() {
     }
   };
 
-  // Handle search button click
+  // Handles search button click
   const handleSearchClick = () => {
     const cleanedSearchTerm = cleanSearchTerm(searchTerm);
     navigate(`/spotslist?search=${encodeURIComponent(cleanedSearchTerm)}`);
   };
 
-  // Return the JSX for the Searchbar component
+  // Returns the JSX for the Searchbar component
   return (
     <>
       <div id="searchbar-container">

@@ -2,6 +2,9 @@ import './AboutUs.css';
 
 export default function AboutUs() {
 
+    /**
+     * Array with the team pictures
+     */
     const team = [
         {
             nom: 'Ombeline PINOCHE',
@@ -37,6 +40,7 @@ export default function AboutUs() {
         <div className="team-presentation">
             <h2>Notre Équipe</h2>
             <div className="members">
+                {/*Mapping on the array to get infos*/}
                 {team.map((member, index) => (
                     <div key={index} className="member">
                         <img src={member.photo} alt={`Photo de ${member.nom}`} />

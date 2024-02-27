@@ -75,11 +75,11 @@ export default function UserProfileDashboard() {
     > = (event) => {
         const file = event.target.files && event.target.files[0];
         if (file && file.type.startsWith("image/")) {
-            setIsLoading(true); // Activer l'indicateur de chargement
+            setIsLoading(true); // Activates loading indicator
             const reader = new FileReader();
             reader.onloadend = () => {
                 if (typeof reader.result === "string") {
-                    // Mise à jour immédiate avec l'aperçu de l'image
+                    // Instantly updates and displays image
                     setProfilePictureUrl(reader.result);
                     uploadProfilePicture(file);
                 }
@@ -89,10 +89,10 @@ export default function UserProfileDashboard() {
     };
 
     const uploadProfilePicture = async (file: string | Blob) => {
-        setIsLoading(true); // Activer l'indicateur de chargement pour montrer un placeholder ou une animation
+        setIsLoading(true); // Activates loading indicator
 
         const formData = new FormData();
-        formData.append("profilPictureFile", file); // Assurez-vous que le nom de l'attribut correspond à ce que votre API attend
+        formData.append("profilPictureFile", file);
 
         try {
             const response = await axios.post(
@@ -100,37 +100,35 @@ export default function UserProfileDashboard() {
                 formData,
                 {
                     headers: {
-                        Authorization: `Bearer ${token}`, // Assurez-vous d'inclure le token d'autorisation si nécessaire
-                        "Content-Type": "multipart/form-data", // Ce type de contenu est nécessaire pour les fichiers
+                        Authorization: `Bearer ${token}`, 
+                        "Content-Type": "multipart/form-data",
                     },
                 }
             );
 
-            // Ici, vous devez ajuster en fonction de la réponse spécifique de votre API.
-            // Par exemple, supposons que l'API renvoie l'URL de l'image mise à jour dans response.data.url.
             const newImageUrl = response.data.url;
 
-            // Préchargez l'image mise à jour en arrière-plan
+            // Pre-load image in background
             const img = new Image();
             img.onload = () => {
-                // Une fois que l'image est chargée, mettez à jour l'URL de l'image de profil et désactivez le chargement
-                setProfilePictureUrl(newImageUrl); // Mettez à jour l'état avec l'URL finale de l'image
-                setIsLoading(false); // Désactiver l'indicateur de chargement
+                // Once the picture is loaded, updates profile picture URL and disables loading
+                setProfilePictureUrl(newImageUrl); // Updates state with image final URL
+                setIsLoading(false); // Disable loading indicator
             };
             img.onerror = () => {
-                // Gérer l'erreur si l'image ne peut pas être chargée
-                setIsLoading(false); // Assurez-vous de désactiver l'indicateur de chargement même en cas d'erreur
+                // Manages error if the picture doesn't load
+                setIsLoading(false); 
                 console.error("Failed to load the updated profile picture.");
             };
             img.src = newImageUrl;
         } catch (error) {
             console.error("Error uploading profile picture:", error);
-            setIsLoading(false); // Désactiver l'indicateur de chargement en cas d'erreur
+            setIsLoading(false); 
         }
     };
 
     useEffect(() => {
-        // Utilisez useEffect pour mettre à jour l'URL de l'image de profil avec un timestamp
+        // Using useEffect to update image URL with a timestamp
         if (user.profilPicture) {
             const newProfilePictureUrl = `${FETCH_PICTURES}${user.profilPicture
                 }?timestamp=${new Date().getTime()}`;

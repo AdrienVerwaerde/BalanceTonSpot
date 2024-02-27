@@ -1,5 +1,9 @@
 import './Contact.css';
 
+
+/**
+ * A simple contact form
+*/
 export default function ContactForm() {
     return (
         <div className="contactFormContainer">

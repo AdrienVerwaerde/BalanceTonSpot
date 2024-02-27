@@ -31,10 +31,10 @@ const FETCH_PICTURES = "http://ombelinepinoche-server.eddi.cloud:8443/uploads/";
  * @returns JSX element
  */
 export default function SpotDetail() {
-  const [spot, setSpot] = useState<Spot>({} as Spot); // Initialize as an empty object
+  const [spot, setSpot] = useState<Spot>({} as Spot); // Initializes as an empty object
   const [error, setError] = useState('');
 
-  // Extract the 'name' parameter from the URL using useParams with a generic type
+  // Extracts the 'name' parameter from the URL using useParams with a generic type
   const { name } = useParams<{ name: string }>();
 
   useEffect(() => {
@@ -78,7 +78,7 @@ export default function SpotDetail() {
           <p>({spot?.rating})</p>
         </div>
 
-        {/* Ensure spot?.id is converted to a string if your FavoriteButton expects a string type */}
+        {/* Ensures spot?.id is converted to a string if your FavoriteButton expects a string type */}
         <FavoriteButton spotId={spot?.id} onToggle={() => { }} />
 
         <p id="spot-details-description">{spot?.description}</p>
