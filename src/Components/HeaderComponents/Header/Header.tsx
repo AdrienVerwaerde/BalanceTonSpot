@@ -18,7 +18,7 @@ export default function Header() {
 {/*LOGO HEADER*/}
       <Link to='/' id="button-logo"><img
               id="logo"
-              src='/public/logo-bts-simplified-transparent-copie.png'
+              src='/logo-bts-simplified-transparent-copie.png'
               alt="Website logo for Balance Ton Spot"
             ></img></Link>
 

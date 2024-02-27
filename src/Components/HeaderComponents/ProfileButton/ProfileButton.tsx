@@ -77,7 +77,7 @@ const fetchUserData = async (token: string) => {
         ref={buttonRef}
         onClick={() => setOpen(!open)}
         className="shadow-none btn btn-primary btn-profile mb-5">
-        <img id="button-img" src={isLoggedIn ? `${FETCH_PICTURES}${user.profilPicture}` : "/public/profile-button.png"} alt="Profile button"></img>
+        <img id="button-img" src={isLoggedIn ? `${FETCH_PICTURES}${user.profilPicture}` : "/profile-button.png"} alt="Profile button"></img>
       </button>
       {isLoggedIn && <span id="profile-button-pseudo">{user.pseudo}</span>}
       <div ref={menuRef} style={{ minHeight: '150px' }}>
