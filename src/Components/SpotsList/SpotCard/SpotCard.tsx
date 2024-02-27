@@ -46,7 +46,7 @@ export default function SpotCard({ spot, onFavoriteToggle }: SpotCardProps) {
                 <p id="spotslist-description">{spot.description.length > 150 ? `${spot.description.slice(0, 150)}...` : spot.description}</p>
                 
                 {/* Displaying the spot's address with an icon */}
-                <p id="spotslist-address"><img src="/src/assets/images/pin-solid-24.png" alt="Location pin"/>{spot.address}</p>
+                <p id="spotslist-address"><img src="/pin-solid-24.png" alt="Location pin"/>{spot.address}</p>
 
                 {/* Detail button to navigate to the spot's detailed page */}
                 <button

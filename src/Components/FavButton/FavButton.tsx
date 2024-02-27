@@ -82,9 +82,9 @@ export default function FavoriteButton({ spotId, onToggle }: FavoriteButtonProps
     return (
         <button className="button-fav" onClick={toggleFavorite} aria-label="toggle favorite">
             {isFavorite ? (
-                <img className={animate ? "animate__animated animate__heartBeat" : ""} src="/src/assets/images/heart-solid-24-1.png" alt="Remove from favorites" />
+                <img className={animate ? "animate__animated animate__heartBeat" : ""} src="/heart-solid-24-1.png" alt="Remove from favorites" />
             ) : (
-                <img className={animate ? "animate__animated animate__heartBeat" : ""} src="/src/assets/images/heart-regular-24-2.png" alt="Add to favorites" />
+                <img className={animate ? "animate__animated animate__heartBeat" : ""} src="/heart-regular-24-2.png" alt="Add to favorites" />
             )}
         </button>
     );

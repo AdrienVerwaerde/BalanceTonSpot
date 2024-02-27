@@ -61,8 +61,8 @@ export default function UpdateButton({ commentId, onCommentUpdated, onCommentCon
                         </option>
                     ))}
                 </select>
-                <button className="edit-buttons validate" onClick={handleUpdate}><img src="/src/assets/images/check-regular-24-1.png"></img></button>
-                <button className="edit-buttons cancel" onClick={() => setEditing(false)}><img src="/src/assets/images/x-regular-24-2.png"></img></button>
+                <button className="edit-buttons validate" onClick={handleUpdate}><img src="/check-regular-24-1.png"></img></button>
+                <button className="edit-buttons cancel" onClick={() => setEditing(false)}><img src="/x-regular-24-2.png"></img></button>
             </div>
         );
 

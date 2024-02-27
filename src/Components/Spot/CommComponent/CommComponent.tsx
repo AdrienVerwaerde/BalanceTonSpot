@@ -264,7 +264,7 @@ console.log(comments.map(comment => comment.user.profilpicture))
               >
                 <img
                   id="button-cancel-img"
-                  src="/src/assets/images/x-regular-24-2.png"
+                  src="/x-regular-24-2.png"
                 />
                 ANNULER
               </button>
@@ -272,7 +272,7 @@ console.log(comments.map(comment => comment.user.profilpicture))
                 ENVOYER
                 <img
                   id="button-submit-img"
-                  src="/src/assets/images/send-regular-24-1.png"
+                  src="/send-regular-24-1.png"
                 />
               </button>
             </form>

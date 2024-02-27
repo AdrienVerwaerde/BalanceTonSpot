@@ -73,7 +73,7 @@ export default function TrashButton({ commentId, onCommentDeleted }: TrashButton
       aria-label="Delete comment"
     >
       <img
-        src={isHovering ? "/src/assets/images/trash-solid-alt.png" : "/src/assets/images/trash-solid-24.png"}
+        src={isHovering ? "/trash-solid-alt.png" : "/trash-solid-24.png"}
         alt="Delete"
       ></img>
     </button>

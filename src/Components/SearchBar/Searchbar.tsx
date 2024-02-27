@@ -135,7 +135,7 @@ export default function Searchbar() {
   if (isLoading) {
     return (
       <div className="loader-container">
-        <img src="/src/assets/images/bouton-skate-color-2.png"
+        <img src="/bouton-skate-color-2.png"
           alt="loader"
           className="loader-img" />
         <p id="loader-message">Chargement en cours...</p>

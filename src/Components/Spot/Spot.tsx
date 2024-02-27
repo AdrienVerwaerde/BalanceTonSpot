@@ -82,7 +82,7 @@ export default function SpotDetail() {
         <FavoriteButton spotId={spot?.id} onToggle={() => { }} />
 
         <p id="spot-details-description">{spot?.description}</p>
-        <p id="spot-details-address"><img src="https://i.postimg.cc/P5YNtVhs/pin-solid-24.png" alt="Location pin" />{spot?.address}</p>
+        <p id="spot-details-address"><img src="/pin-solid-24.png" alt="Location pin" />{spot?.address}</p>
 
         <CommComponent spot={spot} />
         <div className="backtolist-button-container">

@@ -61,7 +61,7 @@ export default function LoginForm() {
         <div className="wrapper-login">
             <div className="form-login">
                 <img
-                    src="https://i.postimg.cc/0QHzDXTz/logo-bts-simplified-transparent-copie.png"
+                    src="/logo-bts-simplified-transparent-copie.png"
                     alt="Logo"
                     className="title-login"
                 />

@@ -1,8 +1,5 @@
 import { useState, useEffect } from 'react';
 import './StarRating.css'; 
-import starFilledSvg from '../../assets/images/svg/starfilled.svg';
-import starEmptySvg from '../../assets/images/svg/starempty.svg';
-import starHalfSvg from '../../assets/images/svg/starhalf.svg';
 
 interface StarRatingProps {
     id: number;
@@ -37,11 +34,11 @@ export default function StarRating({rating} : StarRatingProps): JSX.Element{
             let starContent: JSX.Element;
 
             if (isFilled) {
-                starContent = <img src={starFilledSvg} alt="Star" />;
+                starContent = <img src="/starfilled.svg" alt="Star" />;
             } else if (isPartialFilled) {
-                starContent = <img src={starHalfSvg} alt="Half Star" />;
+                starContent = <img src="/starhalf.svg" alt="Half Star" />;
             } else {
-                starContent = <img src={starEmptySvg} alt="Empty Star" />;
+                starContent = <img src="/starempty.svg" alt="Empty Star" />;
             }
 
             stars.unshift(

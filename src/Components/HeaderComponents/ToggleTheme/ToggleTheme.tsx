@@ -56,17 +56,17 @@ export default function ToggleTheme() {
                 className="toggle-button-snow"
                 value="snow"
                 aria-label="Snowboard Thème"
-                onClick={() => setTheme && setTheme('snowboard')}><img src="/src/assets/images/bouton-snow.png" id="image-button-snow" alt="Snow Thème"></img>SNOWBOARD</ToggleButton>
+                onClick={() => setTheme && setTheme('snowboard')}><img src="/bouton-snow.png" id="image-button-snow" alt="Snow Thème"></img>SNOWBOARD</ToggleButton>
               <ToggleButton disableRipple
                 className="toggle-button-skate"
                 value="skate"
                 aria-label="Skateboard Thème"
-                onClick={() => setTheme && setTheme('skateboard')}><img src="/src/assets/images/bouton-skate.png" id="image-button-skate" alt="Skate Thème"></img>SKATEBOARD</ToggleButton>
+                onClick={() => setTheme && setTheme('skateboard')}><img src="/bouton-skate.png" id="image-button-skate" alt="Skate Thème"></img>SKATEBOARD</ToggleButton>
             </ToggleButtonGroup>
           </CCardBody>
         </CCard>
       </CCollapse>
-      <CButton className={`shadow-none collapse-button ${visible ? 'rotate' : ''}`} onClick={() => setVisible(!visible)}><img id="collapse-chevron"src="/src/assets/images/toggle-theme-chevron.png"></img></CButton>
+      <CButton className={`shadow-none collapse-button ${visible ? 'rotate' : ''}`} onClick={() => setVisible(!visible)}><img id="collapse-chevron"src="/toggle-theme-chevron.png"></img></CButton>
     </div>
   );
 }
