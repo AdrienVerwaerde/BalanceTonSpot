@@ -77,7 +77,7 @@ export default function UpdateButton({ commentId, onCommentUpdated, onCommentCon
             aria-label="Update comment"
         >
             <img
-                src={isHovering ? "/src/assets/images/edit-alt-solid-24.png" : "/src/assets/images/pencil-solid-24-1.png"}
+                src={isHovering ? "/edit-alt-solid-24.png" : "/pencil-solid-24-1.png"}
                 alt="Edit"
             ></img>
         </button>

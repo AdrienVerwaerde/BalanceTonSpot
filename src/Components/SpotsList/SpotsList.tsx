@@ -84,12 +84,19 @@ export default function SpotsList() {
             </div>
 
             {/* Pagination */}
-            <div className="pagination">
-                {/*Array with .map thate creates a button for each necessary page*/}
-                {Array(Math.ceil(spots.length / 20)).fill(null).map((_, i) => (
-                    <button key={i + 1} onClick={() => handlePageChange(i + 1)}>{i + 1}</button>
-                ))}
-            </div>
+            {spots.length > 20 && (
+                <div className="pagination">
+                    {Array(Math.ceil(spots.length / 20)).fill(null).map((_, i) => (
+                        <button 
+                            key={i + 1} 
+                            onClick={() => handlePageChange(i + 1)} 
+                            className={currentPage === i + 1 ? "pagination-button active" : "pagination-button"}
+                        >
+                            {i + 1}
+                        </button>
+                    ))}
+                </div>
+            )}
         </>
     );
 }

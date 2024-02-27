@@ -197,8 +197,6 @@ export default function CommentSection({ spot }: SpotProps) {
     );
 };
 
-console.log(comments.map(comment => comment.user.profilpicture))
-
   return (
     <div className="comments-container">
       {error && <p className="error-message">{error}</p>}

@@ -38,3 +38,27 @@
   outline: none !important;
   border: #e3e3e3 1px solid;
 }
+
+/*Styles for pagination*/
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagination-button {
+  background-color: transparent;
+  border: none;
+  color: #897b68;
+  font-weight: bold;
+  margin: 0.25em;
+  margin-bottom: 0em;
+}
+
+.pagination-button.active {
+  font-size: medium;
+  border: #897b68 2px solid;
+  border-radius: 15%;
+  padding: 0.2em;
+}

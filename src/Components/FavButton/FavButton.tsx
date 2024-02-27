@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import 'animate.css/animate.min.css';
 import axios from 'axios';
 import './FavButton.css';
+import Swal from 'sweetalert2';
 
 // Define props type for FavoriteButton component
 interface FavoriteButtonProps {
@@ -54,8 +55,14 @@ export default function FavoriteButton({ spotId, onToggle }: FavoriteButtonProps
     // Function to toggle the favorite status
     const toggleFavorite = async () => {
         if (!token) {
-            alert('Vous devez être connecté pour effectuer cette action.');
-            return;
+            Swal.fire({
+                title: 'Erreur',
+                text: "Il faut être connecté.e pour ajouter un favori !",
+                icon: 'error',
+                confirmButtonText: 'Ça roule',
+                buttonsStyling: false,
+                scrollbarPadding: false
+            });
         }
         try {
             if (isFavorite) {
@@ -74,7 +81,7 @@ export default function FavoriteButton({ spotId, onToggle }: FavoriteButtonProps
             setIsFavorite(!isFavorite);
             onToggle();
         } catch (error) {
-            console.error('Error updating favorite status:', error);
+            console.error('Error updating favorite status:', error)
         }
     };
 

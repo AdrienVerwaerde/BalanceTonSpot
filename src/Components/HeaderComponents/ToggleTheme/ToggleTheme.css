@@ -50,7 +50,7 @@
 }
 
 /*Background color when a button is active*/
-.css-d9c359-MuiButtonBase-root-MuiToggleButton-root.Mui-selected {
+.MuiButtonBase-root.MuiToggleButtonGroup-grouped.MuiToggleButtonGroup-groupedHorizontal.MuiToggleButton-root.Mui-selected.MuiToggleButton-sizeMedium.MuiToggleButton-primary.toggle-button-skate.MuiToggleButtonGroup-lastButton.css-d9c359-MuiButtonBase-root-MuiToggleButton-root {
     background-color: rgba(0, 0, 0, 0.133) !important;
 }
 
