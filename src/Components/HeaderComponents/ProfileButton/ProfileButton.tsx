@@ -93,6 +93,8 @@ const fetchUserData = async (token: string) => {
   }
 };
 
+console.log(user)
+
   return (
     <div className='profile-btn-container'>
       <button

@@ -24,7 +24,6 @@ export default function SignUpForm() {
             setError('Les mots de passe ne correspondent pas.');
             return;
         }
-
         try {
             // First, proceeds to registering the user
             await axios.post('http://ombelinepinoche-server.eddi.cloud:8443/api/users', {
@@ -52,7 +51,7 @@ export default function SignUpForm() {
     return (
         <div className="wrapper-signup">
             <div className="form-container">
-                <img src="https://i.postimg.cc/0QHzDXTz/logo-bts-simplified-transparent-copie.png" className="title-signup" />
+                <img src="/logo-bts-simplified-transparent-copie.png" className="title-signup" />
                 <h1>S'inscrire pour la Ride !</h1>
                 <form className="signup-form" onSubmit={handleSubmit}>
                     <input type="text" value={pseudo} onChange={(e) => setPseudo(e.target.value)} className="input-signup" placeholder="Nom affiché" required />

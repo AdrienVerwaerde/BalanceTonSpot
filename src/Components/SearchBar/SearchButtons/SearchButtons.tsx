@@ -29,6 +29,7 @@ export default function SearchButtons() {
 
             // Navigates to the '/spotslist' route
             navigate('/spotslist');
+
         } catch (error) {
             console.error('Erreur lors de la récupération des données:', error);
         }

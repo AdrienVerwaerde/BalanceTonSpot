@@ -58,6 +58,8 @@ export default function SpotsList() {
      */
     const handlePageChange = (page: number) => {
         setCurrentPage(page);
+        // Scroll to the top of the page
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     return (
