@@ -26,14 +26,14 @@ export default function SignUpForm() {
         }
         try {
             // First, proceeds to registering the user
-            await axios.post('http://ombelinepinoche-server.eddi.cloud:8443/api/users', {
+            await axios.post('https://balancetonspotapi.live/api/users', {
                 pseudo,
                 email,
                 password,
                 roles: ["ROLE_USER"] // Adds a default role to the user
             });
             // Makes a request to obtain a token
-            const loginResponse = await axios.post('http://ombelinepinoche-server.eddi.cloud:8443/api/login_check', {
+            const loginResponse = await axios.post('https://balancetonspotapi.live/api/login_check', {
                 username: email,
                 password: password,
             });

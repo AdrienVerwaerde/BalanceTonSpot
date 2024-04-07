@@ -8,7 +8,7 @@ interface TrashButtonProps {
   onCommentDeleted: () => void;
 }
 
-const API_BASE_URL = "http://ombelinepinoche-server.eddi.cloud:8443/api";
+const API_BASE_URL = "https://balancetonspotapi.live/api";
 
 export default function TrashButton({ commentId, onCommentDeleted }: TrashButtonProps) {
   const [isHovering, setIsHovering] = useState(false);

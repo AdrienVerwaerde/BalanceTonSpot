@@ -31,8 +31,8 @@ interface SpotProps {
   };
 }
 
-const FETCH_USER = "http://ombelinepinoche-server.eddi.cloud:8443/uploads/";
-const API_BASE_URL = "http://ombelinepinoche-server.eddi.cloud:8443/api";
+const FETCH_USER = "https://balancetonspotapi.live/uploads/";
+const API_BASE_URL = "https://balancetonspotapi.live/api";
 
 export default function CommentSection({ spot }: SpotProps) {
   const [comments, setComments] = useState<Comment[]>([]);

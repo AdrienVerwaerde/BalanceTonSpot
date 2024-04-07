@@ -9,7 +9,7 @@ interface UpdateButtonProps {
     onCommentRating: number;
 }
 
-const API_BASE_URL = "http://ombelinepinoche-server.eddi.cloud:8443/api";
+const API_BASE_URL = "https://balancetonspotapi.live/api";
 
 export default function UpdateButton({ commentId, onCommentUpdated, onCommentContent, onCommentRating }: UpdateButtonProps) {
     // State variables to manage component state

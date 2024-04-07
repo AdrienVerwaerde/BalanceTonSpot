@@ -38,7 +38,7 @@ export default function FavoriteButton({ spotId, onToggle }: FavoriteButtonProps
         const checkFavoriteStatus = async () => {
             if (token) {
                 try {
-                    const response = await axios.get(`http://ombelinepinoche-server.eddi.cloud:8443/api/favorites`, {
+                    const response = await axios.get(`https://balancetonspotapi.live/api/favorites`, {
                         headers: { Authorization: `Bearer ${token}` },
                     });
                     const favorites = response.data;
@@ -69,12 +69,12 @@ export default function FavoriteButton({ spotId, onToggle }: FavoriteButtonProps
         try {
             if (isFavorite) {
                 // If the spot is already a favorite, remove it from favorites
-                await axios.delete(`http://ombelinepinoche-server.eddi.cloud:8443/api/favorites/${spotId}`, {
+                await axios.delete(`https://balancetonspotapi.live/api/favorites/${spotId}`, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
             } else {
                 // If the spot is not a favorite, add it to favorites
-                await axios.post(`http://ombelinepinoche-server.eddi.cloud:8443/api/favorites/${spotId}`, {}, {
+                await axios.post(`https://balancetonspotapi.live/api/favorites/${spotId}`, {}, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
             }

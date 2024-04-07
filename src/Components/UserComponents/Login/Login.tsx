@@ -30,7 +30,7 @@ export default function LoginForm() {
     const authenticateUser = async () => {
         setLoading(true);
         try {
-            const response = await axios.post("http://ombelinepinoche-server.eddi.cloud:8443/api/login_check", {
+            const response = await axios.post("https://balancetonspotapi.live/api/login_check", {
                 username: email,
                 password: password,
             });

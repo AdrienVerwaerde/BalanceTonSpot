@@ -3,7 +3,7 @@ import './SpotCard.css';
 import StarRating from '../../StarRating/StarRating';
 import FavoriteButton from '../../FavButton/FavButton';
 
-const FETCH_PICTURES = "http://ombelinepinoche-server.eddi.cloud:8443/uploads/";
+const FETCH_PICTURES = "https://balancetonspotapi.live/uploads/";
 
 // Defines the type for the 'spot' prop
 interface Spot {

@@ -3,8 +3,8 @@ import axios from "axios";
 import "./Profile.css";
 import Swal from "sweetalert2";
 
-const API_BASE_URL = "http://ombelinepinoche-server.eddi.cloud:8443/api";
-const FETCH_PICTURES = "http://ombelinepinoche-server.eddi.cloud:8443/uploads/";
+const API_BASE_URL = "https://balancetonspotapi.live/api";
+const FETCH_PICTURES = "https://balancetonspotapi.live/uploads/";
 
 /**
  * Component for the user profile dashboard.

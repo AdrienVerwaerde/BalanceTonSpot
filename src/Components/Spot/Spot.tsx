@@ -22,8 +22,8 @@ interface Spot {
   pictures: Picture[]; // Ajout de cette ligne
 }
 
-const API_BASE_URL = "http://ombelinepinoche-server.eddi.cloud:8443/api/spot";
-const FETCH_PICTURES = "http://ombelinepinoche-server.eddi.cloud:8443/uploads/";
+const API_BASE_URL = "https://balancetonspotapi.live/api/spot";
+const FETCH_PICTURES = "https://balancetonspotapi.live/uploads/";
 
 /*
  * Component for displaying the details of a spot.

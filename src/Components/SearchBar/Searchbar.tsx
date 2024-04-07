@@ -8,7 +8,7 @@ import SearchButtons from "./SearchButtons/SearchButtons";
 import SearchContext from '../../contextAPI/searchContext';
 
 // Defines the base URL for API requests
-const API_BASE_URL = 'http://ombelinepinoche-server.eddi.cloud:8443/api';
+const API_BASE_URL = 'https://balancetonspotapi.live/api';
 
 // Defines the Searchbar component
 export default function Searchbar() {

@@ -5,8 +5,8 @@ import './ProfileButton.css'
 import ThemeContext from '../../../contextAPI/themeContext';  
 import axios from 'axios';
 
-const API_USER = "http://ombelinepinoche-server.eddi.cloud:8443/api/user";
-const FETCH_PICTURES = "http://ombelinepinoche-server.eddi.cloud:8443/uploads/";
+const API_USER = "https://balancetonspotapi.live/api/user";
+const FETCH_PICTURES = "https://balancetonspotapi.live/uploads/";
 
 export default function ProfileButton() {
   /**

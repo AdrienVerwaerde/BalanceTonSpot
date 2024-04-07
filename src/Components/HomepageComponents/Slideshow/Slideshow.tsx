@@ -3,7 +3,7 @@ import axios from 'axios';
 import './Slideshow.css';
 import ThemeContext from '../../../contextAPI/themeContext';
 
-const FETCH_PICTURES = "http://ombelinepinoche-server.eddi.cloud:8443/uploads/";
+const FETCH_PICTURES = "https://balancetonspotapi.live/uploads/";
 interface spot {
   name: string;
   description: string;
@@ -41,7 +41,7 @@ export default function Slideshow() {
         /**
          * Gets the spots data depending of the selected theme
          */
-        const response = await axios.get(`http://ombelinepinoche-server.eddi.cloud:8443/api/sport/${theme}/spots`);
+        const response = await axios.get(`https://balancetonspotapi.live/api/sport/${theme}/spots`);
         setSpots(response.data.slice(0, 3)); // Sets the spots data in the state variable
       } catch (error) {
         console.error("Erreur lors de la récupération des spots:", error); // Logs an error message if there is an error fetching the spots data

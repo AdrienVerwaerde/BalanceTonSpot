@@ -32,7 +32,7 @@ export default function Favoris() {
     const token = localStorage.getItem('userToken');
     if (token) {
         try {
-            const response = await axios.get('http://ombelinepinoche-server.eddi.cloud:8443/api/favorites', {
+            const response = await axios.get('https://balancetonspotapi.live/api/favorites', {
                 headers: { Authorization: `Bearer ${token}` },
             });
             setSpots(response.data);
